@@ -702,6 +702,7 @@
     <None Include="Include\glm\gtx\vector_angle.inl" />
     <None Include="Include\glm\gtx\vector_query.inl" />
     <None Include="Include\glm\gtx\wrap.inl" />
+    <None Include="Shaders\Ch1\basic.frag" />
     <None Include="Shaders\Ch1\basic.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

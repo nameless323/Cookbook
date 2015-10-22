@@ -1644,5 +1644,6 @@
     </None>
     <None Include="glew32.dll" />
     <None Include="Shaders\Ch1\basic.vert" />
+    <None Include="Shaders\Ch1\basic.frag" />
   </ItemGroup>
 </Project>
