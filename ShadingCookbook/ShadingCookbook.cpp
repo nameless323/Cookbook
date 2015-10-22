@@ -50,8 +50,32 @@ int main(void)
 		glClearBufferfv(GL_COLOR, 0, bckColor);
 		
 		/* Render here */
+		const GLuint vertShader = glCreateShader(GL_VERTEX_SHADER);
+		const GLchar* vertShaderSource = loadShaderAsString("Shaders/Ch1/basic.vert");
+		const GLchar* vSourceArray[] = { vertShaderSource };
+		glShaderSource(vertShader, 1, vSourceArray, 0);
+		glCompileShader(vertShader);
 
+		GLint result;
+		glGetShaderiv(vertShader, GL_COMPILE_STATUS, &result);
+		if (result == GL_FALSE)
+		{
+			std::cout << "Vertex shader compilation failed" << std::endl;
+
+			GLint logLen;
+			glGetShaderiv(vertShader, GL_INFO_LOG_LENGTH, &logLen);
+			if (logLen > 0)
+			{
+				char* log = new char[logLen];
+
+				GLsizei written;
+				glGetShaderInfoLog(vertShader, logLen, &written, log);
+				std::cout << "Shader log:" << std::endl << log;
+				delete[] log;
+			}
+		}
 		/* Swap front and back buffers */
+
 		glfwSwapBuffers(window);
 
 		/* Poll for and process events */
