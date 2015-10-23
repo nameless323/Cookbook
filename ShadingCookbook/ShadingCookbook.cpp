@@ -97,6 +97,27 @@ int main(void)
 	glAttachShader(shaderProgram, vertShader);
 	glAttachShader(shaderProgram, fragShader);
 	glLinkProgram(shaderProgram);
+	GLint programStatus;
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &programStatus);
+	if (programStatus == GL_FALSE)
+	{
+		std::cout << "Failed to link shader program" << std::endl;
+		GLint logLen;
+		glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logLen);
+		if (logLen > 0)
+		{
+			char* log = new char[logLen];
+			GLsizei written;
+			glGetProgramInfoLog(shaderProgram, logLen, &written, log);
+			std::cout << "Program log" << std::endl << log << std::endl;
+			delete[] log;
+		}
+	}
+	else
+	{
+		glUseProgram(shaderProgram);
+	}
+
 	glDeleteShader(fragShader);
 	glDeleteShader(vertShader);
 
@@ -116,6 +137,7 @@ int main(void)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
+	
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -125,7 +147,6 @@ int main(void)
 		
 		/* Render here */
 				
-		glUseProgram(shaderProgram);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -134,9 +155,14 @@ int main(void)
 		/* Poll for and process events */
 		glfwPollEvents();
 	}
-
-
-
+	glBindVertexArray(0);
+	glDeleteVertexArrays(1, &vao);
+	glUseProgram(0);
+	glDeleteProgram(shaderProgram);
+	glDisableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &vBuffer);
+	
 	glfwTerminate();
 	return 0;
 }
