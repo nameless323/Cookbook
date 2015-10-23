@@ -68,7 +68,7 @@ int main(void)
 		}
 	}
 
-	const GLuint fragShader = glCreateShader(GL_VERTEX_SHADER);
+	const GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
 	const GLchar* fragShaderSource = loadShaderAsString("Shaders/Ch1/basic.frag");
 	const GLchar* fSourceArray[] = { fragShaderSource };
 	glShaderSource(fragShader, 1, fSourceArray, 0);
@@ -127,9 +127,9 @@ int main(void)
 
 	GLfloat pos[] =
 	{
-		0.0f, 1.0f, 0.5f,
-		1.0f, 0.0f, 0.5f,
-		0.0f, 0.0f, 0.5f
+		0.0f, 0.7f, 0.5f,
+		-0.7f, -0.7f, 0.5f,
+		0.7f, -0.7f, 0.5f
 	};
 	GLuint vBuffer;
 	glGenBuffers(1, &vBuffer);
@@ -138,6 +138,20 @@ int main(void)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
 	
+
+	GLuint colorBuffer;
+	glGenBuffers(1, &colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+	const GLfloat colors[] =
+	{
+		1.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 1.0f
+	};
+	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(1);
+	glUseProgram(shaderProgram);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -160,6 +174,7 @@ int main(void)
 	glUseProgram(0);
 	glDeleteProgram(shaderProgram);
 	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteBuffers(1, &vBuffer);
 	
