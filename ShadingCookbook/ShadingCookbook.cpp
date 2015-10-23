@@ -131,17 +131,15 @@ int main(void)
 		-0.7f, -0.7f, 0.5f,
 		0.7f, -0.7f, 0.5f
 	};
-	GLuint vBuffer;
-	glGenBuffers(1, &vBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vBuffer);
+	GLuint buffer[2];
+	glGenBuffers(2, buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
 	
 
-	GLuint colorBuffer;
-	glGenBuffers(1, &colorBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer[1]);
 	const GLfloat colors[] =
 	{
 		1.0f, 0.0f, 0.0f,
@@ -176,7 +174,7 @@ int main(void)
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDeleteBuffers(1, &vBuffer);
+	glDeleteBuffers(2, buffer);
 	
 	glfwTerminate();
 	return 0;
