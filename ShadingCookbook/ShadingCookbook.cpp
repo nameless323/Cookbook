@@ -146,10 +146,16 @@ int main(void)
 		0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 1.0f
 	};
+	//glEnableVertexAttribArray(1);
+	glBindVertexBuffer(1, buffer[1], 0, 3 * sizeof(GLfloat));
+
 	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribFormat(1, 3, GL_FLOAT, GL_FALSE, 0);
+	glVertexAttribBinding(1, 1);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(1);
 	glUseProgram(shaderProgram);
+
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
