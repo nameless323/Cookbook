@@ -30,18 +30,18 @@ int main(void)
 	GLint major, minor;
 	glGetIntegerv(GL_MAJOR_VERSION, &major);
 	glGetIntegerv(GL_MINOR_VERSION, &minor);
-
+	/*
 	std::cout << "rnd " << renderer << std::endl;
 	std::cout << "vendor " << vendor << std::endl;
 	std::cout << "version " << version << std::endl;
 	std::cout << "glslVersion " << glslVersion << std::endl;
 	std::cout << "major " << major << std::endl;
 	std::cout << "minor " << minor << std::endl;
-
+	*/
 	GLint extNum;
 	glGetIntegerv(GL_NUM_EXTENSIONS, &extNum);
-	for (int i = 0; i < extNum; i++)
-		std::cout << glGetStringi(GL_EXTENSIONS, i) <<std::endl;
+	//for (int i = 0; i < extNum; i++)
+	//	std::cout << glGetStringi(GL_EXTENSIONS, i) <<std::endl;
 
 	const GLuint vertShader = glCreateShader(GL_VERTEX_SHADER);
 	const GLchar* vertShaderSource = loadShaderAsString("Shaders/Ch1/basic.vert");
@@ -91,7 +91,6 @@ int main(void)
 			delete[] log;
 		}
 	}
-	/* Swap front and back buffers */
 
 	const GLint shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertShader);
@@ -117,6 +116,23 @@ int main(void)
 	{
 		glUseProgram(shaderProgram);
 	}
+
+	GLint numAttribs;
+	glGetProgramInterfaceiv(shaderProgram, GL_PROGRAM_INPUT, GL_ACTIVE_RESOURCES, &numAttribs);
+	GLenum properties[] = {GL_NAME_LENGTH, GL_TYPE, GL_LOCATION};
+	std::cout << "Active attribs" << std::endl;
+	for (int i = 0; i < numAttribs; i++)
+	{
+		GLint results[3];
+		glGetProgramResourceiv(shaderProgram, GL_PROGRAM_INPUT, i, 3, properties, 3, NULL, results);
+
+		GLint nameBufferSize = results[0] + 1;
+		char* name = new char[nameBufferSize];
+		glGetProgramResourceName(shaderProgram, GL_PROGRAM_INPUT, i, nameBufferSize, NULL, name);
+		std::cout << results[2] << "||" << name << "||" << std::endl;
+		delete[] name;
+	}
+
 
 	glDeleteShader(fragShader);
 	glDeleteShader(vertShader);
