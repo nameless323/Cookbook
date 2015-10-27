@@ -3,6 +3,37 @@
 #include "Utils/Utils.h"
 #include <iostream>
 
+const char * getTypeString(GLenum type) {
+	// There are many more types than are covered here, but
+	// these are the most common in these examples.
+	switch (type) {
+	case GL_FLOAT:
+		return "float";
+	case GL_FLOAT_VEC2:
+		return "vec2";
+	case GL_FLOAT_VEC3:
+		return "vec3";
+	case GL_FLOAT_VEC4:
+		return "vec4";
+	case GL_DOUBLE:
+		return "double";
+	case GL_INT:
+		return "int";
+	case GL_UNSIGNED_INT:
+		return "unsigned int";
+	case GL_BOOL:
+		return "bool";
+	case GL_FLOAT_MAT2:
+		return "mat2";
+	case GL_FLOAT_MAT3:
+		return "mat3";
+	case GL_FLOAT_MAT4:
+		return "mat4";
+	default:
+		return "?";
+	}
+}
+
 int main(void)
 {
 	GLFWwindow* window;
@@ -129,7 +160,7 @@ int main(void)
 		GLint nameBufferSize = results[0] + 1;
 		char* name = new char[nameBufferSize];
 		glGetProgramResourceName(shaderProgram, GL_PROGRAM_INPUT, i, nameBufferSize, NULL, name);
-		std::cout << results[2] << "||" << name << "||" << std::endl;
+		std::cout << results[2] << "||" << name << "||" << getTypeString(results[1]) << std::endl;
 		delete[] name;
 	}
 
