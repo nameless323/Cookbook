@@ -2,6 +2,8 @@
 #include <GLFW/glfw3.h>
 #include "Utils/Utils.h"
 #include <iostream>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 
 const char * getTypeString(GLenum type) {
 	// There are many more types than are covered here, but
@@ -203,7 +205,7 @@ int main(void)
 	glEnableVertexAttribArray(1);
 	glUseProgram(shaderProgram);
 
-
+	float angle =glm::radians(90.0f);
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
@@ -212,6 +214,9 @@ int main(void)
 		
 		/* Render here */
 				
+		GLint rotMatLocation = glGetUniformLocation(shaderProgram, "rotMat");
+		glm::mat4 rotMat = rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(rotMatLocation, 1, GL_FALSE, &rotMat[0][0]);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
