@@ -205,6 +205,26 @@ int main(void)
 	glEnableVertexAttribArray(1);
 	glUseProgram(shaderProgram);
 
+	GLint numUniforms = 0;
+	glGetProgramInterfaceiv(shaderProgram, GL_UNIFORM, GL_ACTIVE_RESOURCES, &numUniforms);
+	GLenum unifProperties[] = { GL_NAME_LENGTH, GL_TYPE, GL_LOCATION, GL_BLOCK_INDEX };
+	std::cout << "active uniforms" << std::endl;
+	for (int i = 0; i < numUniforms; i++)
+	{
+		GLint results[4];
+		glGetProgramResourceiv(shaderProgram, GL_UNIFORM, i, 4, unifProperties, 4, NULL, results);
+		if (results[3] != -1)
+			continue;
+
+		GLint nameBufferSize = results[0] + 1;
+		char* name = new char[nameBufferSize];
+		glGetProgramResourceName(shaderProgram, GL_UNIFORM, i, nameBufferSize, NULL, name);
+		std::cout << results[2] << "|" << name << "|" << getTypeString(results[1]);
+		delete[] name;
+
+	}
+
+
 	float angle =glm::radians(90.0f);
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
