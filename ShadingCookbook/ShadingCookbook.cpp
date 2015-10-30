@@ -226,6 +226,42 @@ int main(void)
 
 
 	float angle =glm::radians(90.0f);
+
+	GLuint vaoQuad;
+	glGenVertexArrays(1, &vaoQuad);
+	glBindVertexArray(vaoQuad);
+	GLfloat quadVerts[] = {
+		-0.9f, 0.9f, 0.5f,
+		-0.9f, -0.9f, 0.5f,
+		0.9f, 0.9f, 0.5f,
+
+		0.9f, 0.9f, 0.5f,
+		-0.9f, -0.9f, 0.5f,
+		0.9f, -0.9f, 0.5f
+	};
+	GLuint qvertBuf;
+	glGenVertexArrays(1, &qvertBuf);
+	glBindBuffer(GL_ARRAY_BUFFER, qvertBuf);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVerts), quadVerts, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glEnableVertexAttribArray(0);
+
+	GLuint quadShader =	glCreateProgram();
+	const GLchar* quadVertShaderSource = loadShaderAsString("Shaders/Uniforms/Blob.vert");
+	const GLchar* quadvSourceArray[] = { quadVertShaderSource };
+	GLuint qVertSh = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(qVertSh, 1, quadvSourceArray, 0);
+	glCompileShader(qVertSh);
+	const GLchar* quadFragShaderSource = loadShaderAsString("Shaders/Uniforms/Blob.frag");
+	const GLchar* quadfSourceArray[] = { quadFragShaderSource };
+	GLuint qFragSh = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(qFragSh, 1, quadfSourceArray, 0);
+	glCompileShader(qFragSh);
+
+	glAttachShader(quadShader, qVertSh);
+	glAttachShader(quadShader, qFragSh);
+	glLinkProgram(quadShader);
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
@@ -233,12 +269,18 @@ int main(void)
 		glClearBufferfv(GL_COLOR, 0, bckColor);
 		
 		/* Render here */
-				
+		glBindVertexArray(vao);
+		glUseProgram(shaderProgram);
 		GLint rotMatLocation = glGetUniformLocation(shaderProgram, "rotMat");
 		glm::mat4 rotMat = rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(rotMatLocation, 1, GL_FALSE, &rotMat[0][0]);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		glBindVertexArray(vaoQuad);
+		glUseProgram(quadShader);
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glfwSwapBuffers(window);
 
