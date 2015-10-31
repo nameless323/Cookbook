@@ -252,16 +252,93 @@ int main(void)
 	GLuint qVertSh = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(qVertSh, 1, quadvSourceArray, 0);
 	glCompileShader(qVertSh);
+	glGetShaderiv(qVertSh, GL_COMPILE_STATUS, &result);
+	if (result == GL_FALSE)
+	{
+		std::cout << "Vertex shader compilation failed" << std::endl;
+
+		GLint logLen;
+		glGetShaderiv(qVertSh, GL_INFO_LOG_LENGTH, &logLen);
+		if (logLen > 0)
+		{
+			char* log = new char[logLen];
+
+			GLsizei written;
+			glGetShaderInfoLog(qVertSh, logLen, &written, log);
+			std::cout << "Shader log:" << std::endl << log;
+			delete[] log;
+		}
+	}
 	const GLchar* quadFragShaderSource = loadShaderAsString("Shaders/Uniforms/Blob.frag");
 	const GLchar* quadfSourceArray[] = { quadFragShaderSource };
 	GLuint qFragSh = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(qFragSh, 1, quadfSourceArray, 0);
 	glCompileShader(qFragSh);
+	glGetShaderiv(qFragSh, GL_COMPILE_STATUS, &result);
+	if (result == GL_FALSE)
+	{
+		std::cout << "Vertex shader compilation failed" << std::endl;
+
+		GLint logLen;
+		glGetShaderiv(qFragSh, GL_INFO_LOG_LENGTH, &logLen);
+		if (logLen > 0)
+		{
+			char* log = new char[logLen];
+
+			GLsizei written;
+			glGetShaderInfoLog(qFragSh, logLen, &written, log);
+			std::cout << "Shader log:" << std::endl << log;
+			delete[] log;
+		}
+	}
 
 	glAttachShader(quadShader, qVertSh);
 	glAttachShader(quadShader, qFragSh);
 	glLinkProgram(quadShader);
 
+	GLint programStatus1;
+	glGetProgramiv(quadShader, GL_LINK_STATUS, &programStatus1);
+	if (programStatus1 == GL_FALSE)
+	{
+		std::cout << "Failed to link shader program" << std::endl;
+		GLint logLen;
+		glGetProgramiv(quadShader, GL_INFO_LOG_LENGTH, &logLen);
+		if (logLen > 0)
+		{
+			char* log = new char[logLen];
+			GLsizei written;
+			glGetProgramInfoLog(quadShader, logLen, &written, log);
+			std::cout << "Program log" << std::endl << log << std::endl;
+			delete[] log;
+		}
+	}
+
+	GLuint blockIndex = glGetUniformBlockIndex(quadShader, "BlobSettings");
+	if (blockIndex == GL_INVALID_INDEX)
+		std::cout << std::endl << "invalid block index" << std::endl;
+	GLint blockSize;
+	glGetActiveUniformBlockiv(quadShader, blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
+	GLubyte* blockBuffer = (GLubyte*)malloc(blockSize);
+	const GLchar* uninames[] = {"BlobSettings.innerColor", "BlobSettings.outerColor", "BlobSettings.radiusInner", "BlobSettings.radiusOuter"};
+	//const GLchar* uninames[] = {"innerColor", "outerColor", "radiusInner", "radiusOuter"};
+	GLuint indices[4];
+	glGetUniformIndices(quadShader, 4, uninames, indices);
+	GLint offsets[4];
+	glGetActiveUniformsiv(quadShader, 4, indices, GL_UNIFORM_OFFSET, offsets);
+	GLfloat outerColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
+	GLfloat innerColor[] = {1.0f, 1.0f, 0.75f, 1.0f};
+	GLfloat innerRadius = 0.25f;
+	GLfloat outerRadius = 0.45f;
+	memcpy(blockBuffer + offsets[0], innerColor, 4 * sizeof(GLfloat));
+	memcpy(blockBuffer + offsets[1], outerColor, 4 * sizeof(GLfloat));
+	memcpy(blockBuffer + offsets[2], &innerRadius, sizeof(GLfloat));
+	memcpy(blockBuffer + offsets[3], &outerRadius, sizeof(GLfloat));
+	GLuint uboBuffer;
+	glGenBuffers(1, &uboBuffer);
+	glBindBuffer(GL_UNIFORM_BUFFER, uboBuffer);
+	glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer, GL_DYNAMIC_DRAW);
+	free(blockBuffer);
+	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboBuffer);
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
