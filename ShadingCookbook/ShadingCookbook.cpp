@@ -246,6 +246,22 @@ int main(void)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glEnableVertexAttribArray(0);
 
+	GLfloat quadUV[] =
+	{
+		0.0f, 1.0f,
+		0.0f, 0.0f,
+		1.0f, 1.0f,
+		1.0f, 1.0f,
+		0.0f, 0.0f,
+		1.0f, 0.0f
+	};
+	GLuint quadUVBuffer;
+	glGenBuffers(1, &quadUVBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, quadUVBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(quadUV), quadUV, GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glEnableVertexAttribArray(1);
+
 	GLuint quadShader =	glCreateProgram();
 	const GLchar* quadVertShaderSource = loadShaderAsString("Shaders/Uniforms/Blob.vert");
 	const GLchar* quadvSourceArray[] = { quadVertShaderSource };
@@ -313,6 +329,23 @@ int main(void)
 		}
 	}
 
+	numUniforms = 0;
+	glGetProgramInterfaceiv(quadShader, GL_UNIFORM, GL_ACTIVE_RESOURCES, &numUniforms);
+	std::cout << "active uniforms" << std::endl;
+	for (int i = 0; i < numUniforms; i++)
+	{
+		GLint results[4];
+		glGetProgramResourceiv(quadShader, GL_UNIFORM, i, 4, unifProperties, 4, NULL, results);
+		if (results[3] != -1)
+			continue;
+
+		GLint nameBufferSize = results[0] + 1;
+		char* name = new char[nameBufferSize];
+		glGetProgramResourceName(quadShader, GL_UNIFORM, i, nameBufferSize, NULL, name);
+		std::cout << results[2] << "|" << name << "|" << getTypeString(results[1]);
+		delete[] name;
+
+	}
 	GLuint blockIndex = glGetUniformBlockIndex(quadShader, "BlobSettings");
 	if (blockIndex == GL_INVALID_INDEX)
 		std::cout << std::endl << "invalid block index" << std::endl;

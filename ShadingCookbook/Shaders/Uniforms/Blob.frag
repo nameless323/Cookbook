@@ -1,5 +1,5 @@
 #version 430 core
-in vec3 texCoord;
+in vec2 texCoord;
 layout(location = 0) out vec4 fragColor;
 
 layout (std140, binding = 0) uniform BlobSettings
