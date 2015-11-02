@@ -4,6 +4,7 @@
 #include <iostream>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
+#include <windows.h>
 
 const char * getTypeString(GLenum type) {
 	// There are many more types than are covered here, but
@@ -36,6 +37,11 @@ const char * getTypeString(GLenum type) {
 	}
 }
 
+void APIENTRY GLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+{
+	std::cout << "GLDEBUG" << std::endl << source << " : " << type << " : " << " : " << severity << " : " << id << " : " << message << std::endl << std::endl;
+}
+
 int main(void)
 {
 	GLFWwindow* window;
@@ -44,6 +50,10 @@ int main(void)
 		return -1;
 
 	/* Create a windowed mode window and its OpenGL context */
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+
+	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+
 	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
 	if (!window)
 	{
@@ -54,6 +64,9 @@ int main(void)
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 	glewInit();
+
+	glDebugMessageCallback(GLDebugCallback, nullptr);
+	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
 
 	const GLubyte *renderer = glGetString(GL_RENDERER);
 	const GLubyte *vendor = glGetString(GL_VENDOR);
@@ -311,6 +324,8 @@ int main(void)
 	glAttachShader(quadShader, qVertSh);
 	glAttachShader(quadShader, qFragSh);
 	glLinkProgram(quadShader);
+	glDeleteShader(qVertSh);
+	glDeleteShader(qFragSh);
 
 	GLint programStatus1;
 	glGetProgramiv(quadShader, GL_LINK_STATUS, &programStatus1);
@@ -352,7 +367,7 @@ int main(void)
 	GLint blockSize;
 	glGetActiveUniformBlockiv(quadShader, blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
 	GLubyte* blockBuffer = (GLubyte*)malloc(blockSize);
-	const GLchar* uninames[] = {"BlobSettings.innerColor", "BlobSettings.outerColor", "BlobSettings.radiusInner", "BlobSettings.radiusOuter"};
+	const GLchar* uninames[] = {"innerColor", "outerColor", "radiusInner", "radiusOuter"};
 	//const GLchar* uninames[] = {"innerColor", "outerColor", "radiusInner", "radiusOuter"};
 	GLuint indices[4];
 	glGetUniformIndices(quadShader, 4, uninames, indices);
@@ -398,14 +413,20 @@ int main(void)
 		glfwPollEvents();
 	}
 	glBindVertexArray(0);
-	glDeleteVertexArrays(1, &vao);
-	glUseProgram(0);
-	glDeleteProgram(shaderProgram);
+
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+
+	glDeleteVertexArrays(1, &vao);
+	glDeleteVertexArrays(1, &vaoQuad);
+	glUseProgram(0);
+	glDeleteProgram(shaderProgram);
+	glDeleteProgram(quadShader);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteBuffers(2, buffer);
-	
+	glDeleteBuffers(1, &quadUVBuffer);
+	glDeleteBuffers(1, &qvertBuf);
+	glDeleteBuffers(1, &uboBuffer);
 	glfwTerminate();
 	return 0;
 }
