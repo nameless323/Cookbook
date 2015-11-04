@@ -74,6 +74,7 @@ private:
 	
 	GLint GetUniformLocation(const char* name);
 	bool IsFileExists(const std::string& fileName);
+	std::string GetExtension(const char* fileName);
 
 	ShaderProgram(const ShaderProgram& other): _handle(0), _linked(false)	{}
 	ShaderProgram& operator= (const ShaderProgram& other) { return *this; }
