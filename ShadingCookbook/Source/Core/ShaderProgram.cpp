@@ -39,7 +39,7 @@ ShaderProgram::~ShaderProgram()
 	glGetProgramiv(_handle, GL_ATTACHED_SHADERS, &numShaders);
 
 	GLuint* shaderNames = new GLuint[numShaders];
-	glGetAttachedShaders(_handle, numShaders, NULL, shaderNames);
+	glGetAttachedShaders(_handle, numShaders, nullptr, shaderNames);
 
 	for (int i = 0; i < numShaders; i++)
 	{
@@ -85,7 +85,7 @@ std::string ShaderProgram::GetExtension(const char* fileName)
 	return "";
 }
 
-void ShaderProgram::CompileShader(const char* fileName, Shaders::ShaderType type) throw (ShaderProgramException)
+void ShaderProgram::CompileShader(const std::string& fileName, Shaders::ShaderType type) throw (ShaderProgramException)
 {
 	if (!IsFileExists(fileName))
 	{
@@ -136,12 +136,98 @@ void ShaderProgram::CompileShader(const char* fileName, Shaders::ShaderType type
 	buffer[fileSize] = '\0';
 	try
 	{
-		CompileShader(buffer, type, fileName);
-	} catch(ShaderProgramException e)
+		CompileShader(buffer, type, fileName.c_str());
+	}
+	catch (ShaderProgramException e)
 	{
-		delete[] buffer;
+		if (buffer != nullptr)
+		{
+			delete[] buffer;
+			buffer = nullptr;
+		}
 		throw e;
 	}
 
-	delete[] buffer;
+	if (buffer != nullptr)
+	{
+		delete[] buffer;
+		buffer = nullptr;
+	}
+}
+
+void ShaderProgram::CompileShader(const char* source, Shaders::ShaderType type, const char* fileName) throw (ShaderProgramException)
+{
+	if (_handle <= 0)
+	{
+		_handle = glCreateProgram();
+		if (_handle == 0)
+		{
+			throw ShaderProgramException("Unable to create shader program");
+		}
+	}
+	GLuint shaderHandle = glCreateShader(type);
+	glShaderSource(shaderHandle, 1, &source, nullptr);
+
+	glCompileShader(shaderHandle);
+
+	int result;
+	glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &result);
+
+	if(result == GL_FALSE)
+	{
+		int len = 0;
+		std::string logString;
+		glGetShaderiv(shaderHandle, GL_INFO_LOG_LENGTH, &len);
+		if (len > 0)
+		{
+			char* log = new char[len];
+			int written = 0;
+			glGetShaderInfoLog(shaderHandle, len, &written, log);
+			logString = log;
+			delete[] log;
+		}
+		std::string msg;
+		if (fileName != nullptr)
+		{
+			msg = std::string(fileName) + ": shader compilation failed\n";
+		}
+		else
+		{
+			msg = "Shader compilation failed.\n";
+		}
+		msg += logString;
+		throw ShaderProgramException(msg);
+	}
+	glAttachShader(_handle, shaderHandle);
+}
+
+void ShaderProgram::Link()
+{
+	if (_linked) return;
+	if (_handle <= 0)
+		throw ShaderProgramException("Program has not been compiled");
+	glLinkProgram(_handle);
+
+	int status = 0;
+	glGetProgramiv(_handle, GL_LINK_STATUS, &status);
+	if (status == GL_FALSE)
+	{
+		int len = 0;
+		std::string logString;
+
+		glGetProgramiv(_handle, GL_INFO_LOG_LENGTH, &len);
+		if (len > 0)
+		{
+			char* log = new char[len];
+			int written = 0;
+			glGetProgramInfoLog(_handle, len, &written, log);
+			logString = log;
+			delete[] log;
+		}
+		throw ShaderProgramException(std::string("Program link failed:\n") + logString);
+	}
+	//todo: delete all shaders here
+	_uniformLocations.clear();
+	_linked = true;
+
 }

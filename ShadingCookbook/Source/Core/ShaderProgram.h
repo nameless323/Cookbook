@@ -38,8 +38,8 @@ public:
 	~ShaderProgram();
 
 	void CompileShader(const char *fileName) throw(ShaderProgramException);
-	void CompileShader(const char* fileName, Shaders::ShaderType type) throw(ShaderProgramException);
-	void CompileShader(const std::string& source, Shaders::ShaderType type, const char* fileName = nullptr) throw(ShaderProgramException);
+	void CompileShader(const std::string& fileName, Shaders::ShaderType type) throw(ShaderProgramException);
+	void CompileShader(const char* source, Shaders::ShaderType type, const char* fileName = nullptr) throw(ShaderProgramException);
 
 	void Link() throw (ShaderProgramException);
 	void Validate() throw (ShaderProgramException);
