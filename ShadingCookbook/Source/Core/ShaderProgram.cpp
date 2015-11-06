@@ -30,7 +30,9 @@ namespace ShaderInfo
 	};
 }
 
-ShaderProgram::ShaderProgram() : _handle(0), _linked(false) {}
+ShaderProgram::ShaderProgram() : _handle(0), _linked(false)
+{
+}
 
 ShaderProgram::~ShaderProgram()
 {
@@ -174,7 +176,7 @@ void ShaderProgram::CompileShader(const char* source, Shaders::ShaderType type, 
 	int result;
 	glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &result);
 
-	if(result == GL_FALSE)
+	if (result == GL_FALSE)
 	{
 		int len = 0;
 		std::string logString;
@@ -321,9 +323,27 @@ void ShaderProgram::SetUniform(const char* name, const bool val)
 
 void ShaderProgram::PrintActiveUniforms()
 {
-	
-}
+	GLint numUniforms = 0;
+	glGetProgramInterfaceiv(_handle, GL_UNIFORM, GL_ACTIVE_RESOURCES, &numUniforms);
 
+	GLenum properties[] = {GL_NAME_LENGTH, GL_TYPE, GL_LOCATION, GL_BLOCK_INDEX};
+
+	std::cout << "Active uniforms:" << std::endl;
+
+	for (int i = 0; i < numUniforms; ++i)
+	{
+		GLint results[4];
+		glGetProgramResourceiv(_handle, GL_UNIFORM, i, 4, properties, 4, nullptr, results);
+
+		if (results[3] != -1) continue;
+
+		GLint nameBufSize = results[0] + 1;
+		char* name = new char[nameBufSize];
+		glGetProgramResourceName(_handle, GL_UNIFORM, i, nameBufSize, nullptr, name);
+		std::cout << "\t" << results[2] << " " << name << " (" << GetTypeString(results[1]) << ")" << std::endl;
+		delete[] name;
+	}
+}
 
 void ShaderProgram::PrintActiveUniformBlocks()
 {
@@ -331,8 +351,8 @@ void ShaderProgram::PrintActiveUniformBlocks()
 
 	glGetProgramInterfaceiv(_handle, GL_UNIFORM_BLOCK, GL_ACTIVE_RESOURCES, &numBlocks);
 	GLenum blockProps[] = {GL_NUM_ACTIVE_VARIABLES, GL_NAME_LENGTH};
-	GLenum blockIndex[] = { GL_ACTIVE_VARIABLES };
-	GLenum props[] = { GL_NAME_LENGTH, GL_TYPE, GL_BLOCK_INDEX };
+	GLenum blockIndex[] = {GL_ACTIVE_VARIABLES};
+	GLenum props[] = {GL_NAME_LENGTH, GL_TYPE, GL_BLOCK_INDEX};
 	for (int block = 0; block < numBlocks; ++block)
 	{
 		GLint blockInfo[2];
@@ -359,4 +379,91 @@ void ShaderProgram::PrintActiveUniformBlocks()
 		}
 		delete[] unifIndexes;
 	}
+}
+
+void ShaderProgram::PrintActiveAttibs()
+{
+	GLint numAttribs;
+	glGetProgramInterfaceiv(_handle, GL_PROGRAM_INPUT, GL_ACTIVE_RESOURCES, &numAttribs);
+
+	GLenum properties[] = {GL_NAME_LENGTH, GL_TYPE, GL_LOCATION};
+	std::cout << "Active attributes:" << std::endl;
+	for (int i = 0; i < numAttribs; ++i)
+	{
+		GLint results[3];
+		glGetProgramResourceiv(_handle, GL_PROGRAM_INPUT, i, 3, properties, 3, nullptr, results);
+
+		GLint nameBuffSize = results[0] + 1;
+		char* name = new char[nameBuffSize];
+		glGetProgramResourceName(_handle, GL_PROGRAM_INPUT, i, nameBuffSize, nullptr, name);
+		std::cout << "\t" << results[2] << " " << name << " (" << GetTypeString(results[1]) << std::endl;
+		delete[] name;
+	}
+}
+
+const char* ShaderProgram::GetTypeString(GLenum type)
+{
+	switch (type)
+	{
+	case GL_FLOAT:
+		return "float";
+	case GL_FLOAT_VEC2:
+		return "vec2";
+	case GL_FLOAT_VEC3:
+		return "vec3";
+	case GL_FLOAT_VEC4:
+		return "vec4";
+	case GL_DOUBLE:
+		return "double";
+	case GL_INT:
+		return "int";
+	case GL_UNSIGNED_INT:
+		return "unsigned int";
+	case GL_BOOL:
+		return "bool";
+	case GL_FLOAT_MAT2:
+		return "mat2";
+	case GL_FLOAT_MAT3:
+		return "mat3";
+	case GL_FLOAT_MAT4:
+		return "mat4";
+	default:
+		return "?";
+	}
+}
+
+void ShaderProgram::Validate() throw(ShaderProgramException)
+{
+	if (!_linked)
+		throw ShaderProgramException("Program is not linked");
+	GLint status;
+	glValidateProgram(_handle);
+	glGetProgramiv(_handle, GL_VALIDATE_STATUS, &status);
+	if (status == GL_FALSE)
+	{
+		int len = 0;
+		std::string logString;
+
+		glGetProgramiv(_handle, GL_INFO_LOG_LENGTH, &len);
+
+		if (len > 0)
+		{
+			char* log = new char[len];
+			int written = 0;
+			glGetProgramInfoLog(_handle, len, &written, log);
+			logString = log;
+			delete[] log;
+		}
+		throw ShaderProgramException(std::string("Program failed to validate\n") + logString);
+	}
+}
+
+GLint ShaderProgram::GetUniformLocation(const char* name)
+{
+	std::map<std::string, int>::iterator pos;
+	pos = _uniformLocations.find(name);
+	if (pos == _uniformLocations.end())
+		_uniformLocations[name] = glGetUniformLocation(_handle, name); //what if not
+
+	return _uniformLocations[name];
 }
