@@ -1,6 +1,7 @@
 #include "ShaderProgram.h"
 
 #include <fstream>
+#include <iostream>
 using std::ifstream;
 using std::ios;
 
@@ -229,5 +230,133 @@ void ShaderProgram::Link()
 	//todo: delete all shaders here
 	_uniformLocations.clear();
 	_linked = true;
+}
 
+void ShaderProgram::Use() throw(ShaderProgramException)
+{
+	if (_handle <= 0 || !_linked)
+		throw ShaderProgramException("Shader has not bene linked");
+	glUseProgram(_handle);
+}
+
+int ShaderProgram::GetHandle()
+{
+	return _handle;
+}
+
+bool ShaderProgram::IsLinked()
+{
+	return _linked;
+}
+
+void ShaderProgram::BindAttribLocation(GLuint location, const char* name)
+{
+	glBindAttribLocation(_handle, location, name);
+}
+
+void ShaderProgram::BindFragDataLocation(GLuint location, const char* name)
+{
+	glBindFragDataLocation(_handle, location, name);
+}
+
+void ShaderProgram::SetUniform(const char* name, float x, float y, float z)
+{
+	GLint loc = GetUniformLocation(name);
+	glUniform3f(loc, x, y, z);
+}
+
+void ShaderProgram::SetUniform(const char* name, const vec3& v)
+{
+	SetUniform(name, v.x, v.y, v.z);
+}
+
+void ShaderProgram::SetUniform(const char* name, const vec4& v)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniform4f(loc, v.x, v.y, v.z, v.w);
+}
+
+void ShaderProgram::SetUniform(const char* name, const vec2& v)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniform2f(loc, v.x, v.y);
+}
+
+void ShaderProgram::SetUniform(const char* name, const mat4& m)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, &m[0][0]);
+}
+
+void ShaderProgram::SetUniform(const char* name, const mat3& m)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniformMatrix3fv(loc, 1, GL_FALSE, &m[0][0]);
+}
+
+void ShaderProgram::SetUniform(const char* name, const float val)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniform1f(loc, val);
+}
+
+void ShaderProgram::SetUniform(const char* name, const int val)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniform1i(loc, val);
+}
+
+void ShaderProgram::SetUniform(const char* name, const GLuint val)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniform1ui(loc, val);
+}
+
+void ShaderProgram::SetUniform(const char* name, const bool val)
+{
+	GLuint loc = GetUniformLocation(name);
+	glUniform1i(loc, val);
+}
+
+
+void ShaderProgram::PrintActiveUniforms()
+{
+	
+}
+
+
+void ShaderProgram::PrintActiveUniformBlocks()
+{
+	GLint numBlocks = 0;
+
+	glGetProgramInterfaceiv(_handle, GL_UNIFORM_BLOCK, GL_ACTIVE_RESOURCES, &numBlocks);
+	GLenum blockProps[] = {GL_NUM_ACTIVE_VARIABLES, GL_NAME_LENGTH};
+	GLenum blockIndex[] = { GL_ACTIVE_VARIABLES };
+	GLenum props[] = { GL_NAME_LENGTH, GL_TYPE, GL_BLOCK_INDEX };
+	for (int block = 0; block < numBlocks; ++block)
+	{
+		GLint blockInfo[2];
+		glGetProgramResourceiv(_handle, GL_UNIFORM_BLOCK, block, 2, blockProps, 2, nullptr, blockInfo);
+		GLint numUnits = blockInfo[0];
+		char* blockName = new char[blockInfo[1] + 1];
+		glGetProgramResourceName(_handle, GL_UNIFORM_BLOCK, block, blockInfo[1] + 1, nullptr, blockName);
+		std::cout << "Uniform block : " << blockName;
+		delete[] blockName;
+
+		GLint* unifIndexes = new GLint[numUnits];
+		glGetProgramResourceiv(_handle, GL_UNIFORM_BLOCK, block, 1, blockIndex, numUnits, nullptr, unifIndexes);
+		for (int unif = 0; unif < numUnits; ++unif)
+		{
+			GLint uniIndex = unifIndexes[unif];
+			GLint results[3];
+			glGetProgramResourceiv(_handle, GL_UNIFORM, uniIndex, 3, props, 3, nullptr, results);
+
+			GLint nameBufSize = results[0] + 1;
+			char* name = new char[nameBufSize];
+			glGetProgramResourceName(_handle, GL_UNIFORM, uniIndex, nameBufSize, nullptr, name);
+			std::cout << std::endl << name << " (" << GetTypeString(results[1]) << ") " << std::endl;
+			delete[] name;
+		}
+		delete[] unifIndexes;
+	}
 }
