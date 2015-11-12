@@ -25,7 +25,8 @@ Torus::Torus(float outerRadius, float innerRadius, int nSides, int nRings) : _ri
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffersHandle[1]);
 	glBufferData(GL_ARRAY_BUFFER, (3 * nVerts) * sizeof(float), n, GL_STATIC_DRAW);
-
+	
+	glBindBuffer(GL_ARRAY_BUFFER, buffersHandle[2]);
 	glBufferData(GL_ARRAY_BUFFER, (2 * nVerts)*sizeof(float), uv, GL_STATIC_DRAW);
 
 	delete[] v;
@@ -48,6 +49,7 @@ Torus::Torus(float outerRadius, float innerRadius, int nSides, int nRings) : _ri
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffersHandle[3]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(el), el, GL_STATIC_DRAW); check this one
 
 	glBindVertexArray(0);
 }
