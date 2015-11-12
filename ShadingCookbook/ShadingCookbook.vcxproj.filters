@@ -933,6 +933,24 @@
     <ClInclude Include="Utils\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Items\IDrawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Items\Torus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter2\DiffuseScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Chapter1\Chapter1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -984,6 +1002,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ingredients\gl_core_4_4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Items\Torus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter2\DiffuseScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1647,5 +1674,7 @@
     <None Include="Shaders\Ch1\basic.frag" />
     <None Include="Shaders\Uniforms\Blob.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
+    <None Include="Shaders\Diffuse\Diffuse.vert" />
+    <None Include="Shaders\Diffuse\Diffuse.frag" />
   </ItemGroup>
 </Project>

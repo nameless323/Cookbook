@@ -5,7 +5,7 @@
 
 const char* loadShaderAsString(const char* filename)
 {
-	std::fstream fin;
+	std::ifstream fin;
 	int fileSize;
 	char input;
 	char* buffer;

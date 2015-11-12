@@ -459,6 +459,12 @@
     <ClInclude Include="ingredients\vboteapot.h" />
     <ClInclude Include="ingredients\vboteapotpatch.h" />
     <ClInclude Include="ingredients\vbotorus.h" />
+    <ClInclude Include="Source\Chapter1\Chapter1.h" />
+    <ClInclude Include="Source\Core\ShaderProgram.h" />
+    <ClInclude Include="Source\Items\IDrawable.h" />
+    <ClInclude Include="Source\Items\Torus.h" />
+    <ClInclude Include="Source\Scene\Chapter2\DiffuseScene.h" />
+    <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utils\Utils.h" />
@@ -480,6 +486,9 @@
     <ClCompile Include="ingredients\vboteapotpatch.cpp" />
     <ClCompile Include="ingredients\vbotorus.cpp" />
     <ClCompile Include="ShadingCookbook.cpp" />
+    <ClCompile Include="Source\Core\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Items\Torus.cpp" />
+    <ClCompile Include="Source\Scene\Chapter2\DiffuseScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -704,6 +713,8 @@
     <None Include="Include\glm\gtx\wrap.inl" />
     <None Include="Shaders\Ch1\basic.frag" />
     <None Include="Shaders\Ch1\basic.vert" />
+    <None Include="Shaders\Diffuse\Diffuse.frag" />
+    <None Include="Shaders\Diffuse\Diffuse.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
     <None Include="Shaders\Uniforms\Blob.vert" />
   </ItemGroup>
