@@ -49,7 +49,7 @@ Torus::Torus(float outerRadius, float innerRadius, int nSides, int nRings) : _ri
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffersHandle[3]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(el), el, GL_STATIC_DRAW); check this one
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(el), el, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 }
