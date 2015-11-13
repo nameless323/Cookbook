@@ -37,7 +37,7 @@ public:
 	ShaderProgram();
 	~ShaderProgram();
 
-	void CompileShader(const char *fileName) throw(ShaderProgramException);
+	void CompileShader(const std::string& fileName) throw(ShaderProgramException);
 	void CompileShader(const std::string& fileName, Shaders::ShaderType type) throw(ShaderProgramException);
 	void CompileShader(const char* source, Shaders::ShaderType type, const char* fileName = nullptr) throw(ShaderProgramException);
 

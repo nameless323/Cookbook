@@ -54,11 +54,11 @@ ShaderProgram::~ShaderProgram()
 	delete[] shaderNames;
 }
 
-void ShaderProgram::CompileShader(const char* fileName) throw(ShaderProgram)
+void ShaderProgram::CompileShader(const std::string& fileName) throw(ShaderProgram)
 {
 	int numExt = sizeof(ShaderInfo::Extensions) / sizeof(ShaderInfo::ShaderFileExtension);
 
-	std::string ext = GetExtension(fileName);
+	std::string ext = GetExtension(fileName.c_str());
 	Shaders::ShaderType type = Shaders::VERTEX;
 	bool matchFound = false;
 	for (int i = 0; i < numExt; i++)
@@ -466,4 +466,13 @@ GLint ShaderProgram::GetUniformLocation(const char* name)
 		_uniformLocations[name] = glGetUniformLocation(_handle, name); //what if not
 
 	return _uniformLocations[name];
+}
+
+bool ShaderProgram::IsFileExists(const std::string& fileName)
+{
+	struct stat info;
+	int ret = -1;
+
+	ret = stat(fileName.c_str(), &info);
+	return 0 == ret;
 }

@@ -1,8 +1,10 @@
+#version 430 core
+
 in vec3 LightIntensity;
 
-layout (location = 0) out vec4 col;
+out vec4 col;
 
 void main(void)
 {
-	col = vec4(LightIntensity);
+	col = vec4(LightIntensity, 1.0);
 }

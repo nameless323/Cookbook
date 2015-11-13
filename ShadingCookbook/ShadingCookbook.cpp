@@ -60,7 +60,7 @@ int main(void)
 		exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(window);
-	if (!glewInit()) exit(EXIT_FAILURE);
+	glewInit();
 
 	InitializeGL();
 	ResizeGL(WIN_WIDTH, WIN_HEIGHT);
