@@ -106,7 +106,7 @@ void Torus::GenerateVerts(float* verts, float* norms, float* tex, unsigned* el, 
 		int nextRingStart = (ring + 1) * _sides;
 		for (int side = 0; side < _sides; side++)
 		{
-			int nextSide = (side + 1) % side;
+			int nextSide = (side + 1) % _sides;
 			el[idx] = (ringStart + side);
 			el[idx + 1] = (nextRingStart + side);
 			el[idx + 2] = (nextRingStart + nextSide);
