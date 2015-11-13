@@ -2,9 +2,6 @@
 #include <GLFW/glfw3.h>
 #include "Utils/Utils.h"
 #include <iostream>
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <windows.h>
 
 #include "Source/Scene/Scene.h"
 
@@ -44,23 +41,35 @@ int main(void)
 {
 	scene = new DiffuseScene();
 
-	if (!glfwInit()) exit(EXIT_FAILURE);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	if (!glfwInit()) 
+		exit(EXIT_FAILURE);
+
+//	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+//	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+//	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-	std::string titile = "Blablabla";
-	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, titile.c_str(), nullptr, nullptr);
+	std::string title = "Blablabla";
+	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, title.c_str(), NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(window);
-	glewInit();
+
+	GLenum status = glewInit();
+	if (status != GLEW_OK)
+	{
+		std::cout << "glew failed";
+	}
+	GLint glMaj;
+	GLint glMin;
+	glGetIntegerv(GL_MAJOR_VERSION, &glMaj);
+	glGetIntegerv(GL_MINOR_VERSION, &glMin);
+	GLuint vao;
 
 	InitializeGL();
 	ResizeGL(WIN_WIDTH, WIN_HEIGHT);
