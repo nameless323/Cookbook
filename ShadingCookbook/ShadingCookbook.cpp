@@ -12,12 +12,10 @@
 Scene* scene;
 GLFWwindow* window;
 
-//std::string parsseCLArgs(int argc, char** argv);
-//void PringHelpInfo(const char* exeFile);
-
+const GLfloat bckColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 void InitializeGL()
 {
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearBufferfv(GL_COLOR, 0, bckColor);
 	scene->InitScene();
 }
 
@@ -41,41 +39,29 @@ int main(void)
 {
 	scene = new DiffuseScene();
 
-	if (!glfwInit()) 
-		exit(EXIT_FAILURE);
-
+	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 //	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 //	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-	std::string title = "Blablabla";
-	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, title.c_str(), NULL, NULL);
+	std::string titile = "Blablabla";
+	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, titile.c_str(), nullptr, nullptr);
 	if (!window)
 	{
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(window);
-
-	GLenum status = glewInit();
-	if (status != GLEW_OK)
-	{
-		std::cout << "glew failed";
-	}
-	GLint glMaj;
-	GLint glMin;
-	glGetIntegerv(GL_MAJOR_VERSION, &glMaj);
-	glGetIntegerv(GL_MINOR_VERSION, &glMin);
-	GLuint vao;
+	glewInit();
 
 	InitializeGL();
 	ResizeGL(WIN_WIDTH, WIN_HEIGHT);
 
 	MainLoop();
-
+	scene->Shutdown();
 	glfwTerminate();
 	exit(EXIT_SUCCESS);
 
