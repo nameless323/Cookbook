@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IDrawable.h"
+#include <GL/glew.h>
 
 class Torus : public IDrawable
 {
@@ -9,7 +10,7 @@ public:
 	virtual void Render() override;
 	int GetVertexArrayHandle();
 private:
-	unsigned int _vaoHandle;
+	GLuint _vaoHandle;
 	int _faces, _rings, _sides;
 
 	void GenerateVerts(float* verts, float* norms, float* tex, unsigned int* el, float outerRadius, float innerRadius);
