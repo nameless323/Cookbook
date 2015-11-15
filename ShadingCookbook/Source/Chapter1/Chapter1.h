@@ -64,7 +64,6 @@ inline int ChapterOne(void)
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 	glewInit();
-
 	glDebugMessageCallback(GLDebugCallback, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
 

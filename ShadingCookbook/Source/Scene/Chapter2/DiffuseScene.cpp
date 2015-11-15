@@ -8,14 +8,14 @@ DiffuseScene::DiffuseScene()
 
 void DiffuseScene::InitScene()
 {
-	CompileAndLinkShader();
-	glEnable(GL_DEPTH);
+	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+	CompileAndLinkShader();
 
 	_torus = new Torus(0.7f, 0.3f, 30, 30);
 
 	_model = mat4(1.0f);
-	_model *= rotate(glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f));
+	_model *= rotate(glm::radians(-30.0f), vec3(1.0f, 0.0f, 0.0f));
 	_model *= rotate(glm::radians(35.0f), vec3(0.0f, 1.0f, 0.0f));
 	_view = lookAt(vec3(0.0f, 0.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
@@ -31,6 +31,7 @@ void DiffuseScene::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	SetMatrices();
+	_shader.Use();
 	_torus->Render();
 }
 

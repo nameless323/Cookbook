@@ -38,20 +38,7 @@ ShaderProgram::~ShaderProgram()
 {
 	if (_handle == 0) return;
 
-	GLint numShaders = 0;
-	glGetProgramiv(_handle, GL_ATTACHED_SHADERS, &numShaders);
-
-	GLuint* shaderNames = new GLuint[numShaders];
-	glGetAttachedShaders(_handle, numShaders, nullptr, shaderNames);
-
-	for (int i = 0; i < numShaders; i++)
-	{
-		glDeleteShader(shaderNames[i]);
-	}
-
 	glDeleteProgram(_handle);
-
-	delete[] shaderNames;
 }
 
 void ShaderProgram::CompileShader(const std::string& fileName) throw(ShaderProgram)
@@ -229,7 +216,18 @@ void ShaderProgram::Link()
 		}
 		throw ShaderProgramException(std::string("Program link failed:\n") + logString);
 	}
-	//todo: delete all shaders here
+
+	GLint numShaders = 0;
+	glGetProgramiv(_handle, GL_ATTACHED_SHADERS, &numShaders);
+
+	GLuint* shaderNames = new GLuint[numShaders];
+	glGetAttachedShaders(_handle, numShaders, nullptr, shaderNames);
+
+	for (int i = 0; i < numShaders; i++)
+	{
+		glDeleteShader(shaderNames[i]);
+	}
+	delete[] shaderNames;
 	_uniformLocations.clear();
 	_linked = true;
 }

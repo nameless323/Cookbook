@@ -60,9 +60,11 @@ Torus::Torus(float outerRadius, float innerRadius, int nsides, int nrings) :
 	glBindVertexArray(0);
 }
 
-void Torus::Render()  {
+void Torus::Render()  
+{
 	glBindVertexArray(_vaoHandle);
 	glDrawElements(GL_TRIANGLES, 6 * _faces, GL_UNSIGNED_INT, ((GLubyte *)NULL + (0)));
+	glBindVertexArray(0);
 }
 
 void Torus::GenerateVerts(float* verts, float* norms, float* tex, unsigned* el, float outerRadius, float innerRadius)
