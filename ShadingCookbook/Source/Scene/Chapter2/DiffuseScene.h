@@ -20,7 +20,7 @@ public:
 private:
 	ShaderProgram _shader;
 	int _width, _height;
-	Teapot* _torus;
+	Torus* _torus;
 	mat4 _model;
 	mat4 _view;
 	mat4 _projection;

@@ -50,7 +50,7 @@ void Teapot::Render()
 	glDrawElements(GL_TRIANGLES, 6 * _faces, GL_UNSIGNED_INT, nullptr);
 }
 
-void Teapot::GeneratePatches(float* v, float* n, float* tc, unsigned* el, int grid)
+void Teapot::GeneratePatches(float* v, float* n, float* tc, unsigned int* el, int grid)
 {
 	float* b = new float[4 * (grid + 1)];
 	float* dB = new float[4 * (grid + 1)];
@@ -69,11 +69,11 @@ void Teapot::GeneratePatches(float* v, float* n, float* tc, unsigned* el, int gr
 	//bottom
 	BuildPatchReflect(5, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, true, true);
 	//handle
-	BuildPatchReflect(6, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, true, true);
-	BuildPatchReflect(7, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, true, true);
+	BuildPatchReflect(6, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, false, true);
+	BuildPatchReflect(7, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, false, true);
 	//spout
-	BuildPatchReflect(8, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, true, true);
-	BuildPatchReflect(9, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, true, true);
+	BuildPatchReflect(8, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, false, true);
+	BuildPatchReflect(9, b, dB, v, n, tc, el, idx, elIndex, tcIndex, grid, false, true);
 
 	delete[] b;
 	delete[] dB;
@@ -131,8 +131,8 @@ void Teapot::BuildPatch(vec3 patch[][4], float* b, float* dB, float* v, float* n
 			n[index + 1] = norm.y;
 			n[index + 2] = norm.z;
 
-			tc[index] = i * tcFactor;
-			tc[index + 1] = j * tcFactor;
+			tc[tcIndex] = i * tcFactor;
+			tc[tcIndex + 1] = j * tcFactor;
 
 			index += 3;
 			tcIndex += 2;
