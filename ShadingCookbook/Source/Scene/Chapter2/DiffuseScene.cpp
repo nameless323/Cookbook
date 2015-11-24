@@ -12,7 +12,8 @@ void DiffuseScene::InitScene()
 	glDepthFunc(GL_LEQUAL);
 	CompileAndLinkShader();
 
-	_torus = new Torus(0.7f, 0.3f, 30, 30);
+	mat4 transform = glm::translate(mat4(1.0f), vec3(0.0f, 1.5f, 0.25f));
+	_torus = new Teapot(13, transform);
 
 	_model = mat4(1.0f);
 	_model *= rotate(glm::radians(-30.0f), vec3(1.0f, 0.0f, 0.0f));

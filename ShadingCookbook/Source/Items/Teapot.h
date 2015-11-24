@@ -24,7 +24,7 @@ private:
 		bool invertNormal);
 	void GetPatch(int patchNum, vec3 patch[][4], bool reverseV);
 	void ComputeBasisFunctions(float* b, float* dB, int grid);
-	vec3 Evaluate(int gridU, int gridV, float* b, float* dB, vec3 patch[][4]);
+	vec3 Evaluate(int gridU, int gridV, float* b, vec3 patch[][4]);
 	vec3 EvaluateNormal(int gridU, int gridV, float* b, float* dB, vec3 patch[][4]);
 	void MoveLid(int grid, float* v, const mat4& lidTransform);
 };

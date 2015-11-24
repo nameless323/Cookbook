@@ -110,7 +110,7 @@ void Teapot::BuildPatchReflect(int patchNum, float* b, float* dB, float* v, floa
 	}
 }
 
-void Teapot::BuildPatch(vec3 patch[][4], float* b, float* dB, float* v, float* n, float* tc, unsigned* el, int& index, int& elIndex, int& tcIndex, int grid, mat3 reflect, bool invertNormal)
+void Teapot::BuildPatch(vec3 patch[][4], float* b, float* dB, float* v, float* n, float* tc, unsigned int* el, int& index, int& elIndex, int& tcIndex, int grid, mat3 reflect, bool invertNormal)
 {
 	int startIndex = index / 3;
 	float tcFactor = 1.0f / grid;
@@ -119,7 +119,7 @@ void Teapot::BuildPatch(vec3 patch[][4], float* b, float* dB, float* v, float* n
 	{
 		for (int j = 0; j <= grid; j++)
 		{
-			vec3 pt = reflect * Evaluate(i, j, b, dB, patch);
+			vec3 pt = reflect * Evaluate(i, j, b, patch);
 			vec3 norm = reflect * EvaluateNormal(i, j, b, dB, patch);
 			if (invertNormal)
 				norm = -norm;
@@ -128,8 +128,8 @@ void Teapot::BuildPatch(vec3 patch[][4], float* b, float* dB, float* v, float* n
 			v[index + 2] = pt.z;
 
 			n[index] = norm.x;
-			n[index] = norm.y;
-			n[index] = norm.z;
+			n[index + 1] = norm.y;
+			n[index + 2] = norm.z;
 
 			tc[index] = i * tcFactor;
 			tc[index + 1] = j * tcFactor;
@@ -206,7 +206,7 @@ void Teapot::ComputeBasisFunctions(float* b, float* dB, int grid)
 	}
 }
 
-vec3 Teapot::Evaluate(int gridU, int gridV, float* b, float* dB, vec3 patch[][4])
+vec3 Teapot::Evaluate(int gridU, int gridV, float* b, vec3 patch[][4])
 {
 	vec3 p(0.0f, 0.0f, 0.0f);
 	for (int i = 0; i < 4; i++)

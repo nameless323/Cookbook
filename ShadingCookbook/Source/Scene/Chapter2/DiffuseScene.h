@@ -3,6 +3,7 @@
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
 #include "../../Items/Torus.h"
+#include "../../Items/Teapot.h"
 
 #include <glm.hpp>
 using glm::mat4;
@@ -19,7 +20,7 @@ public:
 private:
 	ShaderProgram _shader;
 	int _width, _height;
-	Torus* _torus;
+	Teapot* _torus;
 	mat4 _model;
 	mat4 _view;
 	mat4 _projection;
