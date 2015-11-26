@@ -8,6 +8,7 @@
 #define WIN_WIDTH 1024
 #define WIN_HEIGHT 768
 #include "Source/Scene/Chapter2/DiffuseScene.h"
+#include "Source/Scene/Chapter2/PhongScene.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -37,7 +38,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new DiffuseScene();
+	scene = new PhongScene();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

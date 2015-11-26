@@ -1,14 +1,9 @@
 #version 430 core
 
-layout (location = 0) in vec3 VertexPosition;
-layout (location = 1) in vec3 VertexNormal;
+in vec4 LightIntensity;
+out vec4 col;
 
-out vec3 LightIntensity;
-
-struct LightInfo
+void main(void)
 {
-	vec4 Position;
-	vec3 La;
-	vec3 Ld;
-	vec3 Ls;
-};
+	col = LightIntensity;
+}
