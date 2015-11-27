@@ -12,6 +12,8 @@
 
 Scene* scene;
 GLFWwindow* window;
+int currentKey;
+int keyAction;
 
 const GLfloat bckColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 void InitializeGL()
@@ -20,13 +22,24 @@ void InitializeGL()
 	scene->InitScene();
 }
 
+void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	currentKey = key;
+	keyAction = action;
+
+	std::cout << key << "   " << action << std::endl;
+}
+
 void MainLoop()
 {
 	while (!glfwWindowShouldClose(window) & !glfwGetKey(window, GLFW_KEY_ESCAPE))
 	{
+		scene->ProcessInput(currentKey, keyAction);
 		scene->Update(float(glfwGetTime()));
-		scene->Render();
+		scene->Render();		
 		glfwSwapBuffers(window);
+		currentKey = -1;
+		keyAction = -1;
 		glfwPollEvents();
 	}
 }
@@ -55,6 +68,7 @@ int main(void)
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
+	glfwSetKeyCallback(window, KeyCallback);
 	glfwMakeContextCurrent(window);
 	glewInit();
 

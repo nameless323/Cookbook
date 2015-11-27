@@ -8,6 +8,7 @@ public:
 	virtual void Update(float t) = 0;
 	virtual void Render() = 0;
 	virtual void Shutdown() = 0;
+	virtual void ProcessInput(int key, int action) = 0;
 
 	virtual void Resize(int x, int y) = 0;
 

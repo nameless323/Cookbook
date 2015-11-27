@@ -1,10 +1,28 @@
 #include "PhongScene.h"
 #include <gtx/transform.hpp>
 #include <iostream>
+#include <GLFW/glfw3.h>
 using glm::vec3;
 
-PhongScene::PhongScene() : _angle(0), _prevTime(0)
+PhongScene::PhongScene() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0)
 {
+}
+
+void PhongScene::ProcessInput(int key, int action)
+{
+	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
+		_autorotate = !_autorotate;
+
+	if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
+	{
+		_autorotate = false;
+		_rotateLeft = true;
+	}
+	if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
+	{
+		_autorotate = false;
+		_rotateRight = true;
+	}
 }
 
 void PhongScene::InitScene()
@@ -51,8 +69,18 @@ void PhongScene::Render()
 void PhongScene::Update(float t)
 {
 	float dt = t - _prevTime;
-	_angle += 30*dt;
+	if (_autorotate)
+		_angle += 30*dt;
+	if (_rotateRight)
+		_angle += 30 * dt;
+	if (_rotateLeft)
+		_angle -= 30 * dt;
+
 	_prevTime = t;
+
+
+	_rotateLeft = false;
+	_rotateRight = false;
 }
 
 

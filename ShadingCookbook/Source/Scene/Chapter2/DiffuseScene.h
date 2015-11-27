@@ -12,6 +12,7 @@ class DiffuseScene : public Scene
 {
 public:
 	DiffuseScene();
+	void ProcessInput(int key, int action) override;
 	void InitScene() override;
 	void Update(float t);
 	void Render() override;

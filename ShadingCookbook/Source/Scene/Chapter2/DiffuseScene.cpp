@@ -6,6 +6,10 @@ using glm::vec3;
 DiffuseScene::DiffuseScene()
 {}
 
+void DiffuseScene::ProcessInput(int key, int action)
+{
+}
+
 void DiffuseScene::InitScene()
 {
 	glEnable(GL_DEPTH_TEST);
