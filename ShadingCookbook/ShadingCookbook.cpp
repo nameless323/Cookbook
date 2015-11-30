@@ -9,6 +9,7 @@
 #define WIN_HEIGHT 768
 #include "Source/Scene/Chapter2/DiffuseScene.h"
 #include "Source/Scene/Chapter2/PhongScene.h"
+#include "Source/Scene/Chapter2/PhongTea.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -26,8 +27,6 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 {
 	currentKey = key;
 	keyAction = action;
-
-	std::cout << key << "   " << action << std::endl;
 }
 
 void MainLoop()
@@ -51,7 +50,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new PhongScene();
+	scene = new PhongSceneTea();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
