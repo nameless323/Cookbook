@@ -168,18 +168,20 @@ void Teapot::GetPatch(int patchNum, vec3 patch[][4], bool reverseV)
 			{
 				patch[u][v] = vec3
 					(
-						TeapotData::CpSata[TeapotData::PatchData[patchNum][u * 4 + (3 - v)]][0],
-						TeapotData::CpSata[TeapotData::PatchData[patchNum][u * 4 + (3 - v)]][1],
-						TeapotData::CpSata[TeapotData::PatchData[patchNum][u * 4 + (3 - v)]][2]
+						TeapotData::CpData[TeapotData::PatchData[patchNum][u * 4 + (3 - v)]][0],
+						TeapotData::CpData[TeapotData::PatchData[patchNum][u * 4 + (3 - v)]][1],
+						TeapotData::CpData[TeapotData::PatchData[patchNum][u * 4 + (3 - v)]][2]
 					);
-				return;
 			}
-			patch[u][v] = vec3
-				(
-					TeapotData::CpSata[TeapotData::PatchData[patchNum][u * 4 + v]][0],
-					TeapotData::CpSata[TeapotData::PatchData[patchNum][u * 4 + v]][1],
-					TeapotData::CpSata[TeapotData::PatchData[patchNum][u * 4 + v]][2]
-				);
+			else
+			{
+				patch[u][v] = vec3
+					(
+						TeapotData::CpData[TeapotData::PatchData[patchNum][u * 4 + v]][0],
+						TeapotData::CpData[TeapotData::PatchData[patchNum][u * 4 + v]][1],
+						TeapotData::CpData[TeapotData::PatchData[patchNum][u * 4 + v]][2]
+						);
+			}
 		}
 	}
 }
@@ -194,7 +196,7 @@ void Teapot::ComputeBasisFunctions(float* b, float* dB, int grid)
 		float oneMinusT = (1.0f - t);
 		float oneMinusT2 = oneMinusT * oneMinusT;
 
-		b[i * 4] = oneMinusT * oneMinusT;
+		b[i * 4] = oneMinusT * oneMinusT2;
 		b[i * 4 + 1] = 3.0f * oneMinusT2 * t;
 		b[i * 4 + 2] = 3.0f * oneMinusT * tSqr;
 		b[i * 4 + 3] = t * tSqr;

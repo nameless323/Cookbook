@@ -22,7 +22,7 @@ namespace TeapotData
 		{ 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95 }
 	};
 
-	static float CpSata[][3] =
+	static float CpData[][3] =
 	{
 		{ 0.2f, 0.f, 2.7f },
 		{ 0.2f, -0.112f, 2.7f },
