@@ -34,10 +34,10 @@ void PhongSceneTea::InitScene()
 	mat4 transform = glm::translate(mat4(1.0f), vec3(0.0f, 1.5f, 0.25f));
 	_teapot = new Teapot(13, transform);
 
-//	_model = mat4(1.0f);
-//	_model *= rotate(glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f));
-//	_model *= rotate(glm::radians(35.0f), vec3(0.0f, 1.0f, 0.0f));
-	_view = lookAt(vec3(2.0f, 4.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	_model = mat4(1.0f);
+	_model *= rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
+	//_model *= rotate(glm::radians(35.0f), vec3(0.0f, 1.0f, 0.0f));
+	_view = lookAt(vec3(2.0f, 5.0f, 3.5f), vec3(0.0f, 1.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
 	_projection = mat4(1.0f);
 	glm::vec4 worldLight = vec4(2.0f, 4.0f, 2.0f, 1.0f);
@@ -57,17 +57,14 @@ void PhongSceneTea::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glm::vec4 worldLight = vec4(2.0f, 4.0f, 2.0f, 1.0f);
+	glm::vec4 worldLight = glm::rotate(_angle/30.0f, vec3(1.0f, 0.0f, 0.0f)) * vec4(2.0f, 4.0f, 2.0f, 1.0f);
 	_shader.SetUniform("Light.Position", _view*_model*worldLight);
 
 //	_model = mat4(1.0f);
 //	_model *= glm::rotate(glm::radians(_angle), vec3(0.0f, 1.0f, 0.0f));
-//	_model *= rotate(glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f));
+//	_model *= rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
 //	_model *= rotate(glm::radians(35.0f), vec3(0.0f, 1.0f, 0.0f));
 
-	_model = mat4(1.0f);
-	_model *= glm::translate(vec3(0.0, -1.0, 0.0));
-	_model *= glm::rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
 
 	SetMatrices();
 	_shader.Use();
@@ -117,8 +114,8 @@ void PhongSceneTea::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/Phong/Phong.vert");
-		_shader.CompileShader("Shaders/Phong/Phong.frag");
+		_shader.CompileShader("Shaders/Phong/PhongBackface.vert");
+		_shader.CompileShader("Shaders/Phong/PhongBackface.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();
