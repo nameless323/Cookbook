@@ -22,8 +22,8 @@ private:
 	void StoreVbo(const vector<vec3>& points, const vector<vec3>& normals,
 		const vector<vec2>& texCoords, const vector<vec4>& tangents, const vector<GLuint>& elements);
 	void GenerateAverageNormals(const vector<vec3>& points, vector<vec3>& normals, const vector<GLuint>& faces);
-	void GenerateTangents(const vector<vec3>& points, const vector<vec3>& normals, const vector<GLuint>& texcoords, vector<vec4>& tangents);
-	void Center(vector<vec4>& points);
+	void GenerateTangents(const vector<vec3>& points, const vector<vec3>& normals, const vector<GLuint>& faces, const vector<vec2>& texCoords, vector<vec4>& tangents);
+	void Center(vector<vec3>& points);
 	
 	GLuint _faces;
 	GLuint _vao;
