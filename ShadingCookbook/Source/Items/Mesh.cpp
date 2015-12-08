@@ -156,6 +156,12 @@ void Mesh::LoadObj(const char* filename)
 
 void Mesh::TrimString(string& str)
 {
+	const char* witeSpace = " \t\n\r";
+	size_t location;
+	location = str.find_first_not_of(witeSpace);
+	str.erase(0, location);
+	location = str.find_first_not_of(witeSpace);
+	str.erase(location + 1);
 }
 
 void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& normals, const std::vector<vec2>& texCoords, const std::vector<vec4>& tangents, const std::vector<GLuint>& elements)
@@ -164,10 +170,85 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 
 void Mesh::GenerateAverageNormals(const std::vector<vec3>& points, std::vector<vec3>& normals, const std::vector<GLuint>& faces)
 {
+	for (int i = 0; i < points.size(); i++)
+		normals.push_back(vec3(0.0f));
+
+	for (int i = 0; i < faces.size(); i += 3)
+	{
+		const vec3& p1 = points[faces[i]];
+		const vec3& p2 = points[faces[i + 1]];
+		const vec3& p3 = points[faces[i + 2]];
+
+		vec3 a = p2 - p1;
+		vec3 b = p3 - p1;
+		vec3 n = glm::normalize(glm::cross(a, b));
+
+		normals[faces[i]] += n;
+		normals[faces[i + 1]] += n;
+		normals[faces[i + 2]] += n;
+	}
+	for (int i = 0; i < normals.size(); i++)
+		normals[i] = glm::normalize(normals[i]);
 }
 
 void Mesh::GenerateTangents(const vector<vec3>& points, const vector<vec3>& normals, const vector<GLuint>& faces, const vector<vec2>& texCoords, vector<vec4>& tangents)
-{ 
+{
+	vector<vec3> tan1Accum;
+	vector<vec3> tan2Accum;
+
+	for (int i = 0; i < points.size(); i++)
+	{
+		tan1Accum.push_back(vec3(0.0f));
+		tan2Accum.push_back(vec3(0.0f));
+		tangents.push_back(vec4(0.0f));
+	}
+
+	for (int i = 0; i < faces.size(); i += 3)
+	{
+		const vec3& p1 = points[faces[i]];
+		const vec3& p2 = points[faces[i + 1]];
+		const vec3& p3 = points[faces[i + 2]];
+
+		const vec2& uv1 = texCoords[faces[i]];
+		const vec2& uv2 = texCoords[faces[i + 1]];
+		const vec2& uv3 = texCoords[faces[i + 2]];
+
+		vec3 q1 = p2 - p1;
+		vec3 q2 = p3 - p1;
+
+		float s1 = uv2.x - uv1.x;
+		float s2 = uv3.x - uv1.x;
+		float t1 = uv2.y - uv1.y;
+		float t2 = uv3.y - uv1.y;
+
+		float r = 1.0f / (s1 * t2 - s2 * t1);
+		vec3 tan1(
+			(t2*q1.x - t1*q2.x) * r,
+			(t2*q1.y - t1*q2.y) * r,
+			(t2*q1.z - t1*q2.z) * r
+			);
+		vec3 tan2(
+			(s1*q2.x - s2*q1.x) * r,
+			(s1*q2.y - s2*q1.y) * r,
+			(s1*q2.z - s2*q1.z) * r
+			);
+		tan1Accum[faces[i]] += tan1;
+		tan1Accum[faces[i + 1]] += tan1;
+		tan1Accum[faces[i + 2]] += tan1;
+		tan2Accum[faces[i]] += tan2;
+		tan2Accum[faces[i + 1]] += tan2;
+		tan2Accum[faces[i + 2]] += tan2;
+	}
+	for (int i = 0; i < points.size(); i++)
+	{
+		const vec3& n = normals[i];
+		vec3& t1 = tan1Accum[i];
+		vec3& t2 = tan2Accum[i];
+		tangents[i] = vec4(glm::normalize(t1 - (glm::dot(n, t1) * n)), 0.0f);
+		tangents[i].w = (glm::dot(glm::cross(n, t1), t2) < 0.0f) ? -1.0f : 1.0f;
+	}
+	tan1Accum.clear();
+	tan2Accum.clear();
 }
 
 void Mesh::Center(std::vector<vec3>& points)
