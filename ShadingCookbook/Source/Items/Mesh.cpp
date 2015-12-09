@@ -166,6 +166,102 @@ void Mesh::TrimString(string& str)
 
 void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& normals, const std::vector<vec2>& texCoords, const std::vector<vec4>& tangents, const std::vector<GLuint>& elements)
 {
+	GLuint nVerts = GLuint(points.size());
+	_faces = GLuint(elements.size() / 3);
+
+	float* v = new float[3 * nVerts];
+	float* n = new float[3 * nVerts];
+	float* uv = nullptr;
+	float* tang = nullptr;
+
+	if (texCoords.size() > 0)
+	{
+		uv = new float[2 * nVerts];
+		if (tangents.size() > 0)
+			tang = new float[4 * nVerts];
+	}
+
+	unsigned int* el = new unsigned int[elements.size()];
+	int idx = 0, uvIdx = 0, tangIdx = 0;
+	for (GLuint i = 0; i < nVerts; i++)
+	{
+		v[idx] = points[i].x;
+		v[idx + 1] = points[i].y;
+		v[idx + 2] = points[i].z;
+
+		n[idx] = normals[i].x;
+		n[idx + 1] = normals[i].y;
+		n[idx + 2] = normals[i].z;
+		idx += 3;
+		if (uv != nullptr)
+		{
+			uv[uvIdx] = texCoords[i].x;
+			uv[uvIdx + 1] = texCoords[i].y;
+			uvIdx += 2;
+		}
+		if (tang != nullptr)
+		{
+			tang[tangIdx] = tangents[i].x;
+			tang[tangIdx + 1] = tangents[i].y;
+			tang[tangIdx + 2] = tangents[i].z;
+			tang[tangIdx + 2] = tangents[i].w;
+			tangIdx += 4;
+		}
+	}
+	for (unsigned int i = 0; i < elements.size(); i++)
+		el[i] = elements[i];
+
+	glGenVertexArrays(1, &_vao);
+	glBindVertexArray(_vao);
+
+	int nBuffers = 3;
+	if (uv != nullptr) nBuffers++;
+	if (tang != nullptr) nBuffers++;
+	GLuint elementsBuffer = nBuffers - 1;
+
+	GLuint handle[5];
+	GLuint bufIdx = 0;
+	glGenBuffers(nBuffers, handle);
+
+	glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
+	glBufferData(GL_ARRAY_BUFFER, (3 * nVerts)*sizeof(GLfloat), v, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
+	glBufferData(GL_ARRAY_BUFFER, (2 * nVerts) * sizeof(GLfloat), n, GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glEnableVertexAttribArray(1);
+
+	if (uv != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
+		glBufferData(GL_ARRAY_BUFFER, (2 * nVerts) * sizeof(GLfloat), uv, GL_STATIC_DRAW);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+		glEnableVertexAttribArray(2);
+	}
+	if (tang != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
+		glBufferData(GL_ARRAY_BUFFER, (4 * nVerts) * sizeof(GLfloat), tang, GL_STATIC_DRAW);
+		glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 0, nullptr);
+		glEnableVertexAttribArray(3);
+	}
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle[elementsBuffer]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * _faces * sizeof(GLuint), el, GL_STATIC_DRAW);
+	glBindVertexArray(0);
+
+	delete[] v;
+	delete[] n;
+	if (uv != nullptr) delete[] uv;
+	if (tang != nullptr) delete[] tang;
+	delete[] el;
+	v = nullptr;
+	n = nullptr;
+	uv = nullptr;
+	tang = nullptr;
+	el = nullptr;
 }
 
 void Mesh::GenerateAverageNormals(const std::vector<vec3>& points, std::vector<vec3>& normals, const std::vector<GLuint>& faces)

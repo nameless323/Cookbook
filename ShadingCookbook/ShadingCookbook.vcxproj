@@ -462,8 +462,13 @@
     <ClInclude Include="Source\Chapter1\Chapter1.h" />
     <ClInclude Include="Source\Core\ShaderProgram.h" />
     <ClInclude Include="Source\Items\IDrawable.h" />
+    <ClInclude Include="Source\Items\Mesh.h" />
+    <ClInclude Include="Source\Items\Teapot.h" />
+    <ClInclude Include="Source\Items\TeapotData.h" />
     <ClInclude Include="Source\Items\Torus.h" />
     <ClInclude Include="Source\Scene\Chapter2\DiffuseScene.h" />
+    <ClInclude Include="Source\Scene\Chapter2\PhongScene.h" />
+    <ClInclude Include="Source\Scene\Chapter2\PhongTea.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -487,8 +492,12 @@
     <ClCompile Include="ingredients\vbotorus.cpp" />
     <ClCompile Include="ShadingCookbook.cpp" />
     <ClCompile Include="Source\Core\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Items\Mesh.cpp" />
+    <ClCompile Include="Source\Items\Teapot.cpp" />
     <ClCompile Include="Source\Items\Torus.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\DiffuseScene.cpp" />
+    <ClCompile Include="Source\Scene\Chapter2\PhongScene.cpp" />
+    <ClCompile Include="Source\Scene\Chapter2\PhongTea.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -715,6 +724,10 @@
     <None Include="Shaders\Ch1\basic.vert" />
     <None Include="Shaders\Diffuse\Diffuse.frag" />
     <None Include="Shaders\Diffuse\Diffuse.vert" />
+    <None Include="Shaders\Phong\Phong.frag" />
+    <None Include="Shaders\Phong\Phong.vert" />
+    <None Include="Shaders\Phong\PhongBackface.frag" />
+    <None Include="Shaders\Phong\PhongBackface.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
     <None Include="Shaders\Uniforms\Blob.vert" />
   </ItemGroup>
