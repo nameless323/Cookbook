@@ -10,7 +10,7 @@ public:
 	virtual void Shutdown() = 0;
 	virtual void ProcessInput(int key, int action) = 0;
 
-	virtual void Resize(int x, int y) = 0;
+	virtual void Resize(int w, int h) = 0;
 
 	void Animate(bool value)
 	{
