@@ -6,13 +6,16 @@ using glm::vec3;
 Flat::Flat() : _angle(0)
 {}
 
+void Flat::ProcessInput(int key, int action)
+{}
+
 void Flat::InitScene()
 {
 	CompileAndLinkShader();
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	_ogre = new Mesh("../media/bs_ears.obj");
+	_ogre = new Mesh("./media/bs_ears.obj");
 
 	_view = glm::lookAt(vec3(0.0f, 0.35f, 0.85f), vec3(0.0f, -0.25f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 	_projection = mat4(1.0f);
@@ -45,6 +48,11 @@ void Flat::Render()
 	_ogre->Render();
 }
 
+void Flat::Shutdown()
+{
+	delete _ogre;
+}
+
 void Flat::SetMatrices()
 {
 	mat4 mv = _view * _model;
@@ -65,8 +73,8 @@ void Flat::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/Flat/Flat.vert");
-		_shader.CompileShader("Shaders/Flat/Flat.frag");
+		_shader.CompileShader("Shaders/Phong/Phong.vert");
+		_shader.CompileShader("Shaders/Phong/Phong.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();

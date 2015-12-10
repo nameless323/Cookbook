@@ -266,10 +266,10 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 
 void Mesh::GenerateAverageNormals(const std::vector<vec3>& points, std::vector<vec3>& normals, const std::vector<GLuint>& faces)
 {
-	for (int i = 0; i < points.size(); i++)
+	for (unsigned int i = 0; i < points.size(); i++)
 		normals.push_back(vec3(0.0f));
 
-	for (int i = 0; i < faces.size(); i += 3)
+	for (unsigned int i = 0; i < faces.size(); i += 3)
 	{
 		const vec3& p1 = points[faces[i]];
 		const vec3& p2 = points[faces[i + 1]];
@@ -283,7 +283,7 @@ void Mesh::GenerateAverageNormals(const std::vector<vec3>& points, std::vector<v
 		normals[faces[i + 1]] += n;
 		normals[faces[i + 2]] += n;
 	}
-	for (int i = 0; i < normals.size(); i++)
+	for (unsigned int i = 0; i < normals.size(); i++)
 		normals[i] = glm::normalize(normals[i]);
 }
 
@@ -292,14 +292,14 @@ void Mesh::GenerateTangents(const vector<vec3>& points, const vector<vec3>& norm
 	vector<vec3> tan1Accum;
 	vector<vec3> tan2Accum;
 
-	for (int i = 0; i < points.size(); i++)
+	for (unsigned int i = 0; i < points.size(); i++)
 	{
 		tan1Accum.push_back(vec3(0.0f));
 		tan2Accum.push_back(vec3(0.0f));
 		tangents.push_back(vec4(0.0f));
 	}
 
-	for (int i = 0; i < faces.size(); i += 3)
+	for (unsigned int i = 0; i < faces.size(); i += 3)
 	{
 		const vec3& p1 = points[faces[i]];
 		const vec3& p2 = points[faces[i + 1]];
@@ -335,7 +335,7 @@ void Mesh::GenerateTangents(const vector<vec3>& points, const vector<vec3>& norm
 		tan2Accum[faces[i + 1]] += tan2;
 		tan2Accum[faces[i + 2]] += tan2;
 	}
-	for (int i = 0; i < points.size(); i++)
+	for (unsigned int i = 0; i < points.size(); i++)
 	{
 		const vec3& n = normals[i];
 		vec3& t1 = tan1Accum[i];
@@ -354,7 +354,7 @@ void Mesh::Center(std::vector<vec3>& points)
 	vec3 maxPoint = points[0];
 	vec3 minPoint = points[0];
 
-	for (int i = 0; i < points.size(); i++) //detecting aabb
+	for (unsigned int i = 0; i < points.size(); i++) //detecting aabb
 	{
 		vec3& point = points[i];
 		if (point.x > maxPoint.x) maxPoint.x = point.x;
@@ -368,7 +368,7 @@ void Mesh::Center(std::vector<vec3>& points)
 	vec3 center = vec3((maxPoint.x + minPoint.x) / 2.0f,
 		(maxPoint.y + minPoint.y) / 2.0f,
 		(maxPoint.z + minPoint.z) / 2.0f);
-	for (int i = 0; i < points.size(); ++i) {
+	for (unsigned int i = 0; i < points.size(); ++i) {
 		vec3 & point = points[i];
 		point = point - center;
 	}
