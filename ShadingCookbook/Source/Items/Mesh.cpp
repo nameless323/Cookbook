@@ -24,7 +24,7 @@ void Mesh::LoadObj(const char* filename)
 {
 	vector<vec3> points;
 	vector<vec3> normals;
-	vector<vec2> uv;
+	vector<vec2> texCoords;
 	vector<GLuint> faces;
 
 	int nFaces = 0;
@@ -54,7 +54,7 @@ void Mesh::LoadObj(const char* filename)
 			{
 				float s, t;
 				lineStream >> s >> t;
-				uv.push_back(vec2(s, t));
+				texCoords.push_back(vec2(s, t));
 			}
 			else if (token == "vn")
 			{
@@ -81,7 +81,7 @@ void Mesh::LoadObj(const char* filename)
 					}
 					else
 					{
-						slash2 = vertString.find("/", slash1 + 4);
+						slash2 = vertString.find("/", slash1 + 1);
 						pIndex = atoi(vertString.substr(0, slash1).c_str()) - 1;
 						if (slash2 > slash1 + 1)
 						{
@@ -137,13 +137,13 @@ void Mesh::LoadObj(const char* filename)
 	}
 
 	vector<vec4> tangents;
-	if (_genTang && uv.size() > 0)
-		GenerateTangents(points, normals, faces, uv, tangents);
+	if (_genTang && texCoords.size() > 0)
+		GenerateTangents(points, normals, faces, texCoords, tangents);
 
 	if (_recenterMesh)
 		Center(points);
 
-	StoreVbo(points, normals, uv, tangents, faces);
+	StoreVbo(points, normals, texCoords, tangents, faces);
 
 	std::cout << "Loaded mesh from: " << filename << std::endl;
 	std::cout << " " << points.size() << " points" << std::endl;
@@ -151,7 +151,7 @@ void Mesh::LoadObj(const char* filename)
 	std::cout << " " << faces.size() / 3 << " triangles." << std::endl;
 	std::cout << " " << normals.size() << " normals" << std::endl;
 	std::cout << " " << tangents.size() << " tangents " << std::endl;
-	std::cout << " " << uv.size() << " texture coordinates." << std::endl;
+	std::cout << " " << texCoords.size() << " texture coordinates." << std::endl;
 }
 
 void Mesh::TrimString(string& str)
@@ -160,7 +160,7 @@ void Mesh::TrimString(string& str)
 	size_t location;
 	location = str.find_first_not_of(witeSpace);
 	str.erase(0, location);
-	location = str.find_first_not_of(witeSpace);
+	location = str.find_last_not_of(witeSpace);
 	str.erase(location + 1);
 }
 
@@ -171,12 +171,12 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 
 	float* v = new float[3 * nVerts];
 	float* n = new float[3 * nVerts];
-	float* uv = nullptr;
+	float* tc = nullptr;
 	float* tang = nullptr;
 
 	if (texCoords.size() > 0)
 	{
-		uv = new float[2 * nVerts];
+		tc = new float[2 * nVerts];
 		if (tangents.size() > 0)
 			tang = new float[4 * nVerts];
 	}
@@ -193,10 +193,10 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 		n[idx + 1] = normals[i].y;
 		n[idx + 2] = normals[i].z;
 		idx += 3;
-		if (uv != nullptr)
+		if (tc != nullptr)
 		{
-			uv[uvIdx] = texCoords[i].x;
-			uv[uvIdx + 1] = texCoords[i].y;
+			tc[uvIdx] = texCoords[i].x;
+			tc[uvIdx + 1] = texCoords[i].y;
 			uvIdx += 2;
 		}
 		if (tang != nullptr)
@@ -215,7 +215,7 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 	glBindVertexArray(_vao);
 
 	int nBuffers = 3;
-	if (uv != nullptr) nBuffers++;
+	if (tc != nullptr) nBuffers++;
 	if (tang != nullptr) nBuffers++;
 	GLuint elementsBuffer = nBuffers - 1;
 
@@ -233,10 +233,10 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glEnableVertexAttribArray(1);
 
-	if (uv != nullptr)
+	if (tc != nullptr)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
-		glBufferData(GL_ARRAY_BUFFER, (2 * nVerts) * sizeof(GLfloat), uv, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, (2 * nVerts) * sizeof(GLfloat), tc, GL_STATIC_DRAW);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 		glEnableVertexAttribArray(2);
 	}
@@ -254,12 +254,12 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 
 	delete[] v;
 	delete[] n;
-	if (uv != nullptr) delete[] uv;
+	if (tc != nullptr) delete[] tc;
 	if (tang != nullptr) delete[] tang;
 	delete[] el;
 	v = nullptr;
 	n = nullptr;
-	uv = nullptr;
+	tc = nullptr;
 	tang = nullptr;
 	el = nullptr;
 }
