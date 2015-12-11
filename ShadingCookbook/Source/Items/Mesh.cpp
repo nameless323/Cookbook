@@ -182,7 +182,7 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 	}
 
 	unsigned int* el = new unsigned int[elements.size()];
-	int idx = 0, uvIdx = 0, tangIdx = 0;
+	int idx = 0, tcIdx = 0, tangIdx = 0;
 	for (GLuint i = 0; i < nVerts; i++)
 	{
 		v[idx] = points[i].x;
@@ -195,16 +195,16 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 		idx += 3;
 		if (tc != nullptr)
 		{
-			tc[uvIdx] = texCoords[i].x;
-			tc[uvIdx + 1] = texCoords[i].y;
-			uvIdx += 2;
+			tc[tcIdx] = texCoords[i].x;
+			tc[tcIdx + 1] = texCoords[i].y;
+			tcIdx += 2;
 		}
 		if (tang != nullptr)
 		{
 			tang[tangIdx] = tangents[i].x;
 			tang[tangIdx + 1] = tangents[i].y;
 			tang[tangIdx + 2] = tangents[i].z;
-			tang[tangIdx + 2] = tangents[i].w;
+			tang[tangIdx + 3] = tangents[i].w;
 			tangIdx += 4;
 		}
 	}
@@ -229,7 +229,7 @@ void Mesh::StoreVbo(const std::vector<vec3>& points, const std::vector<vec3>& no
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
-	glBufferData(GL_ARRAY_BUFFER, (2 * nVerts) * sizeof(GLfloat), n, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, (3 * nVerts) * sizeof(GLfloat), n, GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glEnableVertexAttribArray(1);
 
