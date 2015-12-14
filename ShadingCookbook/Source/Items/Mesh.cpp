@@ -101,7 +101,7 @@ void Mesh::LoadObj(const char* filename)
 						std::cout << "Normal and point indices are nor consistent" << std::endl;
 				}
 
-				if (face.size() > 3)
+				if (face.size() > 3) //making trig fan
 				{
 					int v0 = face[0];
 					int v1 = face[1];
@@ -127,7 +127,7 @@ void Mesh::LoadObj(const char* filename)
 				}
 			}
 		}
-		std::getline(objStream, line);
+		getline(objStream, line);
 	}
 	objStream.close();
 
@@ -301,6 +301,7 @@ void Mesh::GenerateTangents(const vector<vec3>& points, const vector<vec3>& norm
 
 	for (unsigned int i = 0; i < faces.size(); i += 3)
 	{
+		//http://stackoverflow.com/questions/5255806/how-to-calculate-tangent-and-binormal
 		const vec3& p1 = points[faces[i]];
 		const vec3& p2 = points[faces[i + 1]];
 		const vec3& p3 = points[faces[i + 2]];
