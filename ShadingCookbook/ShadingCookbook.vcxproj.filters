@@ -966,6 +966,9 @@
     <ClInclude Include="Source\Items\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter2\Flat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1038,6 +1041,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Items\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter2\Flat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1707,5 +1713,7 @@
     <None Include="Shaders\Phong\Phong.frag" />
     <None Include="Shaders\Phong\PhongBackface.frag" />
     <None Include="Shaders\Phong\PhongBackface.vert" />
+    <None Include="Shaders\Flat\Flat.vert" />
+    <None Include="Shaders\Flat\Flat.frag" />
   </ItemGroup>
 </Project>

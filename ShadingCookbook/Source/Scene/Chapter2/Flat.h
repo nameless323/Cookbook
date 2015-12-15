@@ -1,9 +1,10 @@
 #pragma once
 
 #include "../../Core/ShaderProgram.h"
-#include "../../Items/Mesh.h"
 #include "../Scene.h"
 #include <glm.hpp>
+#include "../../Items/Mesh.h"
+#include "../../../ingredients/vbomesh.h"
 
 class Flat : public Scene
 {

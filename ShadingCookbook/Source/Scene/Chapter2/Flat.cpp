@@ -17,7 +17,7 @@ void Flat::InitScene()
 
 	_ogre = new Mesh("./media/bs_ears.obj");
 
-	_view = glm::lookAt(vec3(0.0f, 0.35f, 0.85f), vec3(0.0f, -0.25f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	_view = glm::lookAt(vec3(0.0f, 0.35f, 1.85f), vec3(0.0f, -0.25f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 	_projection = mat4(1.0f);
 
 	_shader.SetUniform("Material.Ka", 0.9f, 0.5f, 0.3f);
@@ -75,6 +75,8 @@ void Flat::CompileAndLinkShader()
 	{
 		_shader.CompileShader("Shaders/Phong/Phong.vert");
 		_shader.CompileShader("Shaders/Phong/Phong.frag");
+//		_shader.CompileShader("Shaders/Flat/Flat.vert");
+//		_shader.CompileShader("Shaders/Flat/Flat.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();

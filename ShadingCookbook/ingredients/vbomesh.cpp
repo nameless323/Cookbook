@@ -1,5 +1,5 @@
 #include "vbomesh.h"
-#include "glutils.h"
+#include <GL/glew.h>
 
 #define uint unsigned int
 

@@ -10,6 +10,7 @@
 #include "Source/Scene/Chapter2/DiffuseScene.h"
 #include "Source/Scene/Chapter2/PhongScene.h"
 #include "Source/Scene/Chapter2/PhongTea.h"
+#include "Source/Scene/Chapter2/Flat.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -50,7 +51,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new PhongSceneTea();
+	scene = new Flat();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
