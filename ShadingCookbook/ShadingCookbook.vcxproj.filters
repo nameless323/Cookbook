@@ -969,6 +969,9 @@
     <ClInclude Include="Source\Scene\Chapter2\Flat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter2\Subroutine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1044,6 +1047,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter2\Flat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter2\Subroutine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1715,5 +1721,7 @@
     <None Include="Shaders\Phong\PhongBackface.vert" />
     <None Include="Shaders\Flat\Flat.vert" />
     <None Include="Shaders\Flat\Flat.frag" />
+    <None Include="Shaders\Subroutine\Subroutine.vert" />
+    <None Include="Shaders\Subroutine\Subroutine.frag" />
   </ItemGroup>
 </Project>
