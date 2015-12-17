@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 using glm::vec3;
 
-Subroutine::Subroutine() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0)
+Subroutine::Subroutine() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _ind(0)
 {
 }
 
@@ -22,6 +22,11 @@ void Subroutine::ProcessInput(int key, int action)
 	{
 		_autorotate = false;
 		_rotateRight = true;
+	}
+
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
+	{
+		_ind = (_ind + 1) & 1;
 	}
 }
 
@@ -52,8 +57,8 @@ void Subroutine::InitScene()
 	_shader.SetUniform("Light.Ls", 1.0f, 1.0f, 1.0f);
 	_shader.SetUniform("Material.Shininess", 100.0f);
 
-	_phongSubroutineInd = glGetSubroutineIndex(_shader.GetHandle(), GL_VERTEX_SHADER, "PhongModel");
-	_diffuseSubroutineInd = glGetSubroutineIndex(_shader.GetHandle(), GL_VERTEX_SHADER, "DiffuseModel");
+	_subroutineInd[0] = glGetSubroutineIndex(_shader.GetHandle(), GL_VERTEX_SHADER, "PhongModel");
+	_subroutineInd[1] = glGetSubroutineIndex(_shader.GetHandle(), GL_VERTEX_SHADER, "DiffuseModel");
 	glGetSubroutineUniformLocation(_shader.GetHandle(), GL_VERTEX_SHADER, "LightModel");
 }
 
@@ -73,7 +78,7 @@ void Subroutine::Render()
 	SetMatrices();
 	_shader.Use();
 
-	glUniformSubroutinesuiv(GL_VERTEX_SHADER, 1, &_phongSubroutineInd);
+	glUniformSubroutinesuiv(GL_VERTEX_SHADER, 1, &_subroutineInd[_ind]);
 	_teapot->Render();
 }
 

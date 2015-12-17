@@ -24,9 +24,9 @@ private:
 	mat4 _model;
 	mat4 _view;
 	mat4 _projection;
-	GLuint _phongSubroutineInd;
-	GLuint _diffuseSubroutineInd;
+	GLuint _subroutineInd[2];
 	GLuint _subroutineUniform;
+	unsigned int _ind;
 	float _angle;
 	float _prevTime;
 	bool _autorotate;

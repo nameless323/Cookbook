@@ -60,7 +60,8 @@ vec3 DiffuseModel(vec4 pos, vec3 norm)
 	vec3 s = normalize(vec3(Light.Position - pos));
 	float sDotN = max(dot(s, norm), 0.0);
 	vec3 diffuse = Light.Ld * Material.Kd * sDotN;
-	return diffuse;
+	vec3 ambient = Light.La * Material.Ka;
+	return diffuse + ambient;
 }
 
 void main(void)
