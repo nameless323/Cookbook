@@ -12,6 +12,7 @@
 #include "Source/Scene/Chapter2/PhongTea.h"
 #include "Source/Scene/Chapter2/Flat.h"
 #include "Source/Scene/Chapter2/Subroutine.h"
+#include "Source/Scene/Chapter2/Discarding.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -52,7 +53,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Subroutine();
+	scene = new Discarding();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

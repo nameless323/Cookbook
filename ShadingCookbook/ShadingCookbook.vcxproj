@@ -467,6 +467,7 @@
     <ClInclude Include="Source\Items\TeapotData.h" />
     <ClInclude Include="Source\Items\Torus.h" />
     <ClInclude Include="Source\Scene\Chapter2\DiffuseScene.h" />
+    <ClInclude Include="Source\Scene\Chapter2\Discarding.h" />
     <ClInclude Include="Source\Scene\Chapter2\Flat.h" />
     <ClInclude Include="Source\Scene\Chapter2\PhongScene.h" />
     <ClInclude Include="Source\Scene\Chapter2\PhongTea.h" />
@@ -498,6 +499,7 @@
     <ClCompile Include="Source\Items\Teapot.cpp" />
     <ClCompile Include="Source\Items\Torus.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\DiffuseScene.cpp" />
+    <ClCompile Include="Source\Scene\Chapter2\Discarding.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\Flat.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\PhongScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\PhongTea.cpp" />
@@ -728,6 +730,8 @@
     <None Include="Shaders\Ch1\basic.vert" />
     <None Include="Shaders\Diffuse\Diffuse.frag" />
     <None Include="Shaders\Diffuse\Diffuse.vert" />
+    <None Include="Shaders\Discarding\Discarding.frag" />
+    <None Include="Shaders\Discarding\Discarding.vert" />
     <None Include="Shaders\Flat\Flat.frag" />
     <None Include="Shaders\Flat\Flat.vert" />
     <None Include="Shaders\Phong\Phong.frag" />
