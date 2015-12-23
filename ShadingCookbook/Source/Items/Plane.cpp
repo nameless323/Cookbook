@@ -91,4 +91,5 @@ void Plane::Render()
 {
 	glBindVertexArray(_vao);
 	glDrawElements(GL_TRIANGLES, 6 * _faces, GL_UNSIGNED_INT, nullptr);
+	glBindVertexArray(0);
 }

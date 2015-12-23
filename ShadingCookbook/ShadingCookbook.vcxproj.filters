@@ -975,6 +975,12 @@
     <ClInclude Include="Source\Scene\Chapter2\Discarding.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Items\Plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter3\Multilight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1056,6 +1062,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter2\Discarding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Items\Plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter3\Multilight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
