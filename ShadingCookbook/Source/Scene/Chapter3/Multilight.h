@@ -4,6 +4,7 @@
 #include "../Scene.h"
 #include "../../Items/Plane.h"
 #include "../../Items/Mesh.h"
+#include "../../Items/Teapot.h"
 
 #include <glm.hpp>
 using glm::mat4;
@@ -23,6 +24,7 @@ private:
 	int _width, _height;
 	Mesh* _piggy;
 	Plane* _plane;
+	Teapot* _teapot;
 	mat4 _model;
 	mat4 _view;
 	mat4 _projection;

@@ -49,7 +49,7 @@ vec3 PhongModel(vec4 pos, vec3 norm)
 	vec3 diffuse = Light.Ld * Material.Kd * sDotN;
 	vec3 spec = vec3(0.0);
 	if (sDotN > 0.0)
-		spec = Light.Ls * Material.Ks * pow(max(dot(r, v), 0.0), Material.Shininess);
+		spec = Light.Ls * Material.Ks * pow(max(dot(r, v), 0.0), Material.Shininess);	
 	return ambient + diffuse + spec;
 }
 

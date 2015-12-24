@@ -35,7 +35,6 @@ void Multilight::InitScene()
 
 	_plane = new Plane(10.0f, 10.0f, 100, 100);
 	_piggy = new Mesh("./media/pig_triangulated.obj", true);
-	
 //	_model = mat4(1.0f);
 //	_model *= rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
 	//_model *= rotate(glm::radians(35.0f), vec3(0.0f, 1.0f, 0.0f));
@@ -72,7 +71,6 @@ void Multilight::Render()
 	_model *= glm::rotate(glm::radians(90.0f), vec3(0.0f, 1.0f, 0.0f));
 	SetMatrices();
 	_piggy->Render();
-
 	_shader.SetUniform("Kd", 0.1f, 0.1f, 0.1f);
 	_shader.SetUniform("Ks", 0.9f, 0.9f, 0.9f);
 	_shader.SetUniform("Ka", 0.1f, 0.1f, 0.1f);
@@ -86,19 +84,19 @@ void Multilight::Render()
 
 void Multilight::Update(float t)
 {
-	float dt = t - _prevTime;
-	if (_autorotate)
-		_angle += 30 * dt;
-	if (_rotateRight)
-		_angle += 30 * dt;
-	if (_rotateLeft)
-		_angle -= 30 * dt;
-
-	_prevTime = t;
-
-
-	_rotateLeft = false;
-	_rotateRight = false;
+//	float dt = t - _prevTime;
+//	if (_autorotate)
+//		_angle += 30 * dt;
+//	if (_rotateRight)
+//		_angle += 30 * dt;
+//	if (_rotateLeft)
+//		_angle -= 30 * dt;
+//
+//	_prevTime = t;
+//
+//
+//	_rotateLeft = false;
+//	_rotateRight = false;
 }
 
 

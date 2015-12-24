@@ -1743,5 +1743,7 @@
     <None Include="Shaders\Subroutine\Subroutine.frag" />
     <None Include="Shaders\Discarding\Discarding.vert" />
     <None Include="Shaders\Discarding\Discarding.frag" />
+    <None Include="Shaders\Multilight\Multilight.vert" />
+    <None Include="Shaders\Multilight\Multilight.frag" />
   </ItemGroup>
 </Project>
