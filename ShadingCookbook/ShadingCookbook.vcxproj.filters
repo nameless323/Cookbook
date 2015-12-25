@@ -981,6 +981,9 @@
     <ClInclude Include="Source\Scene\Chapter3\Multilight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter2\DirectionalPhong.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1068,6 +1071,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter3\Multilight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter2\DirectionalPhong.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1745,5 +1751,7 @@
     <None Include="Shaders\Discarding\Discarding.frag" />
     <None Include="Shaders\Multilight\Multilight.vert" />
     <None Include="Shaders\Multilight\Multilight.frag" />
+    <None Include="Shaders\DirectionalPhong\DirectionalPhong.vert" />
+    <None Include="Shaders\DirectionalPhong\DirectionalPhong.frag" />
   </ItemGroup>
 </Project>
