@@ -475,6 +475,7 @@
     <ClInclude Include="Source\Scene\Chapter2\PhongTea.h" />
     <ClInclude Include="Source\Scene\Chapter2\Subroutine.h" />
     <ClInclude Include="Source\Scene\Chapter3\Multilight.h" />
+    <ClInclude Include="Source\Scene\Chapter3\PixelLight.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -510,6 +511,7 @@
     <ClCompile Include="Source\Scene\Chapter2\PhongTea.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\Subroutine.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\Multilight.cpp" />
+    <ClCompile Include="Source\Scene\Chapter3\PixelLight.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
