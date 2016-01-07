@@ -1761,5 +1761,7 @@
     <None Include="Shaders\DirectionalPhong\DirectionalPhong.frag" />
     <None Include="Shaders\Phong\PhongPixel\PhongPixel.vert" />
     <None Include="Shaders\Phong\PhongPixel\PhongPixel.frag" />
+    <None Include="Shaders\Phong\PhongHalfway\PhongHalfway.vert" />
+    <None Include="Shaders\Phong\PhongHalfway\PhongHalfway.frag" />
   </ItemGroup>
 </Project>

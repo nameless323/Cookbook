@@ -107,8 +107,10 @@ void PixelLight::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/Phong/PhongPixel/PhongPixel.vert");
-		_shader.CompileShader("Shaders/Phong/PhongPixel/PhongPixel.frag");
+//		_shader.CompileShader("Shaders/Phong/PhongPixel/PhongPixel.vert");
+//		_shader.CompileShader("Shaders/Phong/PhongPixel/PhongPixel.frag");
+		_shader.CompileShader("Shaders/Phong/PhongHalfway/PhongHalfway.vert");
+		_shader.CompileShader("Shaders/Phong/PhongHalfway/PhongHalfway.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();
