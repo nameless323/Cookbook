@@ -1759,5 +1759,7 @@
     <None Include="Shaders\Multilight\Multilight.frag" />
     <None Include="Shaders\DirectionalPhong\DirectionalPhong.vert" />
     <None Include="Shaders\DirectionalPhong\DirectionalPhong.frag" />
+    <None Include="Shaders\Phong\PhongPixel\PhongPixel.vert" />
+    <None Include="Shaders\Phong\PhongPixel\PhongPixel.frag" />
   </ItemGroup>
 </Project>

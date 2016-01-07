@@ -39,7 +39,7 @@ void PixelLight::InitScene()
 
 	_angle = 0.957283f;
 
-	_shader.SetUniform("LightIntensity", vec3(0.9f, 0.0f, 0.9f));
+	_shader.SetUniform("LightIntensity", vec3(0.9f, 0.9f, 0.9f));
 }
 
 void PixelLight::Render()
@@ -107,8 +107,8 @@ void PixelLight::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/Phong/PhongBackface.vert");
-		_shader.CompileShader("Shaders/Phong/PhongBackface.frag");
+		_shader.CompileShader("Shaders/Phong/PhongPixel/PhongPixel.vert");
+		_shader.CompileShader("Shaders/Phong/PhongPixel/PhongPixel.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();

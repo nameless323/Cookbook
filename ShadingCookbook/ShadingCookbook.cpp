@@ -14,7 +14,7 @@
 #include "Source/Scene/Chapter2/Subroutine.h"
 #include "Source/Scene/Chapter2/Discarding.h"
 #include "Source/Scene/Chapter3/Multilight.h"
-#include "Source/Scene/Chapter2/DirectionalPhong.h"
+#include "Source/Scene/Chapter3/PixelLight.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -55,7 +55,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new DirectionalPhong();
+	scene = new PixelLight();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
