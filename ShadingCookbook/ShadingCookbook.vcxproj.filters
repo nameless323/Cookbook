@@ -987,6 +987,9 @@
     <ClInclude Include="Source\Scene\Chapter3\PixelLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter3\SpotLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1080,6 +1083,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter3\PixelLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter3\SpotLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1763,5 +1769,6 @@
     <None Include="Shaders\Phong\PhongPixel\PhongPixel.frag" />
     <None Include="Shaders\Phong\PhongHalfway\PhongHalfway.vert" />
     <None Include="Shaders\Phong\PhongHalfway\PhongHalfway.frag" />
+    <None Include="Shaders\Phong\PhongSpotlight\PhongSpotlight.frag" />
   </ItemGroup>
 </Project>

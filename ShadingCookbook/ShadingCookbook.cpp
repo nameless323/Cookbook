@@ -15,6 +15,7 @@
 #include "Source/Scene/Chapter2/Discarding.h"
 #include "Source/Scene/Chapter3/Multilight.h"
 #include "Source/Scene/Chapter3/PixelLight.h"
+#include "Source/Scene/Chapter3/SpotLight.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -55,7 +56,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new PixelLight();
+	scene = new SpotLight();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
