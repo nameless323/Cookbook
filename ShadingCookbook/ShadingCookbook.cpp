@@ -16,6 +16,7 @@
 #include "Source/Scene/Chapter3/Multilight.h"
 #include "Source/Scene/Chapter3/PixelLight.h"
 #include "Source/Scene/Chapter3/SpotLight.h"
+#include "Source/Scene/Chapter3/ToonScene.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -56,7 +57,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new SpotLight();
+	scene = new ToonScene();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
