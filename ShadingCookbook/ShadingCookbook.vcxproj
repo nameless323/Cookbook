@@ -474,6 +474,7 @@
     <ClInclude Include="Source\Scene\Chapter2\PhongScene.h" />
     <ClInclude Include="Source\Scene\Chapter2\PhongTea.h" />
     <ClInclude Include="Source\Scene\Chapter2\Subroutine.h" />
+    <ClInclude Include="Source\Scene\Chapter3\FogScene.h" />
     <ClInclude Include="Source\Scene\Chapter3\Multilight.h" />
     <ClInclude Include="Source\Scene\Chapter3\PixelLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\SpotLight.h" />
@@ -512,6 +513,7 @@
     <ClCompile Include="Source\Scene\Chapter2\PhongScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\PhongTea.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\Subroutine.cpp" />
+    <ClCompile Include="Source\Scene\Chapter3\FogScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\Multilight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\PixelLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\SpotLight.cpp" />
@@ -750,6 +752,8 @@
     <None Include="Shaders\Discarding\Discarding.vert" />
     <None Include="Shaders\Flat\Flat.frag" />
     <None Include="Shaders\Flat\Flat.vert" />
+    <None Include="Shaders\Fog\Fog.frag" />
+    <None Include="Shaders\Fog\Fog.vert" />
     <None Include="Shaders\Multilight\Multilight.frag" />
     <None Include="Shaders\Multilight\Multilight.vert" />
     <None Include="Shaders\Phong\Phong.frag" />
