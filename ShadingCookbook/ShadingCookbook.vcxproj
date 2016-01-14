@@ -461,6 +461,7 @@
     <ClInclude Include="ingredients\vbotorus.h" />
     <ClInclude Include="Source\Chapter1\Chapter1.h" />
     <ClInclude Include="Source\Core\ShaderProgram.h" />
+    <ClInclude Include="Source\Core\TGA.h" />
     <ClInclude Include="Source\Items\IDrawable.h" />
     <ClInclude Include="Source\Items\Mesh.h" />
     <ClInclude Include="Source\Items\Plane.h" />
@@ -502,6 +503,7 @@
     <ClCompile Include="ingredients\vbotorus.cpp" />
     <ClCompile Include="ShadingCookbook.cpp" />
     <ClCompile Include="Source\Core\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Core\TGA.cpp" />
     <ClCompile Include="Source\Items\Mesh.cpp" />
     <ClCompile Include="Source\Items\Plane.cpp" />
     <ClCompile Include="Source\Items\Teapot.cpp" />
