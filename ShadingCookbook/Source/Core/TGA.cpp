@@ -94,15 +94,65 @@ namespace TGA
 
 	void Write(GLubyte* pixelData, int width, int height, const char* filename)
 	{
+		std::ofstream oFile(filename, std::ios::binary);
+
+		try
+		{
+			if (!oFile)
+			{
+				std::string msg = std::string("Unable to open file ") + filename + std::string(" for writing.");
+				throw IOException(msg);
+			}
+
+			const char zero[] = { 0, 0, 0, 0, 0 };
+			//header
+			oFile.put(0);
+			oFile.put(0);
+			oFile.put(2);
+			oFile.write(zero, 5);
+			oFile.write(zero, 2);
+			oFile.write(zero, 2);
+			LittleEndian::WriteShort(oFile, width);
+			LittleEndian::WriteShort(oFile, height);
+			oFile.put(32);
+			oFile.put(8);
+			//image
+			for (int i = 0; i < width * height; i++)
+			{
+				oFile.put(pixelData[i * 4 + 2]);
+				oFile.put(pixelData[i * 4 + 1]);
+				oFile.put(pixelData[i * 4]);
+				oFile.put(pixelData[i * 4 + 3]);
+			}
+			oFile.close();
+		} 
+		catch(IOException& e)
+		{
+			oFile.close();
+			throw e;
+		}
 	}
 
 	GLuint LoadTex(const char* filename, GLint& width, GLint& height)
 	{
-		return 0;
+		GLubyte* data = Read(filename, width, height);
+
+		GLuint texId;
+		glGenTextures(1, &texId);
+
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, width, height);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		delete[] data;
+		
+		return texId;
 	}
 
 	GLuint LoadTex(const char* filename)
 	{
-		return 0;
+		GLint w, h;
+		return LoadTex(filename, w, h);
 	}
 }
