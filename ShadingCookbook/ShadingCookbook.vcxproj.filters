@@ -999,6 +999,12 @@
     <ClInclude Include="Source\Core\TGA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter4\TextureScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Items\Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1104,6 +1110,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\TGA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Items\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1792,5 +1804,7 @@
     <None Include="Shaders\Celshading\Celshading.frag" />
     <None Include="Shaders\Fog\Fog.vert" />
     <None Include="Shaders\Fog\Fog.frag" />
+    <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
+    <None Include="Shaders\SimpleTexture\SimpleTexture.frag" />
   </ItemGroup>
 </Project>

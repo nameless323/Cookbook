@@ -462,6 +462,7 @@
     <ClInclude Include="Source\Chapter1\Chapter1.h" />
     <ClInclude Include="Source\Core\ShaderProgram.h" />
     <ClInclude Include="Source\Core\TGA.h" />
+    <ClInclude Include="Source\Items\Cube.h" />
     <ClInclude Include="Source\Items\IDrawable.h" />
     <ClInclude Include="Source\Items\Mesh.h" />
     <ClInclude Include="Source\Items\Plane.h" />
@@ -480,6 +481,7 @@
     <ClInclude Include="Source\Scene\Chapter3\PixelLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\SpotLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\ToonScene.h" />
+    <ClInclude Include="Source\Scene\Chapter4\TextureScene.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -504,6 +506,7 @@
     <ClCompile Include="ShadingCookbook.cpp" />
     <ClCompile Include="Source\Core\ShaderProgram.cpp" />
     <ClCompile Include="Source\Core\TGA.cpp" />
+    <ClCompile Include="Source\Items\Cube.cpp" />
     <ClCompile Include="Source\Items\Mesh.cpp" />
     <ClCompile Include="Source\Items\Plane.cpp" />
     <ClCompile Include="Source\Items\Teapot.cpp" />
@@ -520,6 +523,7 @@
     <ClCompile Include="Source\Scene\Chapter3\PixelLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\SpotLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\ToonScene.cpp" />
+    <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -767,6 +771,8 @@
     <None Include="Shaders\Phong\PhongPixel\PhongPixel.frag" />
     <None Include="Shaders\Phong\PhongPixel\PhongPixel.vert" />
     <None Include="Shaders\Phong\PhongSpotlight\PhongSpotlight.frag" />
+    <None Include="Shaders\SimpleTexture\SimpleTexture.frag" />
+    <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />
     <None Include="Shaders\Subroutine\Subroutine.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
