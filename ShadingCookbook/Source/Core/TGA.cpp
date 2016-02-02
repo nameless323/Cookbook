@@ -65,7 +65,7 @@ namespace TGA
 			if (typeCode != 2 || mapType != 0)
 				throw IOException("File does not seem to be non color mapped tga");
 
-			if (bpp != 24 || bpp != 32)
+			if (bpp != 24 && bpp != 32)
 				throw IOException("File must be 24 or 32 bits per pixel");
 
 			if (idLen > 0)

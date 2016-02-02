@@ -39,7 +39,7 @@ void TextureScene::InitScene()
 
 	_angle = 0.0f;
 
-	_shader.SetUniform("LightIntensity", vec3(0.9f, 0.9f, 0.9f));
+	_shader.SetUniform("Light.Intensity", vec3(0.9f, 0.9f, 0.9f));
 
 	GLint w, h;
 	glActiveTexture(GL_TEXTURE0);
@@ -93,7 +93,7 @@ void TextureScene::Shutdown()
 
 void TextureScene::SetMatrices()
 {
-	mat4 mv = _view * _model;
+	mat4 mv = _view * _model * glm::rotate(_angle, vec3(0,1,0));
 	_shader.SetUniform("ModelViewMatrix", mv);
 	_shader.SetUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
 	_shader.SetUniform("MVP", _projection * mv);
