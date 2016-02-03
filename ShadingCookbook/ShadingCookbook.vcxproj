@@ -481,6 +481,7 @@
     <ClInclude Include="Source\Scene\Chapter3\PixelLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\SpotLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\ToonScene.h" />
+    <ClInclude Include="Source\Scene\Chapter4\DualTex.h" />
     <ClInclude Include="Source\Scene\Chapter4\TextureScene.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
@@ -523,6 +524,7 @@
     <ClCompile Include="Source\Scene\Chapter3\PixelLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\SpotLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\ToonScene.cpp" />
+    <ClCompile Include="Source\Scene\Chapter4\DualTex.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -756,6 +758,8 @@
     <None Include="Shaders\DirectionalPhong\DirectionalPhong.vert" />
     <None Include="Shaders\Discarding\Discarding.frag" />
     <None Include="Shaders\Discarding\Discarding.vert" />
+    <None Include="Shaders\DualTex\DualTex.frag" />
+    <None Include="Shaders\DualTex\DualTex.vert" />
     <None Include="Shaders\Flat\Flat.frag" />
     <None Include="Shaders\Flat\Flat.vert" />
     <None Include="Shaders\Fog\Fog.frag" />
