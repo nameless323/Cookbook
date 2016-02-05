@@ -781,6 +781,8 @@
     <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />
     <None Include="Shaders\Subroutine\Subroutine.vert" />
+    <None Include="Shaders\TexDiscard\TexDiscard.frag" />
+    <None Include="Shaders\TexDiscard\TexDiscard.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
     <None Include="Shaders\Uniforms\Blob.vert" />
   </ItemGroup>

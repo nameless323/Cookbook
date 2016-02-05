@@ -122,8 +122,8 @@ void TexDiscard::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/DualTex/DualTex.vert");
-		_shader.CompileShader("Shaders/DualTex/DualTex.frag");
+		_shader.CompileShader("Shaders/TexDiscard/TexDiscard.vert");
+		_shader.CompileShader("Shaders/TexDiscard/TexDiscard.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();

@@ -1820,5 +1820,7 @@
     <None Include="Shaders\SimpleTexture\SimpleTexture.frag" />
     <None Include="Shaders\DualTex\DualTex.vert" />
     <None Include="Shaders\DualTex\DualTex.frag" />
+    <None Include="Shaders\TexDiscard\TexDiscard.vert" />
+    <None Include="Shaders\TexDiscard\TexDiscard.frag" />
   </ItemGroup>
 </Project>
