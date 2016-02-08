@@ -482,6 +482,7 @@
     <ClInclude Include="Source\Scene\Chapter3\SpotLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\ToonScene.h" />
     <ClInclude Include="Source\Scene\Chapter4\DualTex.h" />
+    <ClInclude Include="Source\Scene\Chapter4\NormalMapping.h" />
     <ClInclude Include="Source\Scene\Chapter4\TexDiscard.h" />
     <ClInclude Include="Source\Scene\Chapter4\TextureScene.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
@@ -526,6 +527,7 @@
     <ClCompile Include="Source\Scene\Chapter3\SpotLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\ToonScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\DualTex.cpp" />
+    <ClCompile Include="Source\Scene\Chapter4\NormalMapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\TexDiscard.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -768,6 +770,8 @@
     <None Include="Shaders\Fog\Fog.vert" />
     <None Include="Shaders\Multilight\Multilight.frag" />
     <None Include="Shaders\Multilight\Multilight.vert" />
+    <None Include="Shaders\NormalMapping\NormalMapping.frag" />
+    <None Include="Shaders\NormalMapping\NormalMapping.vert" />
     <None Include="Shaders\Phong\Phong.frag" />
     <None Include="Shaders\Phong\Phong.vert" />
     <None Include="Shaders\Phong\PhongBackface.frag" />
