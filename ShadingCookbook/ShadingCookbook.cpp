@@ -21,6 +21,7 @@
 #include "Source/Scene/Chapter4/TextureScene.h"
 #include "Source/Scene/Chapter4/DualTex.h"
 #include "Source/Scene/Chapter4/TexDiscard.h"
+#include "Source/Scene/Chapter4/NormalMapping.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -61,7 +62,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new TexDiscard();
+	scene = new NormalMapping();
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

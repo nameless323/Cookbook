@@ -79,7 +79,7 @@ void NormalMapping::Render()
 	_model = mat4(1.0f);
 
 	SetMatrices();
-	_cube->Render();
+	_ogre->Render();
 }
 
 void NormalMapping::Update(float t)
@@ -120,8 +120,8 @@ void NormalMapping::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/DualTex/DualTex.vert");
-		_shader.CompileShader("Shaders/DualTex/DualTex.frag");
+		_shader.CompileShader("Shaders/NormalMapping/NormalMapping.vert");
+		_shader.CompileShader("Shaders/NormalMapping/NormalMapping.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();
