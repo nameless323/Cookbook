@@ -481,6 +481,7 @@
     <ClInclude Include="Source\Scene\Chapter3\PixelLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\SpotLight.h" />
     <ClInclude Include="Source\Scene\Chapter3\ToonScene.h" />
+    <ClInclude Include="Source\Scene\Chapter4\CubemapReflect.h" />
     <ClInclude Include="Source\Scene\Chapter4\DualTex.h" />
     <ClInclude Include="Source\Scene\Chapter4\NormalMapping.h" />
     <ClInclude Include="Source\Scene\Chapter4\TexDiscard.h" />
@@ -526,6 +527,7 @@
     <ClCompile Include="Source\Scene\Chapter3\PixelLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\SpotLight.cpp" />
     <ClCompile Include="Source\Scene\Chapter3\ToonScene.cpp" />
+    <ClCompile Include="Source\Scene\Chapter4\CubemapReflect.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\DualTex.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\NormalMapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\TexDiscard.cpp" />
@@ -756,6 +758,8 @@
     <None Include="Shaders\Celshading\Celshading.vert" />
     <None Include="Shaders\Ch1\basic.frag" />
     <None Include="Shaders\Ch1\basic.vert" />
+    <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.frag" />
+    <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.vert" />
     <None Include="Shaders\Diffuse\Diffuse.frag" />
     <None Include="Shaders\Diffuse\Diffuse.vert" />
     <None Include="Shaders\DirectionalPhong\DirectionalPhong.frag" />

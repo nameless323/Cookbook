@@ -1014,6 +1014,9 @@
     <ClInclude Include="Source\Scene\Chapter4\NormalMapping.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter4\CubemapReflect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1134,6 +1137,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter4\NormalMapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter4\CubemapReflect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1830,5 +1836,7 @@
     <None Include="Shaders\TexDiscard\TexDiscard.frag" />
     <None Include="Shaders\NormalMapping\NormalMapping.vert" />
     <None Include="Shaders\NormalMapping\NormalMapping.frag" />
+    <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.vert" />
+    <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.frag" />
   </ItemGroup>
 </Project>
