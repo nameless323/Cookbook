@@ -32,7 +32,7 @@ void CubemapReflect::InitScene()
 	glDepthFunc(GL_LEQUAL);
 	CompileAndLinkShader();
 	_plane = new Plane(50.0f, 50.0f, 1, 1);
-	_cube = new Cube();
+	_skybox = new Skybox();
 
 	_view = glm::lookAt(vec3(1.0f, 1.25f, 1.25f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 	_projection = mat4(1.0f);
@@ -81,7 +81,7 @@ void CubemapReflect::Render()
 	_model = mat4(1.0f);
 
 	SetMatrices();
-	_cube->Render();
+	_skybox->Render();
 }
 
 void CubemapReflect::Update(float t)
@@ -98,7 +98,7 @@ void CubemapReflect::Update(float t)
 
 void CubemapReflect::Shutdown()
 {
-	delete _cube;
+	delete _skybox;
 	delete _plane;
 }
 

@@ -449,6 +449,7 @@
     <ClInclude Include="ingredients\glutils.h" />
     <ClInclude Include="ingredients\gl_core_4_4.h" />
     <ClInclude Include="ingredients\scene.h" />
+    <ClInclude Include="Source\Items\Skybox.h" />
     <ClInclude Include="ingredients\teapotdata.h" />
     <ClInclude Include="ingredients\tgaio.h" />
     <ClInclude Include="ingredients\vbocube.h" />
@@ -498,6 +499,7 @@
     <ClCompile Include="ingredients\glslprogram.cpp" />
     <ClCompile Include="ingredients\glutils.cpp" />
     <ClCompile Include="ingredients\gl_core_4_4.c" />
+    <ClCompile Include="Source\Items\Skybox.cpp" />
     <ClCompile Include="ingredients\tgaio.cpp" />
     <ClCompile Include="ingredients\vbocube.cpp" />
     <ClCompile Include="ingredients\vbomesh.cpp" />
