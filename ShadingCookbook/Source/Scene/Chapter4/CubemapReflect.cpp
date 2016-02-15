@@ -31,57 +31,75 @@ void CubemapReflect::InitScene()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	CompileAndLinkShader();
-	_plane = new Plane(50.0f, 50.0f, 1, 1);
-	_skybox = new Skybox();
+	glEnable(GL_DEPTH_TEST);
 
-	_view = glm::lookAt(vec3(1.0f, 1.25f, 1.25f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	_teapot = new Teapot(14, mat4(1.0f));
+	_plane = new Plane(1.0f, 1.0f, 1, 1);
+	_skybox = new Skybox();
+	float c = 3.5f;
+	_torus = new Torus(0.7f * c, 0.3f * c, 50, 50);
+
 	_projection = mat4(1.0f);
 
-	_angle = 0.0f;
+	_angle = glm::radians(90.0f);
 
-	_shader.SetUniform("Light.Intensity", vec3(0.9f, 0.9f, 0.9f));
-
-	GLint w, h;
-	glActiveTexture(GL_TEXTURE0);
-	GLubyte* data = TGA::Read("./media/texture/brick1.tga", w, h);
-
-	GLuint texId[2];
-	glGenTextures(2, texId);
-
-	glBindTexture(GL_TEXTURE_2D, texId[0]);
-	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, w, h);
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	delete[] data;
-
-	glActiveTexture(GL_TEXTURE1);
-	data = TGA::Read("./media/texture/moss.tga", w, h);
-
-	glBindTexture(GL_TEXTURE_2D, texId[1]);
-	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, w, h);
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	delete[] data;
+	LoadCubeMap("./media/texture/cubemap_night/night");	
 }
+
+void CubemapReflect::LoadCubeMap(const char* baseFileName)
+{
+	glActiveTexture(GL_TEXTURE0);
+	GLuint texID;
+	glGenTextures(1, &texID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
+
+	const char* suffixes[] = {"posx", "negx", "posy", "negy", "posz", "negz"};
+	GLuint targets[] =
+	{
+		GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+		GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+		GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
+	};
+	GLint w, h;
+	glTexStorage2D(GL_TEXTURE_CUBE_MAP, 1, GL_RGBA8, 256, 256);
+
+	for (int i = 0; i < 6; i++)
+	{
+		std::string texName = std::string(baseFileName) + "_" + suffixes[i] + ".tga";
+		GLubyte* data = TGA::Read(texName.c_str(), w, h);
+		glTexSubImage2D(targets[i], 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		delete[] data;
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+}
+
 
 void CubemapReflect::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	_shader.SetUniform("Light.Position", vec4(0.0f, 0.0f, 0.0f, 1.0f));
-	_shader.SetUniform("Material.Kd", 0.9f, 0.9f, 0.3f);
-	_shader.SetUniform("Material.Ks", 0.95f, 0.95f, 0.95f);
-	_shader.SetUniform("Material.Ka", 0.1f, 0.1f, 0.1f);
-	_shader.SetUniform("Material.Shininess", 100.0f);
+	vec3 cameraPos = vec3(7.0f * cos(_angle), 2.0f, 7.0f * sin(_angle));
+	_view = glm::lookAt(cameraPos, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	_shader.SetUniform("WorldCameraPosition", cameraPos);
 
+	_shader.SetUniform("DrawSkyBox", true);
 	_model = mat4(1.0f);
-
 	SetMatrices();
 	_skybox->Render();
+	_shader.SetUniform("DrawSkyBox", false);
+
+	_shader.SetUniform("MaterialColor", vec4(0.5f, 0.5f, 0.5f, 1.0f));
+	_shader.SetUniform("ReflectFactor", 0.85f);
+
+	_model = mat4(1.0f);
+	_model *= glm::translate(vec3(0.0f, -1.0f, 0.0f));
+	_model *= glm::rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
+	SetMatrices();
+	_teapot->Render();
 }
 
 void CubemapReflect::Update(float t)
@@ -115,7 +133,7 @@ void CubemapReflect::Resize(int w, int h)
 	glViewport(0, 0, w, h);
 	_width = w;
 	_height = h;
-	_projection = glm::perspective(glm::radians(60.0f), (float)w / h, 0.3f, 100.0f);
+	_projection = glm::perspective(glm::radians(50.0f), (float)w / h, 0.3f, 100.0f);
 }
 
 void CubemapReflect::CompileAndLinkShader()

@@ -1,0 +1,21 @@
+#version 430 core
+
+in vec3 ReflectDir;
+
+layout (binding = 0) uniform samplerCube CabeMapTex;
+
+uniform bool DrawSkyBox;
+uniform float ReflectFactor;
+uniform vec4 MaterialColor;
+
+layout (location = 0) out vec4 FragColor;
+
+void main()
+{
+	vec4 cubeMapColor = texture(CubeMapTex, ReflectDir);
+
+	if (DrawSkyBox)
+		FragColor = cubeMapColor;
+	else
+		FragColor = mix (MaterialColor, cubeMapColor, ReflectFactor);
+}

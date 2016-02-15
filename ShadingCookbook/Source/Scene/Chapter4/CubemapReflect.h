@@ -21,12 +21,13 @@ public:
 	void Render() override;
 	void Shutdown();
 	void Resize(int x, int y);
+	void LoadCubeMap(const char* baseFileName);
 private:
 	ShaderProgram _shader;
 	int _width, _height;
 	Teapot* _teapot;
 	Plane* _plane;
-	Skybox* _skybox;;
+	Skybox* _skybox;
 	Torus* _torus;
 	mat4 _model;
 	mat4 _view;
