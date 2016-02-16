@@ -2,7 +2,7 @@
 
 in vec3 ReflectDir;
 
-layout (binding = 0) uniform samplerCube CabeMapTex;
+layout (binding = 0) uniform samplerCube CubeMapTex;
 
 uniform bool DrawSkyBox;
 uniform float ReflectFactor;
@@ -17,5 +17,7 @@ void main()
 	if (DrawSkyBox)
 		FragColor = cubeMapColor;
 	else
+	{
 		FragColor = mix (MaterialColor, cubeMapColor, ReflectFactor);
+	}
 }

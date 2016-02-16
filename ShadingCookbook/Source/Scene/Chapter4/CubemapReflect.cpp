@@ -28,14 +28,13 @@ void CubemapReflect::ProcessInput(int key, int action)
 
 void CubemapReflect::InitScene()
 {
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
 	CompileAndLinkShader();
+
 	glEnable(GL_DEPTH_TEST);
 
 	_teapot = new Teapot(14, mat4(1.0f));
-	_plane = new Plane(1.0f, 1.0f, 1, 1);
 	_skybox = new Skybox();
+	_plane = new Plane(1.0f, 1.0f, 1, 1);
 	float c = 3.5f;
 	_torus = new Torus(0.7f * c, 0.3f * c, 50, 50);
 
@@ -49,27 +48,29 @@ void CubemapReflect::InitScene()
 void CubemapReflect::LoadCubeMap(const char* baseFileName)
 {
 	glActiveTexture(GL_TEXTURE0);
+
 	GLuint texID;
 	glGenTextures(1, &texID);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
 
-	const char* suffixes[] = {"posx", "negx", "posy", "negy", "posz", "negz"};
-	GLuint targets[] =
-	{
+	const char * suffixes[] = { "posx", "negx", "posy", "negy", "posz", "negz" };
+	GLuint targets[] = {
 		GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
 		GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
 		GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 	};
+
 	GLint w, h;
 	glTexStorage2D(GL_TEXTURE_CUBE_MAP, 1, GL_RGBA8, 256, 256);
 
-	for (int i = 0; i < 6; i++)
-	{
+	for (int i = 0; i < 6; i++) {
 		std::string texName = std::string(baseFileName) + "_" + suffixes[i] + ".tga";
-		GLubyte* data = TGA::Read(texName.c_str(), w, h);
-		glTexSubImage2D(targets[i], 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		GLubyte * data = TGA::Read(texName.c_str(), w, h);
+		glTexSubImage2D(targets[i], 0, 0, 0, w, h,
+			GL_RGBA, GL_UNSIGNED_BYTE, data);
 		delete[] data;
 	}
+
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -122,9 +123,8 @@ void CubemapReflect::Shutdown()
 
 void CubemapReflect::SetMatrices()
 {
-	mat4 mv = _view * _model * glm::rotate(_angle, vec3(0, 1, 0));
-	_shader.SetUniform("ModelViewMatrix", mv);
-	_shader.SetUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	mat4 mv = _view * _model;
+	_shader.SetUniform("ModelMatrix", _model);
 	_shader.SetUniform("MVP", _projection * mv);
 }
 
@@ -140,8 +140,8 @@ void CubemapReflect::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/DualTex/DualTex.vert");
-		_shader.CompileShader("Shaders/DualTex/DualTex.frag");
+		_shader.CompileShader("Shaders/Cubemap/CubemapReflect/CubemapReflect.vert");
+		_shader.CompileShader("Shaders/Cubemap/CubemapReflect/CubemapReflect.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();

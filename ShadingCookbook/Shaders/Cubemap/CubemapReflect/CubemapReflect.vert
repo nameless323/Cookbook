@@ -6,7 +6,7 @@ layout (location = 2) in vec2 VertexTexCoord;
 
 out vec3 ReflectDir;
 
-uniform bool DrawSkybox;
+uniform bool DrawSkyBox;
 uniform vec3 WorldCameraPosition;
 
 uniform mat4 ModelViewMatrix;
@@ -17,7 +17,7 @@ uniform mat4 MVP;
 
 void main(void)
 {
-	if (DrawSkybox)
+	if (DrawSkyBox)
 	{
 		ReflectDir = VertexPosition;
 	}
