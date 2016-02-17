@@ -1020,6 +1020,9 @@
     <ClInclude Include="Source\Items\Skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter4\CubemapRefract.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1146,6 +1149,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Items\Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter4\CubemapRefract.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1844,5 +1850,7 @@
     <None Include="Shaders\NormalMapping\NormalMapping.frag" />
     <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.vert" />
     <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.frag" />
+    <None Include="Shaders\Cubemap\CubemapRefract\CubemapRefract.vert" />
+    <None Include="Shaders\Cubemap\CubemapRefract\CubemapRefract.frag" />
   </ItemGroup>
 </Project>
