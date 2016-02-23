@@ -11,7 +11,7 @@ uniform mat4 ProjectorMatrix;
 
 uniform vec3 WorldCameraPosition;
 uniform mat4 ModelViewMatrix;
-uniform mat4 ModelMatirx;
+uniform mat4 ModelMatrix;
 uniform mat3 NormalMatrix;
 uniform mat4 ProjectionMatrix;
 uniform mat4 MVP;
@@ -22,6 +22,6 @@ void main()
 
 	EyeNormal = normalize(NormalMatrix * VertexNormal);
 	EyePosition = ModelViewMatrix * pos4;
-	ProjTexCoord = ProjectorMatrix * (ModelMatirx * pos4);
+	ProjTexCoord = ProjectorMatrix * (ModelMatrix * pos4);
 	gl_Position = MVP * pos4;
 }
