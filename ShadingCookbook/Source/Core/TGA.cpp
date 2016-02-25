@@ -140,6 +140,8 @@ namespace TGA
 		GLuint texId;
 		glGenTextures(1, &texId);
 
+		glBindTexture(GL_TEXTURE_2D, texId);
+
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, width, height);
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 

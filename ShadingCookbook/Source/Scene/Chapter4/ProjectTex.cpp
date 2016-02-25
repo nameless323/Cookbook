@@ -36,7 +36,7 @@ void ProjectTex::InitScene()
 	_plane = new Plane(100.0f, 100.0f, 1, 1);
 
 	_projection = mat4(1.0f);
-	
+
 	_angle = glm::radians(90.0f);
 
 	vec3 projPos = vec3(2.0f, 5.0f, 5.0f);
@@ -60,9 +60,9 @@ void ProjectTex::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vec3 cameraPos = vec3(7.0f * cos(_angle), 2.0f, 7.0f * sin(_angle));
+	vec3 cameraPos = vec3(17.0f * cos(_angle), 2.0f, 17.0f * sin(_angle));
 	_view = glm::lookAt(cameraPos, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
-	
+
 	_shader.SetUniform("Material.Kd", 0.5f, 0.2f, 0.1f);
 	_shader.SetUniform("Material.Ks", 0.95f, 0.95f, 0.95f);
 	_shader.SetUniform("Material.Ka", 0.1f, 0.1f, 0.1f);

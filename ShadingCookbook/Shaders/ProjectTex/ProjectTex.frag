@@ -43,7 +43,9 @@ void main()
 	vec3 color = phongModel(EyePosition.xyz, EyeNormal);
 
 	vec4 projTexColor = vec4(0.0);
-	if (ProjTexCoord.z > 0.0)
+	if (ProjTexCoord.z > 1.0)
+	{
 		projTexColor = textureProj(ProjectorTex, ProjTexCoord);
+	}
 	FragColor = vec4(color, 1.0) + projTexColor * 0.5;
 }
