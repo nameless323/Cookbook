@@ -487,6 +487,7 @@
     <ClInclude Include="Source\Scene\Chapter4\DualTex.h" />
     <ClInclude Include="Source\Scene\Chapter4\NormalMapping.h" />
     <ClInclude Include="Source\Scene\Chapter4\ProjectTex.h" />
+    <ClInclude Include="Source\Scene\Chapter4\RenderToTex.h" />
     <ClInclude Include="Source\Scene\Chapter4\TexDiscard.h" />
     <ClInclude Include="Source\Scene\Chapter4\TextureScene.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
@@ -536,6 +537,7 @@
     <ClCompile Include="Source\Scene\Chapter4\DualTex.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\NormalMapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\ProjectTex.cpp" />
+    <ClCompile Include="Source\Scene\Chapter4\RenderToTex.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\TexDiscard.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -795,6 +797,8 @@
     <None Include="Shaders\Phong\PhongSpotlight\PhongSpotlight.frag" />
     <None Include="Shaders\ProjectTex\ProjectTex.frag" />
     <None Include="Shaders\ProjectTex\ProjectTex.vert" />
+    <None Include="Shaders\RenderToTex\RenderToTex.frag" />
+    <None Include="Shaders\RenderToTex\RenderToTex.vert" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.frag" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />
