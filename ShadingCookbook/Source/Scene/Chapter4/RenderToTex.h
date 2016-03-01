@@ -27,7 +27,9 @@ private:
 	Teapot* _teapot;
 	Plane* _plane;
 	Skybox* _skybox;
+	Cube* _cube;
 	Torus* _torus;
+	GLuint _fboHandle;
 	mat4 _model;
 	mat4 _view;
 	mat4 _projection;
@@ -40,4 +42,7 @@ private:
 
 	void SetMatrices();
 	void CompileAndLinkShader();
+	void SetupFBO();
+	void RenderToTexture();
+	void RenderScene();
 };
