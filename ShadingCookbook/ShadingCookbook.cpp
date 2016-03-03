@@ -25,6 +25,7 @@
 #include "Source/Scene/Chapter4/CubemapReflect.h"
 #include "Source/Scene/Chapter4/CubemapRefract.h"
 #include "Source/Scene/Chapter4/ProjectTex.h"
+#include "Source/Scene/Chapter4/RenderToTex.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -65,7 +66,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new ProjectTex;
+	scene = new RenderToTex;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

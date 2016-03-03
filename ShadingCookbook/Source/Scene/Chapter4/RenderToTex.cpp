@@ -112,6 +112,7 @@ void RenderToTex::RenderToTexture()
 	_shader.SetUniform("RenderTex", 1);
 	glViewport(0, 0, 512, 512);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	_plane->Render();
 
 	_view = glm::lookAt(vec3(0.0f, 0.0f, 7.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 	_projection = glm::perspective(glm::radians(60.0f), 1.0f, 0.3f, 100.0f);

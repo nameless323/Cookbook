@@ -6,7 +6,8 @@ in vec2 TexCoord;
 
 uniform sampler2D RenderTex;
 
-struct LightInfo {
+struct LightInfo 
+{
   vec4 Position; 
   vec3 Intensity;
 };
