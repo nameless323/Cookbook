@@ -26,6 +26,7 @@
 #include "Source/Scene/Chapter4/CubemapRefract.h"
 #include "Source/Scene/Chapter4/ProjectTex.h"
 #include "Source/Scene/Chapter4/RenderToTex.h"
+#include "Source/Scene/Chapter5/EdgeOutliner.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -66,7 +67,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new RenderToTex;
+	scene = new EdgeOutliner;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

@@ -5,7 +5,7 @@
 #include "../../Core/TGA.h"
 using glm::vec3;
 
-EdgeOutliner::EdgeOutliner() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _rotationSpeed(glm::pi<float>() / 8.0f)
+EdgeOutliner::EdgeOutliner() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _rotationSpeed(glm::pi<float>() / 8.0f), _width(1024), _height(768)
 {
 }
 
@@ -114,7 +114,7 @@ void EdgeOutliner::SetupFBO()
 	glGenTextures(1, &renderTex);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, renderTex);
-	glTexStorage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _width, _height);
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, _width, _height);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
