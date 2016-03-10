@@ -1032,6 +1032,9 @@
     <ClInclude Include="Source\Scene\Chapter5\EdgeOutliner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1170,6 +1173,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter5\EdgeOutliner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1876,5 +1882,7 @@
     <None Include="Shaders\RenderToTex\RenderToTex.frag" />
     <None Include="Shaders\EdgeOutliner\EdgeOutliner.vert" />
     <None Include="Shaders\EdgeOutliner\EdgeOutliner.frag" />
+    <None Include="Shaders\GaussianBlur\GaussianBlur.vert" />
+    <None Include="Shaders\GaussianBlur\GaussianBlur.frag" />
   </ItemGroup>
 </Project>

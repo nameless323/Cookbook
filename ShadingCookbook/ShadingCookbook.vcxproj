@@ -491,6 +491,7 @@
     <ClInclude Include="Source\Scene\Chapter4\TexDiscard.h" />
     <ClInclude Include="Source\Scene\Chapter4\TextureScene.h" />
     <ClInclude Include="Source\Scene\Chapter5\EdgeOutliner.h" />
+    <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -542,6 +543,7 @@
     <ClCompile Include="Source\Scene\Chapter4\TexDiscard.cpp" />
     <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\EdgeOutliner.cpp" />
+    <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -786,6 +788,8 @@
     <None Include="Shaders\Flat\Flat.vert" />
     <None Include="Shaders\Fog\Fog.frag" />
     <None Include="Shaders\Fog\Fog.vert" />
+    <None Include="Shaders\GaussianBlur\GaussianBlur.frag" />
+    <None Include="Shaders\GaussianBlur\GaussianBlur.vert" />
     <None Include="Shaders\Multilight\Multilight.frag" />
     <None Include="Shaders\Multilight\Multilight.vert" />
     <None Include="Shaders\NormalMapping\NormalMapping.frag" />
