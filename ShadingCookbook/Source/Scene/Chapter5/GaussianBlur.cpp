@@ -1,6 +1,7 @@
 #include "GaussianBlur.h"
 #include <gtx/transform.hpp>
 #include <iostream>
+#include <sstream>
 #include <GLFW/glfw3.h>
 #include "../../Core/TGA.h"
 using glm::vec3;
@@ -29,7 +30,7 @@ void GaussianBlur::ProcessInput(int key, int action)
 void GaussianBlur::InitScene()
 {
 	CompileAndLinkShader();
-
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 
 	_plane = new Plane(50.0f, 50.0f, 1, 1);
@@ -81,16 +82,32 @@ void GaussianBlur::InitScene()
 	GLuint shaderHandle = _shader.GetHandle();
 	_pass1Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass1");
 	_pass2Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass2");
+	_pass3Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass3");
 
-	_shader.SetUniform("EdgeThreshold", 0.1f);
 	_shader.SetUniform("Light.Intensity", vec3(1.0f, 1.0f, 1.0f));
 
+	float weights[5], sum, sigma2 = 8.0f;
+	weights[0] = Gauss(0, sigma2);
+	sum = weights[0];
+	for (int i = 1; i < 5; i++)
+	{
+		weights[i] = Gauss(float(i), sigma2);
+		sum += 2 * weights[i];
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		std::stringstream uniName;
+		uniName << "Weight[" << i << "]";
+		float val = weights[i] / sum;
+		_shader.SetUniform(uniName.str().c_str(), val);
+	}
 }
 
 void GaussianBlur::Render()
 {
 	Pass1();
 	Pass2();
+	Pass3();
 }
 
 void GaussianBlur::Update(float t)
@@ -107,18 +124,16 @@ void GaussianBlur::Update(float t)
 
 void GaussianBlur::SetupFBO()
 {
-	glGenFramebuffers(1, &_fboHandle);
-	glBindFramebuffer(GL_FRAMEBUFFER, _fboHandle);
+	glGenFramebuffers(1, &_renderFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, _renderFBO);
 
-	GLuint renderTex;
-	glGenTextures(1, &renderTex);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderTex);
+	glGenTextures(1, &_renderTex);
+	glBindTexture(GL_TEXTURE_2D, _renderTex);
 	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, _width, _height);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _renderTex, 0);
 
 	GLuint depth;
 	glGenRenderbuffers(1, &depth);
@@ -130,13 +145,27 @@ void GaussianBlur::SetupFBO()
 	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
 	glDrawBuffers(1, drawBuffers);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glGenFramebuffers(1, &_intermediateFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, _intermediateFBO);
+
+	glGenTextures(1, &_intermediateTex);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, _intermediateTex);
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, _width, _height);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _intermediateTex, 0);
+	glDrawBuffers(1, drawBuffers);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void GaussianBlur::Pass1()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, _fboHandle);
+	glBindFramebuffer(GL_FRAMEBUFFER, _renderFBO);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glEnable(GL_DEPTH_TEST);
 	glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass1Index);
 
 	_view = glm::lookAt(vec3(7.0f * cos(_angle), 4.0f, 7.0f * sin(_angle)), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
@@ -180,7 +209,7 @@ void GaussianBlur::Pass2()
 	glBindFramebuffer(GL_FRAMEBUFFER, _intermediateFBO);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _intermediateTex);
+	glBindTexture(GL_TEXTURE_2D, _renderTex);
 	glDisable(GL_DEPTH_TEST);
 
 	glClear(GL_COLOR_BUFFER_BIT);

@@ -29,10 +29,11 @@ private:
 	Cube* _cube;
 	Torus* _torus;
 
-	GLuint _fboHandle;
+	GLuint _renderFBO;
 	GLuint _intermediateFBO;
 	GLuint _fsQuad;
 	GLuint _intermediateTex;
+	GLuint _renderTex;
 	GLuint _pass1Index;
 	GLuint _pass2Index;
 	GLuint _pass3Index;

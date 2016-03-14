@@ -57,7 +57,7 @@ vec4 pass1()
 subroutine (RenderPassType)
 vec4 pass2()
 {
-	ivec2 pix = ivec2(gl_Fragcoord.xy);
+	ivec2 pix = ivec2(gl_FragCoord.xy);
 	vec4 sum = texelFetch(Texture0, pix, 0) * Weight[0];
 	sum += texelFetchOffset(Texture0, pix, 0, ivec2(0,  1)) * Weight[1];
 	sum += texelFetchOffset(Texture0, pix, 0, ivec2(0, -1)) * Weight[1];
@@ -73,7 +73,7 @@ vec4 pass2()
 subroutine (RenderPassType)
 vec4 pass3()
 {
-	ivec2 pix = ivec2(gl_Fragcoord.xy);
+	ivec2 pix = ivec2(gl_FragCoord.xy);
 	vec4 sum = texelFetch(Texture0, pix, 0) * Weight[0];
 	sum += texelFetchOffset(Texture0, pix, 0, ivec2( 1, 0)) * Weight[1];
 	sum += texelFetchOffset(Texture0, pix, 0, ivec2(-1, 0)) * Weight[1];
