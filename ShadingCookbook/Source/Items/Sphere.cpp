@@ -4,7 +4,7 @@
 #include <cmath>
 #include <gtc/constants.hpp>
 
-Sphere::Sphere(float radius, GLuint slices, GLuint stacks) : _radius(radius), _slices(slices), _stacks(_stacks)
+Sphere::Sphere(float radius, GLuint slices, GLuint stacks) : _radius(radius), _slices(slices), _stacks(stacks)
 {
 	_nVerts = (slices + 1) * (stacks + 1);
 	_elements = (slices * 2 * (stacks - 1)) * 3;
@@ -76,7 +76,7 @@ void Sphere::GenerateVerts(float* verts, float* norms, float* tex, unsigned* el)
 	GLfloat phiFac = glm::pi<float>() / _stacks;
 	GLfloat nx, ny, nz, s, t;
 	GLuint idx = 0, tIdx = 0;
-	for (GLuint i = 0; i < _slices; i++)
+	for (GLuint i = 0; i <= _slices; i++)
 	{
 		theta = i * thetaFac;
 		s = (GLfloat)i / _slices;
@@ -94,7 +94,7 @@ void Sphere::GenerateVerts(float* verts, float* norms, float* tex, unsigned* el)
 			norms[idx] = nx;
 			norms[idx + 1] = ny;
 			norms[idx + 2] = nz;
-			idx += 2;
+			idx += 3;
 
 			tex[tIdx] = s;
 			tex[tIdx + 1] = t;

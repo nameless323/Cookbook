@@ -27,6 +27,8 @@
 #include "Source/Scene/Chapter4/ProjectTex.h"
 #include "Source/Scene/Chapter4/RenderToTex.h"
 #include "Source/Scene/Chapter5/EdgeOutliner.h"
+#include "Source/Scene/Chapter5/GaussianBlur.h"
+#include "Source/Scene/Chapter5/Tonemapping.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -67,7 +69,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new EdgeOutliner;
+	scene = new Tonemapping;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

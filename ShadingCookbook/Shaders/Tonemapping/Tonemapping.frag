@@ -59,7 +59,10 @@ vec3 ads (vec3 pos, vec3 norm)
 	{
 		vec3 s = normalize(vec3(Lights[i].Position) - pos);
 		vec3 r = reflect(-s, norm);
-		total += Lights[i].Intensity * (Material.Ka + Material.Kd * max(dot(s, norm), 0.0) + Material.Ks * pow (max(dot(r,v) 0.0), Material.Shine));
+		total += 
+        Lights[i].Intensity * ( Material.Ka +
+            Material.Kd * max( dot(s, norm), 0.0 ) +
+            Material.Ks * pow( max( dot(r,v), 0.0 ), Material.Shine ) );
 	}
 	return total;
 }
@@ -83,7 +86,7 @@ void pass2()
 
 	xyzCol.x = (L * xyYCol.x) / (xyYCol.y);
 	xyzCol.y = L;
-	yexCol.z = (L * (1 - xyYCol.x - xyYCol.y))/xyYCol.y;
+	xyzCol.z = (L * (1 - xyYCol.x - xyYCol.y))/xyYCol.y;
 
 	if (DoToneMap)
 		FragColor = vec4(xyz2rgb * xyzCol, 1.0);

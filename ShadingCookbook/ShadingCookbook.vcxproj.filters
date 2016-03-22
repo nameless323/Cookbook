@@ -1035,6 +1035,12 @@
     <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Items\Sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1176,6 +1182,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Items\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1884,5 +1896,7 @@
     <None Include="Shaders\EdgeOutliner\EdgeOutliner.frag" />
     <None Include="Shaders\GaussianBlur\GaussianBlur.vert" />
     <None Include="Shaders\GaussianBlur\GaussianBlur.frag" />
+    <None Include="Shaders\Tonemapping\Tonemapping.vert" />
+    <None Include="Shaders\Tonemapping\Tonemapping.frag" />
   </ItemGroup>
 </Project>

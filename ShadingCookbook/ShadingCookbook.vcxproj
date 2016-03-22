@@ -467,6 +467,7 @@
     <ClInclude Include="Source\Items\IDrawable.h" />
     <ClInclude Include="Source\Items\Mesh.h" />
     <ClInclude Include="Source\Items\Plane.h" />
+    <ClInclude Include="Source\Items\Sphere.h" />
     <ClInclude Include="Source\Items\Teapot.h" />
     <ClInclude Include="Source\Items\TeapotData.h" />
     <ClInclude Include="Source\Items\Torus.h" />
@@ -492,6 +493,7 @@
     <ClInclude Include="Source\Scene\Chapter4\TextureScene.h" />
     <ClInclude Include="Source\Scene\Chapter5\EdgeOutliner.h" />
     <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h" />
+    <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -520,6 +522,7 @@
     <ClCompile Include="Source\Items\Cube.cpp" />
     <ClCompile Include="Source\Items\Mesh.cpp" />
     <ClCompile Include="Source\Items\Plane.cpp" />
+    <ClCompile Include="Source\Items\Sphere.cpp" />
     <ClCompile Include="Source\Items\Teapot.cpp" />
     <ClCompile Include="Source\Items\Torus.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\DiffuseScene.cpp" />
@@ -544,6 +547,7 @@
     <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\EdgeOutliner.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp" />
+    <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -813,6 +817,8 @@
     <None Include="Shaders\Subroutine\Subroutine.vert" />
     <None Include="Shaders\TexDiscard\TexDiscard.frag" />
     <None Include="Shaders\TexDiscard\TexDiscard.vert" />
+    <None Include="Shaders\Tonemapping\Tonemapping.frag" />
+    <None Include="Shaders\Tonemapping\Tonemapping.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
     <None Include="Shaders\Uniforms\Blob.vert" />
   </ItemGroup>

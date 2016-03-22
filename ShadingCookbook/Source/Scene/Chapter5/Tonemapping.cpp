@@ -236,7 +236,7 @@ void Tonemapping::ComputeAveLuminance()
 void Tonemapping::Shutdown()
 {
 	delete _plane;
-	delete _torus;
+	delete _sphere;
 	delete _teapot;
 	//del framebufs and renderbufs
 }
