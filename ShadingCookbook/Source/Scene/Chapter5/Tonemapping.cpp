@@ -6,7 +6,7 @@
 #include "../../Core/TGA.h"
 using glm::vec3;
 
-Tonemapping::Tonemapping() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _rotationSpeed(glm::pi<float>() / 8.0f), _width(1024), _height(768)
+Tonemapping::Tonemapping() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _rotationSpeed(glm::pi<float>() / 8.0f), _width(1024), _height(768), _doToneMap(true)
 {
 }
 
@@ -14,6 +14,8 @@ void Tonemapping::ProcessInput(int key, int action)
 {
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 		_autorotate = !_autorotate;
+	if (key == GLFW_KEY_T && action == GLFW_PRESS)
+		_doToneMap = !_doToneMap;
 
 	if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
 	{
@@ -91,6 +93,7 @@ void Tonemapping::InitScene()
 
 void Tonemapping::Render()
 {
+	glUniform1i(5, _doToneMap);
 	Pass1();
 	ComputeAveLuminance();
 	Pass2();

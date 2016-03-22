@@ -49,7 +49,7 @@ uniform mat3 xyz2rgb = mat3
 
 uniform float Exposiure = 0.35;
 uniform float White = 0.928;
-uniform bool DoToneMap = true;
+layout (location = 5) uniform bool DoToneMap = true;
 
 vec3 ads (vec3 pos, vec3 norm)
 {

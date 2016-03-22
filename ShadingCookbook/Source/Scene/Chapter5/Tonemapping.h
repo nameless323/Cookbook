@@ -48,6 +48,7 @@ private:
 	bool _autorotate;
 	bool _rotateLeft;
 	bool _rotateRight;
+	bool _doToneMap;
 
 	void SetMatrices();
 	void CompileAndLinkShader();
