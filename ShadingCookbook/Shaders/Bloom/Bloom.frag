@@ -112,3 +112,27 @@ vec4 pass4()
 	}
 	return sum;
 }
+
+subroutine(RenderPassType)
+vec4 pass5()
+{
+	vec4 color = texture(HdrTex, TexCoord);
+	vec3 xyzCol = rgb2xyz * color;
+
+	float xyzSum = xyzCol.x + xyzCol.y + xyzCol.z;
+	vec3 xyYCol = vec3(xyzCol.x / xyzSum, xyzCol.y / xyzSum, xyzCol.y);
+
+	float L = (Exposure * xyYCol.z) / AveLum;
+	L = (L * (1 - xyYCol.x - xyYCol.y))/xyYCol.y;
+
+	vec4 toneMapColor = vec4(xyz2rgb * xyzCol, 1.0);
+
+	vec4 blurTex = texture(BlurTex1, TexCoord);
+
+	return toneMapColor + blurTex;
+}
+
+void main()
+{
+	FragCoolor = RenderPass();
+}
