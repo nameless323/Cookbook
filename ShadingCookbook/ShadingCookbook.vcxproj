@@ -772,6 +772,8 @@
     <None Include="Include\glm\gtx\vector_angle.inl" />
     <None Include="Include\glm\gtx\vector_query.inl" />
     <None Include="Include\glm\gtx\wrap.inl" />
+    <None Include="Shaders\Bloom\Bloom.frag" />
+    <None Include="Shaders\Bloom\Bloom.vert" />
     <None Include="Shaders\Celshading\Celshading.frag" />
     <None Include="Shaders\Celshading\Celshading.vert" />
     <None Include="Shaders\Ch1\basic.frag" />

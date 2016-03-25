@@ -41,8 +41,12 @@ void Bloom::InitScene()
 
 	_projection = mat4(1.0f);
 	_angle = glm::pi<float>() / 2.0f;
-
-
+	
+	vec3 intens = vec3(0.6f);
+	_shader.SetUniform("Lights[0].Intensity", intens);
+	_shader.SetUniform("Lights[1].Intensity", intens);
+	_shader.SetUniform("Lights[2].Intensity", intens);
+	
 	GLfloat verts[] =
 	{
 		-1.0f, -1.0f, 0.0f,
@@ -83,20 +87,59 @@ void Bloom::InitScene()
 	GLuint shaderHandle = _shader.GetHandle();
 	_pass1Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass1");
 	_pass2Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass2");
+	_pass3Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass3");
+	_pass4Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass4");
+	_pass5Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass5");
 
-	vec3 intens = vec3(0.6f);
-	_shader.SetUniform("Lights[0].Intensity", intens);
-	_shader.SetUniform("Lights[1].Intensity", intens);
-	_shader.SetUniform("Lights[2].Intensity", intens);
+	_shader.SetUniform("LumThresh", 1.7f);
 
+	float weights[10], sum, sigma2 = 25.0f;
+
+	weights[0] = Gauss(0, sigma2);
+	sum = weights[0];
+	for (int i = 1; i < 10; i++) {
+		weights[i] = Gauss(float(i), sigma2);
+		sum += 2 * weights[i];
+	}
+
+	for (int i = 0; i < 10; i++) {
+		std::stringstream uniName;
+		uniName << "Weight[" << i << "]";
+		float val = weights[i] / sum;
+		_shader.SetUniform(uniName.str().c_str(), val);
+	}
+
+	GLuint samplers[2];
+	glGenSamplers(2, samplers);
+	_linearSampler = samplers[0];
+	_nearestSampler = samplers[1];
+
+	GLfloat border[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	glSamplerParameteri(_nearestSampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glSamplerParameteri(_nearestSampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glSamplerParameteri(_nearestSampler, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glSamplerParameteri(_nearestSampler, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glSamplerParameterfv(_nearestSampler, GL_TEXTURE_BORDER_COLOR, border);
+
+	glSamplerParameteri(_linearSampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glSamplerParameteri(_linearSampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glSamplerParameteri(_linearSampler, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glSamplerParameteri(_linearSampler, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glSamplerParameterfv(_linearSampler, GL_TEXTURE_BORDER_COLOR, border);
+
+	glBindSampler(0, _nearestSampler);
+	glBindSampler(1, _nearestSampler);
+	glBindSampler(2, _nearestSampler);
 }
 
 void Bloom::Render()
 {
-	glUniform1i(5, _doToneMap);
 	Pass1();
 	ComputeAveLuminance();
 	Pass2();
+	Pass3();
+	Pass4();
+	Pass5();
 }
 
 void Bloom::Update(float t)
@@ -131,8 +174,26 @@ void Bloom::SetupFBO()
 
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth);
 
-	GLenum drawBuffers[] = { GL_NONE, GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(2, drawBuffers);
+	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
+	glDrawBuffers(1, drawBuffers);
+
+
+	glGenFramebuffers(1, &_blurFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, _blurFBO);
+
+	glGenTextures(1, &_tex1);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, _tex1);
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGB32F, _bloomBufWidth, _bloomBufHeight);
+
+	glGenTextures(1, &_tex2);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, _tex2);
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGB32F, _bloomBufWidth, _bloomBufHeight);
+
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _tex1, 0);
+	glDrawBuffers(1, drawBuffers);
+
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -170,6 +231,30 @@ void Bloom::Pass2()
 	glBindVertexArray(_fsQuad);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
+
+void Bloom::Pass3()
+{
+	
+}
+
+void Bloom::Pass4()
+{
+	
+}
+
+void Bloom::Pass5()
+{
+	
+}
+
+
+float Bloom::Gauss(float x, float sigma2)
+{
+	double coeff = 1.0 / (glm::two_pi<double>() * sigma2);
+	double expon = -(x*x) / (2.0 * sigma2);
+	return (float)(coeff * exp(expon));
+}
+
 
 void Bloom::DrawScene()
 {

@@ -32,11 +32,22 @@ private:
 	Sphere* _sphere;
 
 	GLuint _hdrFBO;
+	GLuint _blurFBO;
 	GLuint _fsQuad;
 	GLuint _hdrTex;
-	GLuint _avgTex;
+	GLuint _tex1;
+	GLuint _tex2;
+	GLuint _linearSampler;
+	GLuint _nearestSampler;
 	GLuint _pass1Index;
 	GLuint _pass2Index;
+	GLuint _pass3Index;
+	GLuint _pass4Index;
+	GLuint _pass5Index;
+
+	GLuint _bloomBufWidth;
+	GLuint _bloomBufHeight;
+
 
 	mat4 _model;
 	mat4 _view;
@@ -55,6 +66,10 @@ private:
 	void SetupFBO();
 	void Pass1();
 	void Pass2();
+	void Pass3();
+	void Pass4();
+	void Pass5();
+	float Gauss(float x, float sigma2);
 	void ComputeAveLuminance();
 	void DrawScene();
 };

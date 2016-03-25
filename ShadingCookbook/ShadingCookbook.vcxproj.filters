@@ -1904,5 +1904,7 @@
     <None Include="Shaders\GaussianBlur\GaussianBlur.frag" />
     <None Include="Shaders\Tonemapping\Tonemapping.vert" />
     <None Include="Shaders\Tonemapping\Tonemapping.frag" />
+    <None Include="Shaders\Bloom\Bloom.vert" />
+    <None Include="Shaders\Bloom\Bloom.frag" />
   </ItemGroup>
 </Project>
