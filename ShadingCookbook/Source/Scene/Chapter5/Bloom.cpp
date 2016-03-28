@@ -217,10 +217,14 @@ void Bloom::Pass1()
 
 void Bloom::Pass2()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass2Index);
+	glBindFramebuffer(GL_FRAMEBUFFER, _blurFBO);
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _tex1, 0);
+
+    glDisable(GL_DEPTH_TEST);
+    glClearColor(0, 0, 0, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
 	glDisable(GL_DEPTH_TEST);
 
 	_model = mat4(1.0f);
@@ -230,21 +234,39 @@ void Bloom::Pass2()
 
 	glBindVertexArray(_fsQuad);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+    glFinish();
 }
 
 void Bloom::Pass3()
 {
-	
+    glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass3Index);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _tex2, 0);
+
+    glBindVertexArray(_fsQuad);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void Bloom::Pass4()
 {
-	
+    glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass4Index);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _tex1, 0);
+
+    glBindVertexArray(_fsQuad);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void Bloom::Pass5()
 {
-	
+    glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass5Index);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glViewport(0, 0, _width, _height);
+
+    glBindSampler(1, _linearSampler);
+    glBindVertexArray(_fsQuad);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glBindSampler(1, _nearestSampler);
 }
 
 
