@@ -6,7 +6,7 @@
 #include "../../Core/TGA.h"
 using glm::vec3;
 
-Bloom::Bloom() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _rotationSpeed(glm::pi<float>() / 8.0f), _width(1024), _height(768), _doToneMap(true)
+Bloom::Bloom() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _rotationSpeed(glm::pi<float>() / 8.0f), _width(1024), _height(768), _doToneMap(true), _bloomBufWidth(_width/8), _bloomBufHeight(_width/8)
 {
 }
 
@@ -32,7 +32,7 @@ void Bloom::ProcessInput(int key, int action)
 void Bloom::InitScene()
 {
 	CompileAndLinkShader();
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 
 	_plane = new Plane(20.0f, 10.0f, 1, 1);
@@ -97,12 +97,14 @@ void Bloom::InitScene()
 
 	weights[0] = Gauss(0, sigma2);
 	sum = weights[0];
-	for (int i = 1; i < 10; i++) {
+	for (int i = 1; i < 10; i++) 
+    {
 		weights[i] = Gauss(float(i), sigma2);
 		sum += 2 * weights[i];
 	}
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 10; i++) 
+    {
 		std::stringstream uniName;
 		uniName << "Weight[" << i << "]";
 		float val = weights[i] / sum;
@@ -160,10 +162,9 @@ void Bloom::SetupFBO()
 	glBindFramebuffer(GL_FRAMEBUFFER, _hdrFBO);
 
 	glGenTextures(1, &_hdrTex);
+    glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _hdrTex);
 	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGB32F, _width, _height);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _hdrTex, 0);
 
@@ -222,6 +223,7 @@ void Bloom::Pass2()
 
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _tex1, 0);
 
+    glViewport(0, 0, _bloomBufWidth, _bloomBufHeight);
     glDisable(GL_DEPTH_TEST);
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -372,8 +374,8 @@ void Bloom::CompileAndLinkShader()
 {
 	try
 	{
-		_shader.CompileShader("Shaders/Tonemapping/Tonemapping.vert");
-		_shader.CompileShader("Shaders/Tonemapping/Tonemapping.frag");
+		_shader.CompileShader("Shaders/Bloom/Bloom.vert");
+		_shader.CompileShader("Shaders/Bloom/Bloom.frag");
 		_shader.Link();
 		_shader.Validate();
 		_shader.Use();

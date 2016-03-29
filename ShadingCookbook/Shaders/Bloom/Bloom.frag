@@ -10,7 +10,7 @@ layout (binding = 2) uniform sampler2D BlurTex2;
 
 uniform float LumThresh;
 
-subroutine vec4 RenderPassType;
+subroutine vec4 RenderPassType();
 subroutine uniform RenderPassType RenderPass;
 
 struct LightInfo
@@ -59,7 +59,8 @@ vec3 ads( vec3 pos, vec3 norm )
     vec3 v = normalize(vec3(-pos));
     vec3 total = vec3(0.0f, 0.0f, 0.0f);
 
-    for( int i = 0; i < 3; i++ ) {
+    for( int i = 0; i < 3; i++ ) 
+    {
       vec3 s = normalize( vec3(Lights[i].Position) - pos) ;
       vec3 r = reflect( -s, norm );
 
@@ -107,8 +108,8 @@ vec4 pass4()
 	vec4 sum = texture(BlurTex2, TexCoord) * Weight[0];
 	for (int i = 1; i < 10; i++)
 	{
-		sum += texture(BlurTex2, TexCoord + vec2(0.0, PixOffset[i], 0.0) * dx) * Weight[i];
-		sum += texture(BlurTex2, TexCoord - vec2(0.0, PixOffset[i], 0.0) * dx) * Weight[i];
+		sum += texture(BlurTex2, TexCoord + vec2(PixOffset[i]) * dx, 0.0) * Weight[i];
+		sum += texture(BlurTex2, TexCoord - vec2(PixOffset[i]) * dx, 0.0) * Weight[i];
 	}
 	return sum;
 }
@@ -117,13 +118,17 @@ subroutine(RenderPassType)
 vec4 pass5()
 {
 	vec4 color = texture(HdrTex, TexCoord);
-	vec3 xyzCol = rgb2xyz * color;
+	vec3 xyzCol = rgb2xyz * color.xyz;
 
 	float xyzSum = xyzCol.x + xyzCol.y + xyzCol.z;
 	vec3 xyYCol = vec3(xyzCol.x / xyzSum, xyzCol.y / xyzSum, xyzCol.y);
 
 	float L = (Exposure * xyYCol.z) / AveLum;
 	L = (L * (1 - xyYCol.x - xyYCol.y))/xyYCol.y;
+
+	xyzCol.x = (L * xyYCol.x) / xyYCol.y;
+	xyzCol.y = L;
+	xyzCol.z = (L * (1 - xyYCol.x - xyYCol.y))/xyYCol.y;
 
 	vec4 toneMapColor = vec4(xyz2rgb * xyzCol, 1.0);
 
