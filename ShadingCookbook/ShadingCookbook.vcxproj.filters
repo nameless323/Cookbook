@@ -1906,5 +1906,7 @@
     <None Include="Shaders\Tonemapping\Tonemapping.frag" />
     <None Include="Shaders\Bloom\Bloom.vert" />
     <None Include="Shaders\Bloom\Bloom.frag" />
+    <None Include="Shaders\GammaCorrection\GammaCorrection.vert" />
+    <None Include="Shaders\GammaCorrection\GammaCorrection.frag" />
   </ItemGroup>
 </Project>
