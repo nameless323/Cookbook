@@ -1044,6 +1044,9 @@
     <ClInclude Include="Source\Scene\Chapter5\Bloom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter5\GammaCorrection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1194,6 +1197,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter5\Bloom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter5\GammaCorrection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

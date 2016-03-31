@@ -493,6 +493,7 @@
     <ClInclude Include="Source\Scene\Chapter4\TextureScene.h" />
     <ClInclude Include="Source\Scene\Chapter5\Bloom.h" />
     <ClInclude Include="Source\Scene\Chapter5\EdgeOutliner.h" />
+    <ClInclude Include="Source\Scene\Chapter5\GammaCorrection.h" />
     <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h" />
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
@@ -548,6 +549,7 @@
     <ClCompile Include="Source\Scene\Chapter4\TextureScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\Bloom.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\EdgeOutliner.cpp" />
+    <ClCompile Include="Source\Scene\Chapter5\GammaCorrection.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
     <ClCompile Include="stdafx.cpp" />

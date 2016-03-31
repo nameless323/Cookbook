@@ -30,6 +30,7 @@
 #include "Source/Scene/Chapter5/GaussianBlur.h"
 #include "Source/Scene/Chapter5/Tonemapping.h"
 #include "Source/Scene/Chapter5/Bloom.h"
+#include "Source/Scene/Chapter5/GammaCorrection.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -70,7 +71,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Bloom;
+	scene = new GammaCorrection;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
