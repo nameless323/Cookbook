@@ -471,6 +471,7 @@
     <ClInclude Include="Source\Items\Teapot.h" />
     <ClInclude Include="Source\Items\TeapotData.h" />
     <ClInclude Include="Source\Items\Torus.h" />
+    <ClInclude Include="Source\Scene\Chapter10\Particles.h" />
     <ClInclude Include="Source\Scene\Chapter2\DiffuseScene.h" />
     <ClInclude Include="Source\Scene\Chapter2\DirectionalPhong.h" />
     <ClInclude Include="Source\Scene\Chapter2\Discarding.h" />
@@ -527,6 +528,7 @@
     <ClCompile Include="Source\Items\Sphere.cpp" />
     <ClCompile Include="Source\Items\Teapot.cpp" />
     <ClCompile Include="Source\Items\Torus.cpp" />
+    <ClCompile Include="Source\Scene\Chapter10\Particles.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\DiffuseScene.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\DirectionalPhong.cpp" />
     <ClCompile Include="Source\Scene\Chapter2\Discarding.cpp" />
