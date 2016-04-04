@@ -1920,5 +1920,8 @@
     <None Include="Shaders\Bloom\Bloom.frag" />
     <None Include="Shaders\GammaCorrection\GammaCorrection.vert" />
     <None Include="Shaders\GammaCorrection\GammaCorrection.frag" />
+    <None Include="Shaders\Particles\Particles.vert" />
+    <None Include="Shaders\Particles\Particles.frag" />
+    <None Include="Shaders\Particles\Particles.cs" />
   </ItemGroup>
 </Project>

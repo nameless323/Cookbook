@@ -808,6 +808,9 @@
     <None Include="Shaders\Multilight\Multilight.vert" />
     <None Include="Shaders\NormalMapping\NormalMapping.frag" />
     <None Include="Shaders\NormalMapping\NormalMapping.vert" />
+    <None Include="Shaders\Particles\Particles.cs" />
+    <None Include="Shaders\Particles\Particles.frag" />
+    <None Include="Shaders\Particles\Particles.vert" />
     <None Include="Shaders\Phong\Phong.frag" />
     <None Include="Shaders\Phong\Phong.vert" />
     <None Include="Shaders\Phong\PhongBackface.frag" />
