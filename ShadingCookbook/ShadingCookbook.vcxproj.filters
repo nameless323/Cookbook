@@ -1923,5 +1923,8 @@
     <None Include="Shaders\Particles\Particles.vert" />
     <None Include="Shaders\Particles\Particles.frag" />
     <None Include="Shaders\Particles\Particles.cs" />
+    <None Include="Shaders\ADS\ADS.vert" />
+    <None Include="Shaders\ADS\ADS.frag" />
+    <None Include="Shaders\Cloth\Cloth.cs" />
   </ItemGroup>
 </Project>
