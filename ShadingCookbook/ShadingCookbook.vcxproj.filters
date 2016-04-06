@@ -1050,6 +1050,9 @@
     <ClInclude Include="Source\Scene\Chapter10\Particles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter10\Cloth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1206,6 +1209,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter10\Particles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter10\Cloth.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
