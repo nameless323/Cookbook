@@ -1,10 +1,8 @@
 #include "Cloth.h"
 #include <gtx/transform.hpp>
 #include <iostream>
-#include <GLFW/glfw3.h>
-#include "../../Core/TGA.h"
 #include <vector>
-#include "../../../ingredients/tgaio.h"
+#include "../../Core/TGA.h"
 using glm::vec3;
 using std::vector;
 #define PRIM_RESTART 0xffffff
@@ -119,6 +117,57 @@ void Cloth::InitBuffers()
         }
         el.push_back(PRIM_RESTART);
     }
+
+    GLuint bufs[7];
+    glGenBuffers(7, bufs);
+    _posBufs[0] = bufs[0];
+    _posBufs[1] = bufs[1];
+    _velBufs[0] = bufs[2];
+    _velBufs[1] = bufs[3];
+    _normBuf = bufs[4];
+    _elBuf = bufs[5];
+    _tcBuf = bufs[6];
+
+    GLuint parts = _numParticles.x * _numParticles.y;
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _posBufs[0]);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, parts * 4 * sizeof(GLfloat), &initPos[0], GL_DYNAMIC_DRAW);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, _posBufs[1]);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, parts * 4 * sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
+
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, _velBufs[0]);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, parts * 4 * sizeof(GLfloat), &initVel[0], GL_DYNAMIC_COPY);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, _velBufs[1]);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, parts * 4 * sizeof(GLfloat), nullptr, GL_DYNAMIC_COPY);
+
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 4, _normBuf);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, parts * 4 * sizeof(GLfloat), nullptr, GL_DYNAMIC_COPY);
+
+    glBindBuffer(GL_ARRAY_BUFFER, _elBuf);
+    glBufferData(GL_ARRAY_BUFFER, el.size() * sizeof(GLuint), &el[0], GL_DYNAMIC_COPY);
+
+    glBindBuffer(GL_ARRAY_BUFFER, _tcBuf);
+    glBufferData(GL_ARRAY_BUFFER, initTc.size() * sizeof(GLfloat), &initTc[0], GL_STATIC_DRAW);
+
+    _numElements = GLuint(el.size());
+
+    glGenVertexArrays(1, &_clothVao);
+    glBindVertexArray(_clothVao);
+
+    glBindBuffer(GL_ARRAY_BUFFER, _posBufs[0]);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, _normBuf);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glEnableVertexAttribArray(1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, _tcBuf);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glEnableVertexAttribArray(2);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _elBuf);
+    glBindVertexArray(0);
+
 }
 
 void Cloth::Update(float t)
@@ -162,16 +211,21 @@ void Cloth::CompileAndLinkShader()
 {
     try
     {
-        _shader.CompileShader("Shaders/Particles/Particles.vert");
-        _shader.CompileShader("Shaders/Particles/Particles.frag");
+        _shader.CompileShader("Shaders/ADS/ADS.vert");
+        _shader.CompileShader("Shaders/ADS/ADS.frag");
         _shader.Link();
         _shader.Validate();
         _shader.Use();
 
-        _computeShader.CompileShader("Shaders/Particles/Particles.cs");
+        _computeShader.CompileShader("Shaders/Cloth/Cloth.comp");
         _computeShader.Link();
         _computeShader.Validate();
         _computeShader.Use();
+
+        _computeShaderNorm.CompileShader("Shaders/Cloth/ClothNormal.comp");
+        _computeShaderNorm.Link();
+        _computeShaderNorm.Validate();
+        _computeShaderNorm.Use();
     }
     catch (ShaderProgramException& e)
     {

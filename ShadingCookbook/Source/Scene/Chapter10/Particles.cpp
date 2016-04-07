@@ -179,7 +179,7 @@ void Particles::CompileAndLinkShader()
         _shader.Validate();
         _shader.Use();
 
-        _computeShader.CompileShader("Shaders/Particles/Particles.cs");
+        _computeShader.CompileShader("Shaders/Particles/Particles.comp");
         _computeShader.Link();
         _computeShader.Validate();
         _computeShader.Use();

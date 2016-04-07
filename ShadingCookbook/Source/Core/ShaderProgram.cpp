@@ -26,7 +26,7 @@ namespace ShaderInfo
 		{".tes", Shaders::TESS_EVALUATION},
 		{".fs", Shaders::FRAGMENT},
 		{".frag", Shaders::FRAGMENT},
-		{".cs", Shaders::COMPUTE}
+		{".comp", Shaders::COMPUTE}
 	};
 }
 

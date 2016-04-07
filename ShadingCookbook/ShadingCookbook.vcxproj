@@ -786,7 +786,8 @@
     <None Include="Shaders\Celshading\Celshading.vert" />
     <None Include="Shaders\Ch1\basic.frag" />
     <None Include="Shaders\Ch1\basic.vert" />
-    <None Include="Shaders\Cloth\Cloth.cs" />
+    <None Include="Shaders\Cloth\Cloth.comp" />
+    <None Include="Shaders\Cloth\ClothNormal.comp" />
     <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.frag" />
     <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.vert" />
     <None Include="Shaders\Cubemap\CubemapRefract\CubemapRefract.frag" />
@@ -813,7 +814,7 @@
     <None Include="Shaders\Multilight\Multilight.vert" />
     <None Include="Shaders\NormalMapping\NormalMapping.frag" />
     <None Include="Shaders\NormalMapping\NormalMapping.vert" />
-    <None Include="Shaders\Particles\Particles.cs" />
+    <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Particles\Particles.frag" />
     <None Include="Shaders\Particles\Particles.vert" />
     <None Include="Shaders\Phong\Phong.frag" />
