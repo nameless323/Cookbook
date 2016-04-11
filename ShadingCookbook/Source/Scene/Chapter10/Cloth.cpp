@@ -26,29 +26,29 @@ void Cloth::InitScene()
     _projection = glm::perspective(glm::radians(50.0f), (float)_width / _height, 1.0f, 100.0f);
 
     _shader.Use();
-    _shader.SetUniform("LightPosition", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-    _shader.SetUniform("LightIntensity", glm::vec3(1.0f));
-    _shader.SetUniform("Kd", glm::vec3(0.8f));
-    _shader.SetUniform("Ka", glm::vec3(0.2f));
-    _shader.SetUniform("Ks", glm::vec3(0.2f));
+    _shader.SetUniform("LightPosition", vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    _shader.SetUniform("LightIntensity", vec3(1.0f));
+    _shader.SetUniform("Kd", vec3(0.8f));
+    _shader.SetUniform("Ka", vec3(0.2f));
+    _shader.SetUniform("Ks", vec3(0.2f));
     _shader.SetUniform("Shininess", 80.0f);
 
     _computeShader.Use();
-    float dx = _clothSize.x / (_numParticles.x - 1);
-    float dy = _clothSize.y / (_numParticles.y - 1);
+    float dx = (float)_clothSize.x / (_numParticles.x - 1);
+    float dy = (float)_clothSize.y / (_numParticles.y - 1);
     _computeShader.SetUniform("RestLengthHoriz", dx);
     _computeShader.SetUniform("RestLengthVert", dy);
     _computeShader.SetUniform("RestLengthDiag", sqrtf(dx * dx + dy * dy));
 
     glActiveTexture(GL_TEXTURE0);
-    TGA::LoadTex("../media/texture/me_textile.tga");
+    TGA::LoadTex("./media/texture/me_textile.tga");
 
 }
 
 void Cloth::Render()
 {
     _computeShader.Use();
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 1000; i++) 
     {
         glDispatchCompute(_numParticles.x / 10, _numParticles.y / 10, 1);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
@@ -56,9 +56,10 @@ void Cloth::Render()
         _readBuf = 1 - _readBuf;
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _posBufs[_readBuf]);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, _posBufs[1 - _readBuf]);
-        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, _posBufs[_readBuf]);
-        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, _posBufs[1 - _readBuf]);
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, _velBufs[_readBuf]);
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, _velBufs[1 - _readBuf]);
     }
+
     _computeShaderNorm.Use();
     glDispatchCompute(_numParticles.x / 10, _numParticles.y / 10, 1);
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
@@ -83,8 +84,8 @@ void Cloth::InitBuffers()
     vector<GLfloat> initPos;
     vector<GLfloat> initVel(_numParticles.x * _numParticles.y * 4, 0.0f);
     vector<float> initTc;
-    float dx = _clothSize.x / (_numParticles.x - 1);
-    float dy = _clothSize.y / (_numParticles.y - 1);
+    float dx = (float)_clothSize.x / (_numParticles.x - 1);
+    float dy = (float)_clothSize.y / (_numParticles.y - 1);
     float ds = 1.0f / (_numParticles.x - 1);
     float dt = 1.0f / (_numParticles.y - 1);
     vec4 p(0.0f, 0.0f, 0.0f, 1.0f);
@@ -129,6 +130,7 @@ void Cloth::InitBuffers()
     _tcBuf = bufs[6];
 
     GLuint parts = _numParticles.x * _numParticles.y;
+
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _posBufs[0]);
     glBufferData(GL_SHADER_STORAGE_BUFFER, parts * 4 * sizeof(GLfloat), &initPos[0], GL_DYNAMIC_DRAW);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, _posBufs[1]);

@@ -7,7 +7,7 @@ uniform float ParticleMass = 0.1;
 uniform float ParticleInvMass = 1.0/0.1;
 uniform float SpringK = 2000.0;
 uniform float RestLengthHoriz;
-uniform float RestLenghtVert;
+uniform float RestLengthVert;
 uniform float RestLengthDiag;
 uniform float DeltaT = 0.000005;
 uniform float DampingConst = 0.1;
@@ -46,12 +46,12 @@ void main()
 	if (gl_GlobalInvocationID.y < nParticles.y - 1)
 	{
 		r = PositionIn[idx + nParticles.x].xyz - p;
-		force += normalize(r) * SpringK * (length(r) - RestLenghtVert);
+		force += normalize(r) * SpringK * (length(r) - RestLengthVert);
 	}
 	if (gl_GlobalInvocationID.y > 0)
 	{
 		r = PositionIn[idx - nParticles.x].xyz - p;
-		force += normalize(r) * SpringK * (length(r) - RestLenghtVert);
+		force += normalize(r) * SpringK * (length(r) - RestLengthVert);
 	}
 	if (gl_GlobalInvocationID.x > 0)
 	{
