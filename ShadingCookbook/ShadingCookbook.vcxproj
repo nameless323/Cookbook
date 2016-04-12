@@ -800,6 +800,9 @@
     <None Include="Shaders\Discarding\Discarding.vert" />
     <None Include="Shaders\DualTex\DualTex.frag" />
     <None Include="Shaders\DualTex\DualTex.vert" />
+    <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.comp" />
+    <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.frag" />
+    <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.vert" />
     <None Include="Shaders\EdgeOutliner\EdgeOutliner.frag" />
     <None Include="Shaders\EdgeOutliner\EdgeOutliner.vert" />
     <None Include="Shaders\Flat\Flat.frag" />

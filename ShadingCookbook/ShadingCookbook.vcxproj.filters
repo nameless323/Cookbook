@@ -1933,5 +1933,8 @@
     <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Cloth\Cloth.comp" />
     <None Include="Shaders\Cloth\ClothNormal.comp" />
+    <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.vert" />
+    <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.frag" />
+    <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.comp" />
   </ItemGroup>
 </Project>
