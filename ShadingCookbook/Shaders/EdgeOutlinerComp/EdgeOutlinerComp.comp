@@ -30,4 +30,76 @@ void applyFilter()
 
 void main()
 {
+	uvec2 gSize = gl_WorkGroupSize.xy * gl_NumWorkGroups.xy;
+	localData[gl_LocalInvocationID.x + 1][gl_LocalInvocationID.y + 1] =
+		luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy)).rgb);
+
+	if (gl_LocalInvocationID.y == 0)
+	{
+		if (gl_GlobalInvocationID.y > 0)
+		{
+			localData[gl_LocalInvocationID.x + 1][0] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(0, -1)).rgb);
+			if (gl_LocalInvocationID.x == 0)
+			{
+				if (gl_GlobalInvocationID.x > 0)
+				{
+					localData[0][0] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(-1, -1)).rgb);
+				}
+				else
+					localData[0][0] = 0.0;					
+			}
+			if (gl_LocalInvocationID.x == gl_WorkGroupSize.x - 1)
+			{
+				if(gl_GlobalInvocationID.x < gSize.x - 1)
+					localData[gl_WorkGroupSize.x + 1][0] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(1, -1)).rgb);
+				else
+					localData[gl_WorkGroupSize.x + 1][0] = 0.0;
+			}
+		}
+	}
+	else
+		localData[gl_LocalInvocationID.x + 1][0] = 0.0;
+
+	if (gl_LocalInvocationID.y == gl_WorkGroupSize.y - 1)
+	{
+		if (gl_GlobalInvocationID.y < gSize.y - 1)
+		{
+			localData[gl_LocalInvocationID.x + 1][gl_WorkGroupSize.y + 1] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(0, 1)).rgb);
+		
+			if (gl_LocalInvocationID.x == 0)
+			{
+				if (gl_GlobalInvocationID.x > 0)
+					localData[0][gl_WorkGroupSize.y + 1] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(-1, 1)).rgb);
+				else
+					localData[0][gl_WorkGroupSize.y + 1] = 0.0;
+			}
+			if (gl_LocalInvocationID.x == gl_WorkGroupSize.x - 1)
+			{
+				if (gl_GlobalInvocationID.x < gSize.x - 1)
+					localData[gl_WorkGroupSize.x + 1][gl_WorkGroupSize.y + 1] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(1, 1)).rgb);
+				else
+					localData[gl_WorkGroupSize.x + 1][gl_WorkGroupSize.y + 1] = 0.0;
+			}
+		}
+		else
+			localData[gl_LocalInvocationID.x + 1][gl_WorkGroupSize.y + 1] = 0.0;
+	}
+
+	if (gl_LocalInvocationID.x == 0)
+	{
+		if (gl_GlobalInvocationID.x > 0)
+			localData[0][gl_LocalInvocationID.y + 1] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(-1, 0)).rgb);
+		else
+			localData[0][gl_LocalInvocationID.y + 1] = 0.0;
+	}
+
+	if (gl_LocalInvocationID.x == gl_WorkGroupSize.x - 1)
+	{
+		if (gl_GlobalInvocationID.x < gSize.x - 1)
+			localData[gl_WorkGroupSize.x + 1][gl_LocalInvocationID.y + 1] = luminance(imageLoad(InputImg, ivec2(gl_GlobalInvocationID.xy) + ivec2(1, 0)).rgb);
+		else
+			localData[gl_WorkGroupSize.x + 1][gl_LocalInvocationID.y + 1] = 0.0;
+	}
+	barrier();
+	applyFilter();
 }
