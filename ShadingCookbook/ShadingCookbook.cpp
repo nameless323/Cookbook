@@ -34,6 +34,7 @@
 #include "Source/Scene/Chapter10/Particles.h"
 #include "Source/Scene/Chapter10/Cloth.h"
 #include "Source/Scene/Chapter10/EdgeOutlinerComp.h"
+#include "Source/Scene/Chapter10/Mandelbrot.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -74,7 +75,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new EdgeOutlinerComp;
+	scene = new Mandelbrot;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
