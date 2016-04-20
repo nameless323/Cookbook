@@ -796,6 +796,8 @@
     <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.vert" />
     <None Include="Shaders\Cubemap\CubemapRefract\CubemapRefract.frag" />
     <None Include="Shaders\Cubemap\CubemapRefract\CubemapRefract.vert" />
+    <None Include="Shaders\Deferred\Deferred.frag" />
+    <None Include="Shaders\Deferred\Deferred.vert" />
     <None Include="Shaders\Diffuse\Diffuse.frag" />
     <None Include="Shaders\Diffuse\Diffuse.vert" />
     <None Include="Shaders\DirectionalPhong\DirectionalPhong.frag" />

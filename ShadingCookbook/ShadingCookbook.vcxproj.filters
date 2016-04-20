@@ -1949,5 +1949,7 @@
     <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.frag" />
     <None Include="Shaders\EdgeOutlinerComp\EdgeOutlinerComp.comp" />
     <None Include="Shaders\Mandelbrot\Mandelbrot.comp" />
+    <None Include="Shaders\Deferred\Deferred.vert" />
+    <None Include="Shaders\Deferred\Deferred.frag" />
   </ItemGroup>
 </Project>
