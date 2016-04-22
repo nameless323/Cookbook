@@ -25,7 +25,7 @@ private:
     ShaderProgram _shader;
     int _width, _height;
     GLuint _deferredFBO;
-    GLuint _quad, _pass1Index, _pass2Index;
+    GLuint _quadVAO, _pass1Index, _pass2Index;
 
     Plane* _plane;
     Torus* _torus;

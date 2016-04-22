@@ -31,6 +31,7 @@
 #include "Source/Scene/Chapter5/Tonemapping.h"
 #include "Source/Scene/Chapter5/Bloom.h"
 #include "Source/Scene/Chapter5/GammaCorrection.h"
+#include "Source/Scene/Chapter5/Deferred.h"
 #include "Source/Scene/Chapter10/Particles.h"
 #include "Source/Scene/Chapter10/Cloth.h"
 #include "Source/Scene/Chapter10/EdgeOutlinerComp.h"
@@ -75,7 +76,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Particles;
+	scene = new Deferred;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

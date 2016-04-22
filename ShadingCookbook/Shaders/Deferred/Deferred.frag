@@ -9,7 +9,7 @@ uniform LightInfo Light;
 
 struct MaterialInfo
 {
-	vec4 Kd;
+	vec3 Kd;
 };
 uniform MaterialInfo Material;
 
@@ -32,7 +32,7 @@ layout (location = 3) out vec3 ColorData;
 vec3 diffuseModel (vec3 pos, vec3 norm, vec3 diff)
 {
 	vec3 s = normalize(vec3(Light.Position) - pos);
-	float sDotN = mat(dot(s, norm), 0.0);
+	float sDotN = max(dot(s, norm), 0.0);
 	vec3 diffuse = Light.Intensity * diff * sDotN;
 
 	return diffuse;
