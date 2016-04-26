@@ -500,6 +500,7 @@
     <ClInclude Include="Source\Scene\Chapter5\EdgeOutliner.h" />
     <ClInclude Include="Source\Scene\Chapter5\GammaCorrection.h" />
     <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h" />
+    <ClInclude Include="Source\Scene\Chapter5\OIT.h" />
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
@@ -561,6 +562,7 @@
     <ClCompile Include="Source\Scene\Chapter5\EdgeOutliner.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\GammaCorrection.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp" />
+    <ClCompile Include="Source\Scene\Chapter5\OIT.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
