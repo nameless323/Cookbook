@@ -1963,5 +1963,7 @@
     <None Include="Shaders\Mandelbrot\Mandelbrot.comp" />
     <None Include="Shaders\Deferred\Deferred.vert" />
     <None Include="Shaders\Deferred\Deferred.frag" />
+    <None Include="Shaders\OIT\OIT.vert" />
+    <None Include="Shaders\OIT\OIT.frag" />
   </ItemGroup>
 </Project>

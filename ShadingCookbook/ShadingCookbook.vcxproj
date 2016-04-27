@@ -828,6 +828,8 @@
     <None Include="Shaders\Multilight\Multilight.vert" />
     <None Include="Shaders\NormalMapping\NormalMapping.frag" />
     <None Include="Shaders\NormalMapping\NormalMapping.vert" />
+    <None Include="Shaders\OIT\OIT.frag" />
+    <None Include="Shaders\OIT\OIT.vert" />
     <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Particles\Particles.frag" />
     <None Include="Shaders\Particles\Particles.vert" />

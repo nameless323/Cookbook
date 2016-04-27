@@ -104,10 +104,81 @@ void OIT::Pass2()
 
 void OIT::DrawScene()
 {
+    _shader.SetUniform("LightPosition", vec4(0, 0, 0, 1));
+    _shader.SetUniform("LightIntensity", vec3(0.9f));
+
+    _shader.SetUniform("Kd", vec4(0.2f, 0.2f, 0.9f, 0.55f));
+    float size = 0.45f;
+    for (int i = 0; i <= 6; i++)
+        for (int j = 0; j <= 6; j++)
+            for (int k = 0; k <= 6; k++) 
+            {
+                if ((i + j + k) % 2 == 0) 
+                {
+                    _model = translate(mat4(1.0f), vec3(i - 3, j - 3, k - 3));
+                    _model = scale(_model, vec3(size));
+                    SetMatrices();
+                    _sphere->Render();
+                }
+            }
+
+    _shader.SetUniform("Kd", vec4(0.9f, 0.2f, 0.2f, 0.4f));
+    size = 2.0f;
+    float pos = 1.75f;
+    _model = translate(mat4(1.0f), vec3(-pos, -pos, pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
+    _model = translate(mat4(1.0f), vec3(-pos, -pos, -pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
+    _model = translate(mat4(1.0f), vec3(-pos, pos, pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
+    _model = translate(mat4(1.0f), vec3(-pos, pos, -pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
+    _model = translate(mat4(1.0f), vec3(pos, pos, pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
+    _model = translate(mat4(1.0f), vec3(pos, pos, -pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
+    _model = translate(mat4(1.0f), vec3(pos, -pos, pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
+    _model = translate(mat4(1.0f), vec3(pos, -pos, -pos));
+    _model = scale(_model, vec3(size));
+    SetMatrices();
+    _cube->Render();
 }
 
 void OIT::InitShaderStorage()
 {
+    glGenBuffers(2, _buffers);
+    GLuint maxNodes = 20 * _width * _height;
+    GLint nodeSize = 5 * sizeof(GLfloat) + sizeof(GLuint);
+
+    glBindBufferBase(GL_ATOMIC_COUNTER_BUFFER, 0, _buffers[COUNTER_BUFFER]);
+    glBufferData(GL_ATOMIC_COUNTER_BUFFER, sizeof(GLuint), nullptr, GL_DYNAMIC_DRAW);
+
+    glGenTextures(1, &_headPtrTex);
+    glBindTexture(GL_TEXTURE_2D, _headPtrTex);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, _width, _height);
+    glBindImageTexture(0, _headPtrTex, 0, GL_FALSE, 0, GL_READ_WRITE, GL_R32UI);
+
+    _shader.SetUniform("MaxNodes", maxNodes);
+
+    vector<GLuint> headPtrClearBuf(_width * _height, 0xffffffff);
+    glGenBuffers(1, &_clearBuf);
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, _clearBuf);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, headPtrClearBuf.size() * sizeof(GLuint), &headPtrClearBuf[0], GL_STATIC_COPY);
 }
 
 void OIT::ClearBuffers()
@@ -157,8 +228,8 @@ void OIT::CompileAndLinkShader()
 {
     try
     {
-        _shader.CompileShader("Shaders/Deferred/Deferred.vert");
-        _shader.CompileShader("Shaders/Deferred/Deferred.frag");
+        _shader.CompileShader("Shaders/OIT/OIT.vert");
+        _shader.CompileShader("Shaders/OIT/OIT.frag");
         _shader.Link();
         _shader.Validate();
         _shader.Use();
