@@ -21,35 +21,33 @@ void OIT::ProcessInput(int key, int action)
 void OIT::InitScene()
 {
     CompileAndLinkShader();
-    glEnable(GL_DEPTH_TEST);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
-    float c = 1.5f;
+    glEnable(GL_DEPTH_TEST);
 
-    _angle = radians(210.0f);
-    _cube = new Cube;
+    _cube = new Cube();
     _sphere = new Sphere(1.0f, 40, 40);
+
+    _angle = glm::radians(210.0f);
+
+    //  glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     InitShaderStorage();
-    
-    GLuint shaderHandle = _shader.GetHandle();
-    _pass1Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass1");
-    _pass2Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass2");
 
-    GLfloat verts[] =
-    {
-        -1.0f, -1.0f, 0.0f,
-        1.0f,  -1.0f, 0.0f,
-        1.0f, 1.0f, 0.0f,
-        -1.0f, -1.0f, 0.0f,
-        1.0f, 1.0f, 0.0f,
-        -1.0f, 1.0f, 0.0f
-    };
+    GLuint programHandle = _shader.GetHandle();
+    _pass1Index = glGetSubroutineIndex(programHandle, GL_FRAGMENT_SHADER, "pass1");
+    _pass2Index = glGetSubroutineIndex(programHandle, GL_FRAGMENT_SHADER, "pass2");
+
+    GLfloat verts[] = { 
+        -1.0f, -1.0f, 0.0f, 
+        1.0f, -1.0f, 0.0f,
+        1.0f, 1.0f, 0.0f, 
+        -1.0f, 1.0f, 0.0f };
     GLuint bufHandle;
     glGenBuffers(1, &bufHandle);
     glBindBuffer(GL_ARRAY_BUFFER, bufHandle);
-    glBufferData(GL_ARRAY_BUFFER, 3 * 4 * sizeof(GLfloat), verts, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 4 * 3 * sizeof(GLfloat), verts, GL_STATIC_DRAW);
 
     glGenVertexArrays(1, &_quadVAO);
     glBindVertexArray(_quadVAO);
@@ -63,6 +61,7 @@ void OIT::InitScene()
 
 void OIT::Render()
 {
+    _shader.Use();
     ClearBuffers();
     Pass1();
     Pass2();
@@ -173,12 +172,16 @@ void OIT::InitShaderStorage()
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, _width, _height);
     glBindImageTexture(0, _headPtrTex, 0, GL_FALSE, 0, GL_READ_WRITE, GL_R32UI);
 
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _buffers[LINKED_LIST_BUFFER]);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, maxNodes * nodeSize, nullptr, GL_DYNAMIC_DRAW);
+
     _shader.SetUniform("MaxNodes", maxNodes);
 
-    vector<GLuint> headPtrClearBuf(_width * _height, 0xffffffff);
+    vector<GLuint> headPtrClearBuf(_width*_height, 0xffffffff);
     glGenBuffers(1, &_clearBuf);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, _clearBuf);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, headPtrClearBuf.size() * sizeof(GLuint), &headPtrClearBuf[0], GL_STATIC_COPY);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, headPtrClearBuf.size() * sizeof(GLuint),
+        &headPtrClearBuf[0], GL_STATIC_COPY);
 }
 
 void OIT::ClearBuffers()
@@ -189,7 +192,8 @@ void OIT::ClearBuffers()
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, _clearBuf);
     glBindTexture(GL_TEXTURE_2D, _headPtrTex);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, GL_RED_INTEGER, GL_UNSIGNED_INT, nullptr);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, GL_RED_INTEGER,
+        GL_UNSIGNED_INT, nullptr);
 }
 
 void OIT::Update(float t)
