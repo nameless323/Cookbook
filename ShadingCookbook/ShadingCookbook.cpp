@@ -36,6 +36,7 @@
 #include "Source/Scene/Chapter10/Cloth.h"
 #include "Source/Scene/Chapter10/EdgeOutlinerComp.h"
 #include "Source/Scene/Chapter10/Mandelbrot.h"
+#include "Source/Scene/Chapter5/OIT.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -76,7 +77,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Deferred;
+	scene = new OIT;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

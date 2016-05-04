@@ -1065,6 +1065,9 @@
     <ClInclude Include="Source\Scene\Chapter5\OIT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Frustum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1236,6 +1239,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter5\OIT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Frustum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1965,5 +1971,7 @@
     <None Include="Shaders\Deferred\Deferred.frag" />
     <None Include="Shaders\OIT\OIT.vert" />
     <None Include="Shaders\OIT\OIT.frag" />
+    <None Include="Shaders\Shadowmapping\Shadowmapping.vert" />
+    <None Include="Shaders\Shadowmapping\Shadowmapping.frag" />
   </ItemGroup>
 </Project>
