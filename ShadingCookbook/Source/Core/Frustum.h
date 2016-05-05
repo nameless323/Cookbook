@@ -46,4 +46,5 @@ private:
 
     mat4 _view;
     mat4 _proj;
+    GLuint _handle[2];
 };
