@@ -18,7 +18,7 @@ uniform sampler2DShadow ShadowMap;
 
 in vec3 Position;
 in vec3 Normal;
-in vec3 ShadowCoord;
+in vec4 ShadowCoord;
 
 layout (location = 0) out vec4 FragColor;
 
