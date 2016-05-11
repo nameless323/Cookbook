@@ -43,13 +43,12 @@ subroutine void RenderPassType();
 subroutine uniform RenderPassType RenderPass;
 
 subroutine (RenderPassType)
-void shaderWithShadow()
+void shadeWithShadow()
 {
 	vec3 ambient = Light.Intensity * Material.Ka;
 	vec3 diffAndSpec = phongModelDiffAndSpec();
 
 	float shadow = textureProj(ShadowMap, ShadowCoord);
-
 	FragColor = vec4(diffAndSpec * shadow + ambient, 1.0);
 	FragColor = pow (FragColor, vec4(1.0/2.2));
 }

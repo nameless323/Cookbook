@@ -76,8 +76,10 @@ void Shadowmapping::Render()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, _width, _height);
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass2Index);
-    glDisable(GL_CULL_FACE);
+//    glDisable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
     DrawScene();
+
 }
 
 

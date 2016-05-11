@@ -1068,6 +1068,9 @@
     <ClInclude Include="Source\Core\Frustum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1242,6 +1245,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Frustum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

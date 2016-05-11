@@ -37,6 +37,7 @@
 #include "Source/Scene/Chapter10/EdgeOutlinerComp.h"
 #include "Source/Scene/Chapter10/Mandelbrot.h"
 #include "Source/Scene/Chapter5/OIT.h"
+#include "Source/Scene/Chapter7/Shadowmapping.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -77,7 +78,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new OIT;
+	scene = new Shadowmapping;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
