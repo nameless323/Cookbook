@@ -161,8 +161,8 @@ void Shadowmapping::CompileAndLinkShader()
 {
     try
     {
-        _shader.CompileShader("Shaders/Shadowmapping/Shadowmapping.vert");
-        _shader.CompileShader("Shaders/Shadowmapping/Shadowmapping.frag");
+        _shader.CompileShader("Shaders/PercentageCloserFiltering/PercentageCloserFiltering.vert");
+        _shader.CompileShader("Shaders/PercentageCloserFiltering/PercentageCloserFiltering.frag");
         _shader.Link();
         _shader.Validate();
         _shader.Use();

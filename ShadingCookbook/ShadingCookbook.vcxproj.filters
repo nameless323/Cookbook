@@ -1979,5 +1979,7 @@
     <None Include="Shaders\OIT\OIT.frag" />
     <None Include="Shaders\Shadowmapping\Shadowmapping.vert" />
     <None Include="Shaders\Shadowmapping\Shadowmapping.frag" />
+    <None Include="Shaders\PercentageCloserFiltering\PercentageCloserFiltering.vert" />
+    <None Include="Shaders\PercentageCloserFiltering\PercentageCloserFiltering.frag" />
   </ItemGroup>
 </Project>
