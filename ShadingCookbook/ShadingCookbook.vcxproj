@@ -827,6 +827,8 @@
     <None Include="Shaders\GammaCorrection\GammaCorrection.vert" />
     <None Include="Shaders\GaussianBlur\GaussianBlur.frag" />
     <None Include="Shaders\GaussianBlur\GaussianBlur.vert" />
+    <None Include="Shaders\JitterShadowMap\JitterShadowMap.frag" />
+    <None Include="Shaders\JitterShadowMap\JitterShadowMap.vert" />
     <None Include="Shaders\Mandelbrot\Mandelbrot.comp" />
     <None Include="Shaders\Multilight\Multilight.frag" />
     <None Include="Shaders\Multilight\Multilight.vert" />

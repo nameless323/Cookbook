@@ -1981,5 +1981,7 @@
     <None Include="Shaders\Shadowmapping\Shadowmapping.frag" />
     <None Include="Shaders\PercentageCloserFiltering\PercentageCloserFiltering.vert" />
     <None Include="Shaders\PercentageCloserFiltering\PercentageCloserFiltering.frag" />
+    <None Include="Shaders\JitterShadowMap\JitterShadowMap.vert" />
+    <None Include="Shaders\JitterShadowMap\JitterShadowMap.frag" />
   </ItemGroup>
 </Project>
