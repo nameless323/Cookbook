@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);C:\Users\nameless\Documents\Visual Studio 2015\Projects\ShadingCookbook\ShadingCookbook\Include\glm;C:\OpenGlStuff\glfw-3.1.2.bin.WIN32\include;C:\OpenGlStuff\glew-1.13.0\include</IncludePath>
+    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(ProjectDir)Include\glm;C:\OpenGlStuff\glfw-3.1.2.bin.WIN32\include;C:\OpenGlStuff\glew-1.13.0\include</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
