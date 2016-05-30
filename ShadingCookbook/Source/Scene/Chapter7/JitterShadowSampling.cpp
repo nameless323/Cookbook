@@ -2,6 +2,7 @@
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
+#include <GL/glew.h>
 #include "../../Core/TGA.h"
 #include <vector>
 using glm::vec3;
@@ -231,6 +232,43 @@ float JitterShadowSampling::Jitter()
 
 void JitterShadowSampling::BuildJitterTex()
 {
+    int size = _jitterMapSize;
+    int samples = _samplesU*_samplesV;
+    int bufSize = size * size * samples * 2;
+    float* data = new float[bufSize];
+    for (int i = 0; i < size; i++)
+        for (int j = 0; j < size; j++)
+            for (int k = 0; k < samples; k += 2)
+            {
+                int x1, y1, x2, y2;
+                x1 = k % _samplesU;
+                y1 = (samples - 1 - k) / _samplesU;
+                x2 = (k + 1) % _samplesU;
+                y2 = (samples - 1 - k - 1) / _samplesU;
+
+                vec4 v;
+                v.x = (x1 + 0.5f) + Jitter();
+                v.y = (y1 + 0.5f) + Jitter();
+                v.z = (x2 + 0.5f) + Jitter();
+                v.w = (y2 + 0.5f) + Jitter();
+
+                int cell = ((k / 2) * size * size + j * size + i) * 4;
+                data[cell + 0] = sqrtf(v.y) * cosf(glm::two_pi<float>() * v.x);
+                data[cell + 1] = sqrtf(v.y) * cosf(glm::two_pi<float>() * v.x);
+                data[cell + 2] = sqrtf(v.w) * cosf(glm::two_pi<float>() * v.z);
+                data[cell + 3] = sqrtf(v.w) * cosf(glm::two_pi<float>() * v.z);
+            }
+    glActiveTexture(GL_TEXTURE1);
+    GLuint texID;
+    glGenTextures(1, &texID);
+
+    glBindTexture(GL_TEXTURE_3D, texID);
+    glTexStorage3D(GL_TEXTURE_3D, 1, GL_RGBA32F, size, size, samples / 2);
+    glTexSubImage3D(GL_TEXTURE_3D, 0, 0, 0, 0, size, size, samples / 2, GL_RGBA, GL_FLOAT, data);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+    delete[] data;
 }
 
 void JitterShadowSampling::DrawBuildingScene()
