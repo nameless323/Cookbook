@@ -503,6 +503,7 @@
     <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h" />
     <ClInclude Include="Source\Scene\Chapter5\OIT.h" />
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
+    <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
@@ -567,6 +568,7 @@
     <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\OIT.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
+    <ClCompile Include="Source\Scene\Chapter7\JitterShadowSampling.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -827,8 +829,8 @@
     <None Include="Shaders\GammaCorrection\GammaCorrection.vert" />
     <None Include="Shaders\GaussianBlur\GaussianBlur.frag" />
     <None Include="Shaders\GaussianBlur\GaussianBlur.vert" />
-    <None Include="Shaders\JitterShadowMap\JitterShadowMap.frag" />
-    <None Include="Shaders\JitterShadowMap\JitterShadowMap.vert" />
+    <None Include="Shaders\JitterShadowSampling\JitterShadowSampling.frag" />
+    <None Include="Shaders\JitterShadowSampling\JitterShadowSampling.vert" />
     <None Include="Shaders\Mandelbrot\Mandelbrot.comp" />
     <None Include="Shaders\Multilight\Multilight.frag" />
     <None Include="Shaders\Multilight\Multilight.vert" />
