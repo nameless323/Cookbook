@@ -69,13 +69,14 @@ void JitterShadowSampling::Render()
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass1Index);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_FRONT);
-    DrawScene();
-    glFlush();
-    glFinish();
+    glEnable(GL_POLYGON_OFFSET_FILL);
+    glPolygonOffset(2.5f, 10.0f);    
+    DrawBuildingScene();
+    glDisable(GL_POLYGON_OFFSET_FILL);
 
     float c = 1.0f;
-    vec3 cameraPos(c * 11.5f * cos(_angle), c * 7.0f, c * 11.5f * sin(_angle));
-    _view = glm::lookAt(cameraPos, vec3(0.0), vec3(0.0f, 1.0f, 0.0f));
+    vec3 cameraPos(1.8f * cos(_angle), c * 7.0f, 1.8f * sin(_angle));
+    _view = glm::lookAt(cameraPos, vec3(0.0f, -0.175f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
     _shader.SetUniform("Light.Position", _view*vec4(_lightFrustum->GetOrigin(), 1.0f));
     _projection = glm::perspective(glm::radians(50.0f), (float)_width / _height, 0.1f, 100.0f);
 
@@ -83,9 +84,9 @@ void JitterShadowSampling::Render()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, _width, _height);
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass2Index);
-    //    glDisable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    DrawScene();
+    glDisable(GL_CULL_FACE);
+    DrawBuildingScene();
+    glFinish();
 
 }
 
@@ -168,8 +169,8 @@ void JitterShadowSampling::CompileAndLinkShader()
 {
     try
     {
-        _shader.CompileShader("Shaders/PercentageCloserFiltering/PercentageCloserFiltering.vert");
-        _shader.CompileShader("Shaders/PercentageCloserFiltering/PercentageCloserFiltering.frag");
+        _shader.CompileShader("Shaders/JitterShadowSampling/JitterShadowSampling.vert");
+        _shader.CompileShader("Shaders/JitterShadowSampling/JitterShadowSampling.frag");
         _shader.Link();
         _shader.Validate();
         _shader.Use();
@@ -273,4 +274,22 @@ void JitterShadowSampling::BuildJitterTex()
 
 void JitterShadowSampling::DrawBuildingScene()
 {
+    vec3 color = vec3(1.0f, 0.85f, 0.55f);
+    _shader.SetUniform("Material.Ka", color * 0.1f);
+    _shader.SetUniform("Material.Kd", color);
+    _shader.SetUniform("Material.Ks", vec3(0.0f));
+    _shader.SetUniform("Material.Shininess", 1.0f);
+    _model = mat4(1.0f);
+    _model *= glm::translate(vec3(0.0f, 0.0f, 0.0f));
+    SetMatrices();
+    _mesh->Render();
+
+    _shader.SetUniform("Material.Kd", 0.25f, 0.25f, 0.25f);
+    _shader.SetUniform("Material.Ks", 0.0f, 0.0f, 0.0f);
+    _shader.SetUniform("Material.Ka", 0.05f, 0.05f, 0.05f);
+    _shader.SetUniform("Material.Shininess", 1.0f);
+    _model = mat4(1.0f);
+    _model *= glm::translate(vec3(0.0f, 0.0f, 0.0f));
+    SetMatrices();
+    _plane->Render();
 }
