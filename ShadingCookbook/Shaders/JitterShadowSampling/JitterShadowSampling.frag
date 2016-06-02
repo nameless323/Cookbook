@@ -11,6 +11,7 @@ uniform struct MaterialInfo
 	vec3 Ka;
 	vec3 Kd;
 	vec3 Ks;
+	float Shininess;
 } Material;
 
 uniform sampler2DShadow ShadowMap;
@@ -51,10 +52,11 @@ void shadeWithShadow()
 	vec3 diffAndSpec = phongModelDiffAndSpec();
 
 	ivec3 offsetCoord;
-	offsetCoord.xy = ivec3(mod(gl_FragCoord.xy, OffsetTexSize.xy));
+	offsetCoord.xy = ivec2(mod(gl_FragCoord.xy, OffsetTexSize.xy));
 
 	float sum = 0;
 	int samplesDiv2 = int (OffsetTexSize.z);
+	vec4 sc = ShadowCoord;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -81,7 +83,7 @@ void shadeWithShadow()
 		shadow = sum / float(samplesDiv2*2);
 	}
 	FragColor = vec4(diffAndSpec * shadow + ambient, 1.0);
-	FragColor = pow (FragColor, vec4(1.0, 2.2));
+	FragColor = pow (FragColor, vec4(1.0/2.2));
 } 
 
 
