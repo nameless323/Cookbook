@@ -1989,5 +1989,12 @@
     <None Include="Shaders\PercentageCloserFiltering\PercentageCloserFiltering.frag" />
     <None Include="Shaders\JitterShadowSampling\JitterShadowSampling.frag" />
     <None Include="Shaders\JitterShadowSampling\JitterShadowSampling.vert" />
+    <None Include="Shaders\ShadowVolume\Render.vert" />
+    <None Include="Shaders\ShadowVolume\Render.frag" />
+    <None Include="Shaders\ShadowVolume\Vol.vert" />
+    <None Include="Shaders\ShadowVolume\Vol.frag" />
+    <None Include="Shaders\ShadowVolume\Vol.geom" />
+    <None Include="Shaders\ShadowVolume\Comp.frag" />
+    <None Include="Shaders\ShadowVolume\Comp.vert" />
   </ItemGroup>
 </Project>

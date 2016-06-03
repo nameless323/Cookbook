@@ -858,6 +858,13 @@
     <None Include="Shaders\RenderToTex\RenderToTex.vert" />
     <None Include="Shaders\Shadowmapping\Shadowmapping.frag" />
     <None Include="Shaders\Shadowmapping\Shadowmapping.vert" />
+    <None Include="Shaders\ShadowVolume\Comp.frag" />
+    <None Include="Shaders\ShadowVolume\Comp.vert" />
+    <None Include="Shaders\ShadowVolume\Render.frag" />
+    <None Include="Shaders\ShadowVolume\Render.vert" />
+    <None Include="Shaders\ShadowVolume\Vol.frag" />
+    <None Include="Shaders\ShadowVolume\Vol.geom" />
+    <None Include="Shaders\ShadowVolume\Vol.vert" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.frag" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />
