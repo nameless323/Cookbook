@@ -450,6 +450,7 @@
     <ClInclude Include="ingredients\gl_core_4_4.h" />
     <ClInclude Include="ingredients\scene.h" />
     <ClInclude Include="Source\Core\Frustum.h" />
+    <ClInclude Include="Source\Items\MeshAdj.h" />
     <ClInclude Include="Source\Items\Skybox.h" />
     <ClInclude Include="ingredients\teapotdata.h" />
     <ClInclude Include="ingredients\tgaio.h" />
@@ -505,6 +506,7 @@
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
     <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
+    <ClInclude Include="Source\Scene\Chapter7\ShadowVolume.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -518,6 +520,7 @@
     <ClCompile Include="ingredients\glutils.cpp" />
     <ClCompile Include="ingredients\gl_core_4_4.c" />
     <ClCompile Include="Source\Core\Frustum.cpp" />
+    <ClCompile Include="Source\Items\MeshAdj.cpp" />
     <ClCompile Include="Source\Items\Skybox.cpp" />
     <ClCompile Include="ingredients\tgaio.cpp" />
     <ClCompile Include="ingredients\vbocube.cpp" />
