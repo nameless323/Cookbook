@@ -192,7 +192,7 @@ void MeshAdj::LoadObj(const char* filename, bool recenterMesh)
 
 void MeshAdj::TrimString(string& str)
 {
-    const char * whiteSpace = " \t\n\r";
+    const char* whiteSpace = " \t\n\r";
     size_t location;
     location = str.find_first_not_of(whiteSpace);
     str.erase(0, location);
@@ -283,7 +283,96 @@ void MeshAdj::DetermineAdjacency(vector<GLuint>& el)
 
 void MeshAdj::StoreVBO(const vector<vec3>& points, const vector<vec3>& normals, const vector<vec2>& texCoords, const vector<vec4>& tangents, const vector<GLuint>& elements)
 {
+    GLuint nVerts = GLuint(points.size());
+    _faces = GLuint(elements.size() / 6);
 
+    float* v = new float[3 * nVerts];
+    float* n = new float[3 * nVerts];
+    float* tc = nullptr;
+    float* tang = nullptr;
+    if (texCoords.size() > 0 && tangents.size() > 0)
+    {
+        tc = new float[2 * nVerts];
+        tang = new float[4 * nVerts];
+    }
+    unsigned int* el = new unsigned int[elements.size()];
+    int idx = 0, tcIdx = 0, tangIdx = 0;
+    for (GLuint i = 0; i < nVerts; ++i)
+    {
+        v[idx] = points[i].x;
+        v[idx + 1] = points[i].y;
+        v[idx + 2] = points[i].z;
+        n[idx] = normals[i].x;
+        n[idx + 1] = normals[i].y;
+        n[idx + 2] = normals[i].z;
+        idx += 3;
+        if (tc != nullptr)
+        {
+            tang[tangIdx] = tangents[i].x;
+            tang[tangIdx + 1] = tangents[i].y;
+            tang[tangIdx + 2] = tangents[i].z;
+            tang[tangIdx + 3] = tangents[i].w;
+            tangIdx += 4;
+            tc[tcIdx] = texCoords[i].x;
+            tc[tcIdx + 1] = texCoords[i].y;
+            tcIdx += 2;
+        }
+    }
+    for (unsigned int i = 0; i < elements.size(); ++i)
+    {
+        el[i] = elements[i];
+    }
+    glGenVertexArrays(1, &_vao);
+    glBindVertexArray(_vao);
+
+    int nBuffers = 5;
+    GLuint elementBuffer = 4;
+    if (tc == nullptr)
+    {
+        nBuffers = 3;
+        elementBuffer = 2;
+    }
+
+    unsigned int handle[5];
+    glGenBuffers(nBuffers, handle);
+
+    glBindBuffer(GL_ARRAY_BUFFER, handle[0]);
+    glBufferData(GL_ARRAY_BUFFER, (3 * nVerts) * sizeof(float), v, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)));
+    glEnableVertexAttribArray(0); // Vertex position
+
+    glBindBuffer(GL_ARRAY_BUFFER, handle[1]);
+    glBufferData(GL_ARRAY_BUFFER, (3 * nVerts) * sizeof(float), n, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)));
+    glEnableVertexAttribArray(1); // Vertex normal
+
+    if (tc != nullptr)
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, handle[2]);
+        glBufferData(GL_ARRAY_BUFFER, (2 * nVerts) * sizeof(float), tc, GL_STATIC_DRAW);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)));
+        glEnableVertexAttribArray(2); // Texture coords
+
+        glBindBuffer(GL_ARRAY_BUFFER, handle[3]);
+        glBufferData(GL_ARRAY_BUFFER, (4 * nVerts) * sizeof(float), tang, GL_STATIC_DRAW);
+        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)));
+        glEnableVertexAttribArray(3); // Tangent vector
+    }
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle[elementBuffer]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * _faces * sizeof(unsigned int), el, GL_STATIC_DRAW);
+
+    glBindVertexArray(0);
+
+    delete[] v;
+    delete[] n;
+    if (tc != nullptr)
+    {
+        delete[] tc;
+        delete[] tang;
+    }
+    delete[] el;
+    printf("End storeVBO\n");
 }
 
 void MeshAdj::GenerateAveragedNormals(const vector<vec3>& points, vector<vec3>& normals, const vector<GLuint>& faces)
