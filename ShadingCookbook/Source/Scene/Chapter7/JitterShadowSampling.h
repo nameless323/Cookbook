@@ -42,7 +42,7 @@ private:
     mat4 _model, _view, _projection;
     mat4 _lightView, _lightProjection, _lightPV;    
     mat4 _shadowScale;
-    vec3 _lightPos;
+    glm::vec3 _lightPos;
     float _angle;
 
     Frustum* _lightFrustum;

@@ -1265,6 +1265,9 @@
     <ClCompile Include="Source\Items\MeshAdj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\detail\func_common.inl">
