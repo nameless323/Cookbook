@@ -83,14 +83,43 @@ void ShadowVolume::Shutdown()
 
 void ShadowVolume::Resize(int x, int y)
 {
+    glViewport(0, 0, x, y);
+    _width = x;
+    _height = y;
 }
 
 void ShadowVolume::SetMatrices(ShaderProgram& shader)
 {
+    mat4 mv = _view * _model;
+    shader.SetUniform("ModelViewMatrix", mv);
+    shader.SetUniform("ProjMatrix", _projection);
+    shader.SetUniform("NormalNatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
 }
 
 void ShadowVolume::CompileAndLinkShader()
 {
+    try
+    {
+        _volumeShader.CompileShader("Shaders/ShadowVolume/Vol.vert");
+        _volumeShader.CompileShader("Shaders/ShadowVolume/Vol.geom");
+        _volumeShader.CompileShader("Shaders/ShadowVolume/Vol.frag");
+        _volumeShader.Link();
+        _volumeShader.Validate();
+
+        _renderShader.CompileShader("Shaders/ShadowVolume/Render.vert");
+        _renderShader.CompileShader("Shaders/ShadowVolume/Render.frag");
+        _renderShader.Link();
+        _renderShader.Validate();
+
+        _compShader.CompileShader("Shaders/ShadowVolume/Comp.vert");
+        _compShader.CompileShader("Shaders/ShadowVolume/Comp.frag");
+        _compShader.Link();
+        _compShader.Validate();
+    } catch (ShaderProgramException &e)
+    {
+        std::cerr << e.what() << std::endl;
+        
+    }
 }
 
 void ShadowVolume::SetupFBO()
@@ -145,7 +174,7 @@ void ShadowVolume::Pass1()
     glDisable(GL_STENCIL_TEST);
     glEnable(GL_DEPTH_TEST);
 
-    _projection = infinitePerspective(glm::radians(50.0f), (float)_width / _height, 0.5f);
+    _projection = glm::infinitePerspective(glm::radians(50.0f), (float)_width / _height, 0.5f);
     _view = glm::lookAt(vec3(5.0f, 5.0f, 5.0f), vec3(0, 2, 0), vec3(0, 1, 0));
 
     _renderShader.Use();
@@ -158,10 +187,48 @@ void ShadowVolume::Pass1()
 
 void ShadowVolume::Pass2()
 {
+    _volumeShader.Use();
+    _volumeShader.SetUniform("LightPosition", _view * _lightPos);
+
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, _colorDepthFBO);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBlitFramebuffer(0, 0, _width - 1, _height - 1, 0, 0, _width - 1, _height - 1, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+    glDepthMask(GL_FALSE);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glClear(GL_STENCIL_BUFFER_BIT);
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_ALWAYS, 0, 0xffff);
+    glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_KEEP, GL_INCR_WRAP);
+    glStencilOpSeparate(GL_BACK, GL_KEEP, GL_KEEP, GL_DECR_WRAP);
+
+    DrawScene(_volumeShader, true);
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 }
 
 void ShadowVolume::Pass3()
 {
+    glDisable(GL_DEPTH_TEST);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    _compShader.Use();
+
+    _model = mat4(1.0f);
+    _projection = _model;
+    _view = _model;
+    SetMatrices(_compShader);
+
+    glBindVertexArray(_fsQuad);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    glBindVertexArray(0);
+
+    glDisable(GL_BLEND);
+    glEnable(GL_DEPTH_TEST);
 }
 
 void ShadowVolume::UpdateLight()
