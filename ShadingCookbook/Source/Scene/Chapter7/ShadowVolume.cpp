@@ -166,6 +166,63 @@ void ShadowVolume::SetupFBO()
 
 void ShadowVolume::DrawScene(ShaderProgram& shader, bool onlyShadowCasters)
 {
+    vec3 color;
+    if (!onlyShadowCasters)
+    {
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, _spotTex);
+        color = vec3(1.0f);
+        shader.SetUniform("Ka", color*0.1f);
+        shader.SetUniform("Kd", color);
+        shader.SetUniform("Ks", vec3(0.9f));
+        shader.SetUniform("Shininess", 150.0f);
+    }
+    _model = mat4(1.0f);
+    _model *= translate(vec3(-2.3f, 1.0f, 0.2f));
+    _model *= rotate(glm::radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
+    _model = scale(_model, vec3(1.5f));
+    SetMatrices(shader);
+    _spot->Render();
+
+    _model = mat4(1.0f);
+    _model *= translate(vec3(2.5f, 1.0f, -1.2f));
+    _model *= rotate(glm::radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
+    _model = scale(_model, vec3(1.5f));
+    SetMatrices(shader);
+    _spot->Render();
+
+    _model = mat4(1.0f);
+    _model *= translate(vec3(0.5f, 1.0f, 2.7f));
+    _model *= rotate(glm::radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
+    _model = scale(_model, vec3(1.5f));
+    SetMatrices(shader);
+    _spot->Render();
+
+    if (!onlyShadowCasters) 
+    {
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, _brickTex);
+        color = vec3(0.5f);
+        shader.SetUniform("Kd", color);
+        shader.SetUniform("Ks", vec3(0.0f));
+        shader.SetUniform("Ka", vec3(0.1f));
+        shader.SetUniform("Shininess", 1.0f);
+        _model = mat4(1.0f);
+        SetMatrices(shader);
+        _plane->Render();
+        _model = mat4(1.0f);
+        _model *= translate(vec3(-5.0f, 5.0f, 0.0f));
+        _model *= rotate(glm::radians(90.0f), vec3(1, 0, 0));
+        _model *= rotate(glm::radians(-90.0f), vec3(0.0f, 0.0f, 1.0f));
+        SetMatrices(shader);
+        _plane->Render();
+        _model = mat4(1.0f);
+        _model *= translate(vec3(0.0f, 5.0f, -5.0f));
+        _model *= rotate(glm::radians(90.0f), vec3(1.0f, 0.0f, 0.0f));
+        SetMatrices(shader);
+        _plane->Render();
+        _model = mat4(1.0f);
+    }
 }
 
 void ShadowVolume::Pass1()
