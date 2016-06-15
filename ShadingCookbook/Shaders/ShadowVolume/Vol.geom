@@ -31,7 +31,7 @@ void emitEdgeQuad(vec3 a, vec3 b)
 
 	gl_Position = ProjMatrix * vec4(b - LightPosition.xyz, 0);
 	EmitVertex();
-	EmitPrimitive();
+	EndPrimitive();
 }
 
 void main()

@@ -7,7 +7,7 @@
 
 using glm::vec3;
 
-ShadowVolume::ShadowVolume() : _width(800), _height(600), _rotSpeed(0.1f), _tPrev(0)
+ShadowVolume::ShadowVolume() : _width(1024), _height(768), _rotSpeed(0.1f), _tPrev(0)
 {
 }
 
@@ -57,6 +57,7 @@ void ShadowVolume::InitScene()
     glActiveTexture(GL_TEXTURE2);
     _spotTex = TGA::LoadTex("./media/spot/spot_texture.tga");
     _brickTex = TGA::LoadTex("./media/texture/brick1.tga");
+    UpdateLight();
 }
 
 void ShadowVolume::Update(float t)
@@ -130,7 +131,7 @@ void ShadowVolume::SetupFBO()
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _width, _height);
 
     GLuint ambBuffer;
-    glGenRenderbuffers(GL_RENDERBUFFER, &ambBuffer);
+    glGenRenderbuffers(1, &ambBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, ambBuffer);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, _width, _height);
 
