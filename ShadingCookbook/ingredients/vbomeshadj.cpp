@@ -1,5 +1,5 @@
+#include "GL/glew.h"
 #include "vbomeshadj.h"
-#include "glutils.h"
 
 #define uint unsigned int
 

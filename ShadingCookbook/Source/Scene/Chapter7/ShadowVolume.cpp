@@ -94,7 +94,7 @@ void ShadowVolume::SetMatrices(ShaderProgram& shader)
     mat4 mv = _view * _model;
     shader.SetUniform("ModelViewMatrix", mv);
     shader.SetUniform("ProjMatrix", _projection);
-    shader.SetUniform("NormalNatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+    shader.SetUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
 }
 
 void ShadowVolume::CompileAndLinkShader()
@@ -273,6 +273,7 @@ void ShadowVolume::Pass3()
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE);
 
+    glStencilFunc(GL_EQUAL, 0, 0xffff);
     glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
     _compShader.Use();
 

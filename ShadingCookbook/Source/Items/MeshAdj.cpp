@@ -213,6 +213,7 @@ void MeshAdj::DetermineAdjacency(vector<GLuint>& el)
         elAdj.push_back(el[i + 2]);
         elAdj.push_back(-1);
     }
+
     for (uint i = 0; i < elAdj.size(); i += 6)
     {
         int a1 = elAdj[i];
@@ -225,46 +226,55 @@ void MeshAdj::DetermineAdjacency(vector<GLuint>& el)
             int b2 = elAdj[j + 2];
             int c2 = elAdj[j + 4];
 
+            // Edge 1 == Edge 1
             if ((a1 == a2 && b1 == b2) || (a1 == b2 && b1 == a2))
             {
                 elAdj[i + 1] = c2;
                 elAdj[j + 1] = c1;
             }
+            // Edge 1 == Edge 2
             if ((a1 == b2 && b1 == c2) || (a1 == c2 && b1 == b2))
             {
                 elAdj[i + 1] = a2;
                 elAdj[j + 3] = c1;
             }
+            // Edge 1 == Edge 3
             if ((a1 == c2 && b1 == a2) || (a1 == a2 && b1 == c2))
             {
                 elAdj[i + 1] = b2;
                 elAdj[j + 5] = c1;
             }
+            // Edge 2 == Edge 1
             if ((b1 == a2 && c1 == b2) || (b1 == b2 && c1 == a2))
             {
                 elAdj[i + 3] = c2;
                 elAdj[j + 1] = a1;
             }
+            // Edge 2 == Edge 2
             if ((b1 == b2 && c1 == c2) || (b1 == c2 && c1 == b2))
             {
                 elAdj[i + 3] = a2;
                 elAdj[j + 3] = a1;
             }
+            // Edge 2 == Edge 3
             if ((b1 == c2 && c1 == a2) || (b1 == a2 && c1 == c2))
             {
                 elAdj[i + 3] = b2;
                 elAdj[j + 5] = a1;
             }
+            // Edge 3 == Edge 1
             if ((c1 == a2 && a1 == b2) || (c1 == b2 && a1 == a2))
             {
                 elAdj[i + 5] = c2;
                 elAdj[j + 1] = b1;
             }
+            // Edge 3 == Edge 2
             if ((c1 == b2 && a1 == c2) || (c1 == c2 && a1 == b2))
             {
                 elAdj[i + 5] = a2;
                 elAdj[j + 3] = b1;
             }
+            // Edge 3 == Edge 3
             if ((c1 == c2 && a1 == a2) || (c1 == a2 && a1 == c2))
             {
                 elAdj[i + 5] = b2;
@@ -272,12 +282,16 @@ void MeshAdj::DetermineAdjacency(vector<GLuint>& el)
             }
         }
     }
+
+    // Look for any outside edges
     for (uint i = 0; i < elAdj.size(); i += 6)
     {
         if (elAdj[i + 1] == -1) elAdj[i + 1] = elAdj[i + 4];
         if (elAdj[i + 3] == -1) elAdj[i + 3] = elAdj[i];
-        if (elAdj[i + 4] == -1) elAdj[i + 5] = elAdj[i + 2];
+        if (elAdj[i + 5] == -1) elAdj[i + 5] = elAdj[i + 2];
     }
+
+    // Copy all data back into el
     el = elAdj;
 }
 

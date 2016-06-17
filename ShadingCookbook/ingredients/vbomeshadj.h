@@ -1,6 +1,7 @@
 #ifndef VBOMESHADJ_H
 #define VBOMESHADJ_H
 
+#include <GL/glew.h>
 #include "drawable.h"
 
 #include <vector>
@@ -13,7 +14,6 @@ using glm::vec4;
 #include <string>
 using std::string;
 
-#include "cookbookogl.h"
 
 class VBOMeshAdj : public Drawable
 {

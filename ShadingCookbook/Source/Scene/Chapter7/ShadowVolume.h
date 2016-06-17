@@ -12,6 +12,7 @@
 #include "../../Items/Mesh.h"
 #include "../../Items/Teapot.h"
 #include "../../Items/MeshAdj.h"
+#include "../../../ingredients/vbomeshadj.h"
 using glm::mat4;
 using glm::vec4;
 using glm::vec3;
