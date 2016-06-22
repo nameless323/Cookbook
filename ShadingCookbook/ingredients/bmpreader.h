@@ -4,7 +4,7 @@
 #include <fstream>
 using std::ifstream;
 
-#include "cookbookogl.h"
+#include <GL/glew.h>
 
 class BMPReader {
 public:

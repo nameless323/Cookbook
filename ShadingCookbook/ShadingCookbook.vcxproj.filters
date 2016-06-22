@@ -1080,6 +1080,9 @@
     <ClInclude Include="Source\Items\MeshAdj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter6\PointSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1266,6 +1269,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter6\PointSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2008,5 +2014,8 @@
     <None Include="Shaders\ShadowVolume\Vol.geom" />
     <None Include="Shaders\ShadowVolume\Comp.frag" />
     <None Include="Shaders\ShadowVolume\Comp.vert" />
+    <None Include="Shaders\PointSprite\PointSprite.frag" />
+    <None Include="Shaders\PointSprite\PointSprite.geom" />
+    <None Include="Shaders\PointSprite\PointSprite.vert" />
   </ItemGroup>
 </Project>

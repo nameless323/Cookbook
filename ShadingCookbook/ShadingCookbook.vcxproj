@@ -504,6 +504,7 @@
     <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h" />
     <ClInclude Include="Source\Scene\Chapter5\OIT.h" />
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
+    <ClInclude Include="Source\Scene\Chapter6\PointSprite.h" />
     <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
     <ClInclude Include="Source\Scene\Chapter7\ShadowVolume.h" />
@@ -571,6 +572,7 @@
     <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\OIT.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
+    <ClCompile Include="Source\Scene\Chapter6\PointSprite.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\JitterShadowSampling.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp" />
@@ -856,6 +858,9 @@
     <None Include="Shaders\Phong\PhongPixel\PhongPixel.frag" />
     <None Include="Shaders\Phong\PhongPixel\PhongPixel.vert" />
     <None Include="Shaders\Phong\PhongSpotlight\PhongSpotlight.frag" />
+    <None Include="Shaders\PointSprite\PointSprite.frag" />
+    <None Include="Shaders\PointSprite\PointSprite.geom" />
+    <None Include="Shaders\PointSprite\PointSprite.vert" />
     <None Include="Shaders\ProjectTex\ProjectTex.frag" />
     <None Include="Shaders\ProjectTex\ProjectTex.vert" />
     <None Include="Shaders\RenderToTex\RenderToTex.frag" />
