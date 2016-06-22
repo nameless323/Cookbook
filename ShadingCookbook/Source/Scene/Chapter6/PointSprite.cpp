@@ -70,7 +70,7 @@ void PointSprite::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	vec3 cameraPos(0.0f, 0.0f, 3.0f);
 	_view = glm::lookAt(cameraPos, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
-	_model = mat4(1.0f);
+	_model = glm::mat4(1.0f);
 	SetMatrices();
 
 	glBindVertexArray(_sprites);
@@ -91,7 +91,7 @@ void PointSprite::Resize(int w, int h)
 
 void PointSprite::SetMatrices()
 {
-	mat4 mv = _view * _model;
+	glm::mat4 mv = _view * _model;
 	_shader.SetUniform("ModelViewMatrix", mv);
 	_shader.SetUniform("ProjectionMatrix", _projection);
 }
