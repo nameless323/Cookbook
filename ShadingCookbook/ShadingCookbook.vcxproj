@@ -865,6 +865,9 @@
     <None Include="Shaders\ProjectTex\ProjectTex.vert" />
     <None Include="Shaders\RenderToTex\RenderToTex.frag" />
     <None Include="Shaders\RenderToTex\RenderToTex.vert" />
+    <None Include="Shaders\ShadedWireframe\ShadedWireframe.frag" />
+    <None Include="Shaders\ShadedWireframe\ShadedWireframe.geom" />
+    <None Include="Shaders\ShadedWireframe\ShadedWireframe.vert" />
     <None Include="Shaders\Shadowmapping\Shadowmapping.frag" />
     <None Include="Shaders\Shadowmapping\Shadowmapping.vert" />
     <None Include="Shaders\ShadowVolume\Comp.frag" />

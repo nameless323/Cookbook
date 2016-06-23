@@ -40,6 +40,7 @@
 #include "Source/Scene/Chapter7/Shadowmapping.h"
 #include "Source/Scene/Chapter7/JitterShadowSampling.h"
 #include "Source/Scene/Chapter7/ShadowVolume.h"
+#include "Source/Scene/Chapter6/PointSprite.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -80,7 +81,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new ShadowVolume;
+	scene = new PointSprite;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

@@ -2017,5 +2017,8 @@
     <None Include="Shaders\PointSprite\PointSprite.frag" />
     <None Include="Shaders\PointSprite\PointSprite.geom" />
     <None Include="Shaders\PointSprite\PointSprite.vert" />
+    <None Include="Shaders\ShadedWireframe\ShadedWireframe.vert" />
+    <None Include="Shaders\ShadedWireframe\ShadedWireframe.frag" />
+    <None Include="Shaders\ShadedWireframe\ShadedWireframe.geom" />
   </ItemGroup>
 </Project>

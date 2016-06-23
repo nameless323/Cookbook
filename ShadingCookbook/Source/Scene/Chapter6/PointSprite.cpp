@@ -54,7 +54,7 @@ void PointSprite::InitScene()
 	glBindVertexArray(0);
 
 	GLuint w, h;
-	const char * texName = "../media/texture/flower.bmp";
+	const char * texName = "./media/texture/flower.bmp";
 	BMPReader::loadTex(texName, w, h);
 
 	_shader.SetUniform("SpriteTex", 0);
