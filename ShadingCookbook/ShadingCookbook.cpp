@@ -41,6 +41,7 @@
 #include "Source/Scene/Chapter7/JitterShadowSampling.h"
 #include "Source/Scene/Chapter7/ShadowVolume.h"
 #include "Source/Scene/Chapter6/PointSprite.h"
+#include "Source/Scene/Chapter6/ShadedWireframe.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -81,7 +82,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new PointSprite;
+	scene = new ShadedWireframe;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -107,6 +108,7 @@ int main(void)
 
 	MainLoop();
 	scene->Shutdown();
+	delete scene;
 	glfwTerminate();
 	exit(EXIT_SUCCESS);
 

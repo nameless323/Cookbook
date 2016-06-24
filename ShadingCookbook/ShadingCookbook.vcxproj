@@ -505,6 +505,7 @@
     <ClInclude Include="Source\Scene\Chapter5\OIT.h" />
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
     <ClInclude Include="Source\Scene\Chapter6\PointSprite.h" />
+    <ClInclude Include="Source\Scene\Chapter6\ShadedWireframe.h" />
     <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
     <ClInclude Include="Source\Scene\Chapter7\ShadowVolume.h" />
@@ -573,6 +574,7 @@
     <ClCompile Include="Source\Scene\Chapter5\OIT.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\PointSprite.cpp" />
+    <ClCompile Include="Source\Scene\Chapter6\ShadedWireframe.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\JitterShadowSampling.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp" />

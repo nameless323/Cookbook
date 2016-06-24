@@ -18,9 +18,9 @@ public:
 private:
 	ShaderProgram _shader;
 	GLuint _sprites;
-	mat4 _model;
-	mat4 _view;
-	mat4 _projection;
+	glm::mat4 _model;
+	glm::mat4 _view;
+	glm::mat4 _projection;
 	int _numSprites;
 	float* _locations;
 
