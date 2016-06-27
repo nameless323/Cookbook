@@ -879,6 +879,9 @@
     <None Include="Shaders\ShadowVolume\Vol.frag" />
     <None Include="Shaders\ShadowVolume\Vol.geom" />
     <None Include="Shaders\ShadowVolume\Vol.vert" />
+    <None Include="Shaders\Silhouette\Silhouette.frag" />
+    <None Include="Shaders\Silhouette\Silhouette.geom" />
+    <None Include="Shaders\Silhouette\Silhouette.vert" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.frag" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />

@@ -2026,5 +2026,8 @@
     <None Include="Shaders\ShadedWireframe\ShadedWireframe.vert" />
     <None Include="Shaders\ShadedWireframe\ShadedWireframe.frag" />
     <None Include="Shaders\ShadedWireframe\ShadedWireframe.geom" />
+    <None Include="Shaders\Silhouette\Silhouette.vert" />
+    <None Include="Shaders\Silhouette\Silhouette.frag" />
+    <None Include="Shaders\Silhouette\Silhouette.geom" />
   </ItemGroup>
 </Project>
