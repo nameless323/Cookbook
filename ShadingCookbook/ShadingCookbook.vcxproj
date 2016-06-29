@@ -804,6 +804,10 @@
     <None Include="Include\glm\gtx\wrap.inl" />
     <None Include="Shaders\ADS\ADS.frag" />
     <None Include="Shaders\ADS\ADS.vert" />
+    <None Include="Shaders\BezierCurve\BezierCurve.frag" />
+    <None Include="Shaders\BezierCurve\BezierCurve.tesc" />
+    <None Include="Shaders\BezierCurve\BezierCurve.tese" />
+    <None Include="Shaders\BezierCurve\BezierCurve.vert" />
     <None Include="Shaders\Bloom\Bloom.frag" />
     <None Include="Shaders\Bloom\Bloom.vert" />
     <None Include="Shaders\Celshading\Celshading.frag" />

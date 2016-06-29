@@ -2035,5 +2035,9 @@
     <None Include="Shaders\Silhouette\Silhouette.vert" />
     <None Include="Shaders\Silhouette\Silhouette.frag" />
     <None Include="Shaders\Silhouette\Silhouette.geom" />
+    <None Include="Shaders\BezierCurve\BezierCurve.frag" />
+    <None Include="Shaders\BezierCurve\BezierCurve.vert" />
+    <None Include="Shaders\BezierCurve\BezierCurve.tesc" />
+    <None Include="Shaders\BezierCurve\BezierCurve.tese" />
   </ItemGroup>
 </Project>

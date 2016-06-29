@@ -22,8 +22,8 @@ namespace ShaderInfo
 		{".vert", Shaders::VERTEX},
 		{".gs", Shaders::GEOMETRY},
 		{".geom", Shaders::GEOMETRY},
-		{".tcs", Shaders::TESS_CONTROL},
-		{".tes", Shaders::TESS_EVALUATION},
+		{".tesc", Shaders::TESS_CONTROL},
+		{".tese", Shaders::TESS_EVALUATION},
 		{".fs", Shaders::FRAGMENT},
 		{".frag", Shaders::FRAGMENT},
 		{".comp", Shaders::COMPUTE}
