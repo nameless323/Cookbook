@@ -504,6 +504,7 @@
     <ClInclude Include="Source\Scene\Chapter5\GaussianBlur.h" />
     <ClInclude Include="Source\Scene\Chapter5\OIT.h" />
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
+    <ClInclude Include="Source\Scene\Chapter6\BezierCurve.h" />
     <ClInclude Include="Source\Scene\Chapter6\PointSprite.h" />
     <ClInclude Include="Source\Scene\Chapter6\ShadedWireframe.h" />
     <ClInclude Include="Source\Scene\Chapter6\Silhouette.h" />
@@ -574,6 +575,7 @@
     <ClCompile Include="Source\Scene\Chapter5\GaussianBlur.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\OIT.cpp" />
     <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
+    <ClCompile Include="Source\Scene\Chapter6\BezierCurve.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\PointSprite.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\ShadedWireframe.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\Silhouette.cpp" />
@@ -808,6 +810,8 @@
     <None Include="Shaders\BezierCurve\BezierCurve.tesc" />
     <None Include="Shaders\BezierCurve\BezierCurve.tese" />
     <None Include="Shaders\BezierCurve\BezierCurve.vert" />
+    <None Include="Shaders\BezierCurve\Solid.frag" />
+    <None Include="Shaders\BezierCurve\Solid.vert" />
     <None Include="Shaders\Bloom\Bloom.frag" />
     <None Include="Shaders\Bloom\Bloom.vert" />
     <None Include="Shaders\Celshading\Celshading.frag" />

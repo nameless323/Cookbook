@@ -1089,6 +1089,9 @@
     <ClInclude Include="Source\Scene\Chapter6\Silhouette.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter6\BezierCurve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1284,6 +1287,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter6\Silhouette.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter6\BezierCurve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2039,5 +2045,7 @@
     <None Include="Shaders\BezierCurve\BezierCurve.vert" />
     <None Include="Shaders\BezierCurve\BezierCurve.tesc" />
     <None Include="Shaders\BezierCurve\BezierCurve.tese" />
+    <None Include="Shaders\BezierCurve\Solid.vert" />
+    <None Include="Shaders\BezierCurve\Solid.frag" />
   </ItemGroup>
 </Project>
