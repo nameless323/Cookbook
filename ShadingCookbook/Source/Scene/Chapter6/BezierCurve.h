@@ -27,6 +27,8 @@ private:
 	glm::mat4 _projection;
 	GLuint _vao;
 	float _angle, _tPrev, _rotSpeed;
+	int _numSegments;
+	bool _uniformDirty;
 
 	void SetMatrices();
 	void CompileAndLinkShader();

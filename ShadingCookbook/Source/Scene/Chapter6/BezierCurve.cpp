@@ -7,14 +7,26 @@
 using glm::vec3;
 
 #include <gtc/matrix_transform.hpp>
+#include <GLFW/glfw3.h>
 #include <gtx/transform.hpp>
 
-BezierCurve::BezierCurve() : _angle(0.0f), _tPrev(0.0f), _rotSpeed(glm::pi<float>() / 8.0f)
+BezierCurve::BezierCurve() : _angle(0.0f), _tPrev(0.0f), _rotSpeed(glm::pi<float>() / 8.0f), _numSegments(50), _uniformDirty(false)
 {
 }
 
 void BezierCurve::ProcessInput(int key, int action)
 {
+	if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
+	{
+		_numSegments += 5;
+		_uniformDirty = true;
+	}
+	if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
+	{
+		_numSegments -= 5;
+		_numSegments = glm::max(0, _numSegments);
+		_uniformDirty = true;
+	}
 }
 
 void BezierCurve::InitScene()
@@ -46,7 +58,7 @@ void BezierCurve::InitScene()
 	glPatchParameteri(GL_PATCH_VERTICES, 4);
 
 	_shader.Use();
-	_shader.SetUniform("NumSegments", 50);
+	_shader.SetUniform("NumSegments", _numSegments);
 	_shader.SetUniform("NumStrips", 1);
 	_shader.SetUniform("LineColor", vec4(1.0f, 1.0f, 0.5f, 1.0f));
 
@@ -63,6 +75,13 @@ void BezierCurve::Update(float t)
 
 	_angle += _rotSpeed * dt;
 	if (_angle > glm::two_pi<float>()) _angle -= glm::two_pi<float>();
+
+	if (_uniformDirty)
+	{
+		_uniformDirty = false;
+		_shader.Use();
+		_shader.SetUniform("NumSegments", _numSegments);
+	}
 }
 
 void BezierCurve::Render()

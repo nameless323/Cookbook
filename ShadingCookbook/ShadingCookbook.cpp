@@ -43,6 +43,7 @@
 #include "Source/Scene/Chapter6/PointSprite.h"
 #include "Source/Scene/Chapter6/ShadedWireframe.h"
 #include "Source/Scene/Chapter6/Silhouette.h"
+#include "Source/Scene/Chapter6/BezierCurve.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -83,7 +84,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Silhouette;
+	scene = new BezierCurve;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
