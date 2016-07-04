@@ -2047,5 +2047,10 @@
     <None Include="Shaders\BezierCurve\BezierCurve.tese" />
     <None Include="Shaders\BezierCurve\Solid.vert" />
     <None Include="Shaders\BezierCurve\Solid.frag" />
+    <None Include="Shaders\QuadTess\QuadTess.vert" />
+    <None Include="Shaders\QuadTess\QuadTess.geom" />
+    <None Include="Shaders\QuadTess\QuadTess.tesc" />
+    <None Include="Shaders\QuadTess\QuadTess.tese" />
+    <None Include="Shaders\QuadTess\QuadTess.frag" />
   </ItemGroup>
 </Project>

@@ -875,6 +875,11 @@
     <None Include="Shaders\PointSprite\PointSprite.vert" />
     <None Include="Shaders\ProjectTex\ProjectTex.frag" />
     <None Include="Shaders\ProjectTex\ProjectTex.vert" />
+    <None Include="Shaders\QuadTess\QuadTess.frag" />
+    <None Include="Shaders\QuadTess\QuadTess.geom" />
+    <None Include="Shaders\QuadTess\QuadTess.tesc" />
+    <None Include="Shaders\QuadTess\QuadTess.tese" />
+    <None Include="Shaders\QuadTess\QuadTess.vert" />
     <None Include="Shaders\RenderToTex\RenderToTex.frag" />
     <None Include="Shaders\RenderToTex\RenderToTex.vert" />
     <None Include="Shaders\ShadedWireframe\ShadedWireframe.frag" />
