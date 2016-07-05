@@ -19,22 +19,22 @@ void QuadTess::ProcessInput(int key, int action)
 	if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
 	{
 		_inner += 1;
-		_inner = glm::min<GLuint>(_inner, 32);
+		_inner = glm::min<int>(_inner, 32);
 	}
 	if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
 	{
 		_inner -= 1;
-		_inner = glm::max<GLuint>(_inner, 1);
+		_inner = glm::max<int>(_inner, 1);
 	}
 	if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
 	{
 		_outer += 1;
-		_outer = glm::min<GLuint>(_outer, 32);
+		_outer = glm::min<int>(_outer, 32);
 	}
 	if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
 	{
 		_outer -= 1;
-		_outer = glm::max<GLuint>(_outer, 1);
+		_outer = glm::max<int>(_outer, 1);
 	}
 }
 
@@ -94,6 +94,8 @@ void QuadTess::Render()
 	_shader.Use();
 	glPatchParameteri(GL_PATCH_DEFAULT_INNER_LEVEL, _inner);
 	glPatchParameteri(GL_PATCH_DEFAULT_OUTER_LEVEL, _outer);
+	_shader.SetUniform("Inner", _inner);
+	_shader.SetUniform("Outer", _outer);
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_PATCHES, 0, 4);
 

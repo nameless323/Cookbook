@@ -22,8 +22,8 @@ private:
 	glm::mat4 _viewport;
 	glm::mat4 _projection;
 	GLuint _vao;
-	GLuint _inner;
-	GLuint _outer;
+	int _inner;
+	int _outer;
 
 	void SetMatrices();
 	void CompileAndLinkShader();
