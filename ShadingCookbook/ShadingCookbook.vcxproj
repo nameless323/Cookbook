@@ -506,6 +506,7 @@
     <ClInclude Include="Source\Scene\Chapter5\Tonemapping.h" />
     <ClInclude Include="Source\Scene\Chapter6\BezierCurve.h" />
     <ClInclude Include="Source\Scene\Chapter6\PointSprite.h" />
+    <ClInclude Include="Source\Scene\Chapter6\QuadTess.h" />
     <ClInclude Include="Source\Scene\Chapter6\ShadedWireframe.h" />
     <ClInclude Include="Source\Scene\Chapter6\Silhouette.h" />
     <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
@@ -577,6 +578,7 @@
     <ClCompile Include="Source\Scene\Chapter5\Tonemapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\BezierCurve.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\PointSprite.cpp" />
+    <ClCompile Include="Source\Scene\Chapter6\QuadTess.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\ShadedWireframe.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\Silhouette.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\JitterShadowSampling.cpp" />

@@ -1092,6 +1092,9 @@
     <ClInclude Include="Source\Scene\Chapter6\BezierCurve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter6\QuadTess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1290,6 +1293,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter6\BezierCurve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter6\QuadTess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
