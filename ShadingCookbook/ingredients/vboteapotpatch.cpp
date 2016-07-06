@@ -1,8 +1,7 @@
 #include "vboteapotpatch.h"
 #include "teapotdata.h"
-#include "glutils.h"
 
-#include "cookbookogl.h"
+#include <GL/glew.h>
 
 #include <cstdio>
 

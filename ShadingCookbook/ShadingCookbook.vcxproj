@@ -509,6 +509,7 @@
     <ClInclude Include="Source\Scene\Chapter6\QuadTess.h" />
     <ClInclude Include="Source\Scene\Chapter6\ShadedWireframe.h" />
     <ClInclude Include="Source\Scene\Chapter6\Silhouette.h" />
+    <ClInclude Include="Source\Scene\Chapter6\TessTeapot.h" />
     <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
     <ClInclude Include="Source\Scene\Chapter7\ShadowVolume.h" />
@@ -581,6 +582,7 @@
     <ClCompile Include="Source\Scene\Chapter6\QuadTess.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\ShadedWireframe.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\Silhouette.cpp" />
+    <ClCompile Include="Source\Scene\Chapter6\TessTeapot.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\JitterShadowSampling.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp" />

@@ -45,6 +45,7 @@
 #include "Source/Scene/Chapter6/Silhouette.h"
 #include "Source/Scene/Chapter6/BezierCurve.h"
 #include "Source/Scene/Chapter6/QuadTess.h"
+#include "Source/Scene/Chapter6/TessTeapot.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -85,7 +86,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new QuadTess;
+	scene = new TessTeapot;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
