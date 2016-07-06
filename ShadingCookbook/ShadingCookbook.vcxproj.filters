@@ -2058,5 +2058,10 @@
     <None Include="Shaders\QuadTess\QuadTess.tesc" />
     <None Include="Shaders\QuadTess\QuadTess.tese" />
     <None Include="Shaders\QuadTess\QuadTess.frag" />
+    <None Include="Shaders\TessTeapot\TessTeapot.vert" />
+    <None Include="Shaders\TessTeapot\TessTeapot.tesc" />
+    <None Include="Shaders\TessTeapot\TessTeapot.tese" />
+    <None Include="Shaders\TessTeapot\TessTeapot.geom" />
+    <None Include="Shaders\TessTeapot\TessTeapot.frag" />
   </ItemGroup>
 </Project>

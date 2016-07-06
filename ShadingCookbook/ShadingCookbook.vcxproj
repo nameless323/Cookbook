@@ -903,6 +903,11 @@
     <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />
     <None Include="Shaders\Subroutine\Subroutine.vert" />
+    <None Include="Shaders\TessTeapot\TessTeapot.frag" />
+    <None Include="Shaders\TessTeapot\TessTeapot.geom" />
+    <None Include="Shaders\TessTeapot\TessTeapot.tesc" />
+    <None Include="Shaders\TessTeapot\TessTeapot.tese" />
+    <None Include="Shaders\TessTeapot\TessTeapot.vert" />
     <None Include="Shaders\TexDiscard\TexDiscard.frag" />
     <None Include="Shaders\TexDiscard\TexDiscard.vert" />
     <None Include="Shaders\Tonemapping\Tonemapping.frag" />
