@@ -507,6 +507,7 @@
     <ClInclude Include="Source\Scene\Chapter6\BezierCurve.h" />
     <ClInclude Include="Source\Scene\Chapter6\PointSprite.h" />
     <ClInclude Include="Source\Scene\Chapter6\QuadTess.h" />
+    <ClInclude Include="Source\Scene\Chapter6\TeapotTessDepth.h" />
     <ClInclude Include="Source\Scene\Chapter6\ShadedWireframe.h" />
     <ClInclude Include="Source\Scene\Chapter6\Silhouette.h" />
     <ClInclude Include="Source\Scene\Chapter6\TessTeapot.h" />
@@ -580,6 +581,7 @@
     <ClCompile Include="Source\Scene\Chapter6\BezierCurve.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\PointSprite.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\QuadTess.cpp" />
+    <ClCompile Include="Source\Scene\Chapter6\TeapotTessDepth.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\ShadedWireframe.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\Silhouette.cpp" />
     <ClCompile Include="Source\Scene\Chapter6\TessTeapot.cpp" />
@@ -905,6 +907,11 @@
     <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />
     <None Include="Shaders\Subroutine\Subroutine.vert" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.frag" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.geom" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.tesc" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.tese" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.vert" />
     <None Include="Shaders\TessTeapot\TessTeapot.frag" />
     <None Include="Shaders\TessTeapot\TessTeapot.geom" />
     <None Include="Shaders\TessTeapot\TessTeapot.tesc" />

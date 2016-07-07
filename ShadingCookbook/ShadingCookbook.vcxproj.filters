@@ -1098,6 +1098,9 @@
     <ClInclude Include="Source\Scene\Chapter6\TessTeapot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter6\TeapotTessDepth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1302,6 +1305,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter6\TessTeapot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter6\TeapotTessDepth.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2069,5 +2075,10 @@
     <None Include="Shaders\TessTeapot\TessTeapot.tese" />
     <None Include="Shaders\TessTeapot\TessTeapot.geom" />
     <None Include="Shaders\TessTeapot\TessTeapot.frag" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.vert" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.tesc" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.tese" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.geom" />
+    <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.frag" />
   </ItemGroup>
 </Project>
