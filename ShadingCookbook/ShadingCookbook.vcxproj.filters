@@ -1101,6 +1101,9 @@
     <ClInclude Include="Source\Scene\Chapter6\TeapotTessDepth.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Items\NoiseTex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1308,6 +1311,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter6\TeapotTessDepth.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Items\NoiseTex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

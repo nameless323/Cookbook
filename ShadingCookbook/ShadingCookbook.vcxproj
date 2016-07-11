@@ -451,6 +451,7 @@
     <ClInclude Include="ingredients\scene.h" />
     <ClInclude Include="Source\Core\Frustum.h" />
     <ClInclude Include="Source\Items\MeshAdj.h" />
+    <ClInclude Include="Source\Items\NoiseTex.h" />
     <ClInclude Include="Source\Items\Skybox.h" />
     <ClInclude Include="ingredients\teapotdata.h" />
     <ClInclude Include="ingredients\tgaio.h" />
@@ -528,6 +529,7 @@
     <ClCompile Include="ingredients\gl_core_4_4.c" />
     <ClCompile Include="Source\Core\Frustum.cpp" />
     <ClCompile Include="Source\Items\MeshAdj.cpp" />
+    <ClCompile Include="Source\Items\NoiseTex.cpp" />
     <ClCompile Include="Source\Items\Skybox.cpp" />
     <ClCompile Include="ingredients\tgaio.cpp" />
     <ClCompile Include="ingredients\vbocube.cpp" />
