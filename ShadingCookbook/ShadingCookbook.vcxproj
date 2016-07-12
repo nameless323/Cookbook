@@ -515,6 +515,7 @@
     <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
     <ClInclude Include="Source\Scene\Chapter7\ShadowVolume.h" />
+    <ClInclude Include="Source\Scene\Chapter8\Sky.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -590,6 +591,7 @@
     <ClCompile Include="Source\Scene\Chapter7\JitterShadowSampling.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp" />
+    <ClCompile Include="Source\Scene\Chapter8\Sky.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -907,6 +909,8 @@
     <None Include="Shaders\Silhouette\Silhouette.vert" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.frag" />
     <None Include="Shaders\SimpleTexture\SimpleTexture.vert" />
+    <None Include="Shaders\Sky\Sky.frag" />
+    <None Include="Shaders\Sky\Sky.vert" />
     <None Include="Shaders\Subroutine\Subroutine.frag" />
     <None Include="Shaders\Subroutine\Subroutine.vert" />
     <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.frag" />

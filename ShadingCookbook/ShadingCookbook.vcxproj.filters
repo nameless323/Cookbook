@@ -1104,6 +1104,9 @@
     <ClInclude Include="Source\Items\NoiseTex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter8\Sky.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1314,6 +1317,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Items\NoiseTex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter8\Sky.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2086,5 +2092,7 @@
     <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.tese" />
     <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.geom" />
     <None Include="Shaders\TeapotTessDepth\TeapotTessDepth.frag" />
+    <None Include="Shaders\Sky\Sky.vert" />
+    <None Include="Shaders\Sky\Sky.frag" />
   </ItemGroup>
 </Project>
