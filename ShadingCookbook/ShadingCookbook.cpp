@@ -47,6 +47,7 @@
 #include "Source/Scene/Chapter6/QuadTess.h"
 #include "Source/Scene/Chapter6/TessTeapot.h"
 #include "Source/Scene/Chapter6/TeapotTessDepth.h"
+#include "Source/Scene/Chapter8/Sky.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -87,7 +88,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new TeapotTessDepth;
+	scene = new Sky;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

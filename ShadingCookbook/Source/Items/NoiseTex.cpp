@@ -62,6 +62,11 @@ int NoiseTex::Generate2DTex(float baseFreq, float persistence, int w, int h, boo
 			}
 		}
 	}
+	int texId = NoiseTex::StoreTex(data, width, height);
+	delete[] data;
+
+	printf("done.\n");
+	return texId;
 }
 
 int NoiseTex::GeneratePeriodic2DTex(float baseFreq, float persist, int w, int h)

@@ -24,17 +24,25 @@ void Sky::InitScene()
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
 	glEnable(GL_DEPTH_TEST);
-	_projection = mat4(1.0);
+	_projection = glm::mat4(1.0);
 
 	GLfloat verts[] = 
 	{
-		-1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-		-1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f
+		-1.0f, -1.0f, 0.0f, 
+		1.0f, -1.0f, 0.0f, 
+		1.0f, 1.0f, 0.0f,
+		-1.0f, -1.0f, 0.0f, 
+		1.0f, 1.0f, 0.0f, 
+		-1.0f, 1.0f, 0.0f
 	};
 	GLfloat tc[] = 
 	{
-		0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-		0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f
+		0.0f, 0.0f, 
+		1.0f, 0.0f, 
+		1.0f, 1.0f,
+		0.0f, 0.0f, 
+		1.0f, 1.0f, 
+		0.0f, 1.0f
 	};
 
 	unsigned int handle[2];
@@ -53,6 +61,7 @@ void Sky::InitScene()
 	glVertexAttribPointer((GLuint)0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glEnableVertexAttribArray(0);
 
+	glBindBuffer(GL_ARRAY_BUFFER, handle[1]);
 	glVertexAttribPointer((GLuint)2, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glEnableVertexAttribArray(2);
 
