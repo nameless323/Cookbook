@@ -516,6 +516,7 @@
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
     <ClInclude Include="Source\Scene\Chapter7\ShadowVolume.h" />
     <ClInclude Include="Source\Scene\Chapter8\Sky.h" />
+    <ClInclude Include="Source\Scene\Chapter8\Wood.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -592,6 +593,7 @@
     <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp" />
     <ClCompile Include="Source\Scene\Chapter8\Sky.cpp" />
+    <ClCompile Include="Source\Scene\Chapter8\Wood.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -929,6 +931,8 @@
     <None Include="Shaders\Tonemapping\Tonemapping.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
     <None Include="Shaders\Uniforms\Blob.vert" />
+    <None Include="Shaders\Wood\Wood.frag" />
+    <None Include="Shaders\Wood\Wood.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
