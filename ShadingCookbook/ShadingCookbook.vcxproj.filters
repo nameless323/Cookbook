@@ -1110,6 +1110,9 @@
     <ClInclude Include="Source\Scene\Chapter8\Wood.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter8\Decay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1326,6 +1329,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter8\Wood.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter8\Decay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2102,5 +2108,7 @@
     <None Include="Shaders\Sky\Sky.frag" />
     <None Include="Shaders\Wood\Wood.vert" />
     <None Include="Shaders\Wood\Wood.frag" />
+    <None Include="Shaders\Decay\Decay.vert" />
+    <None Include="Shaders\Decay\Decay.frag" />
   </ItemGroup>
 </Project>

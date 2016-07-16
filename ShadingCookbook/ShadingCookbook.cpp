@@ -49,6 +49,7 @@
 #include "Source/Scene/Chapter6/TeapotTessDepth.h"
 #include "Source/Scene/Chapter8/Sky.h"
 #include "Source/Scene/Chapter8/Wood.h"
+#include "Source/Scene/Chapter8/Decay.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -89,7 +90,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Wood;
+	scene = new Decay;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

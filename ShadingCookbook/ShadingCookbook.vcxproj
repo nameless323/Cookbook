@@ -515,6 +515,7 @@
     <ClInclude Include="Source\Scene\Chapter7\JitterShadowSampling.h" />
     <ClInclude Include="Source\Scene\Chapter7\Shadowmapping.h" />
     <ClInclude Include="Source\Scene\Chapter7\ShadowVolume.h" />
+    <ClInclude Include="Source\Scene\Chapter8\Decay.h" />
     <ClInclude Include="Source\Scene\Chapter8\Sky.h" />
     <ClInclude Include="Source\Scene\Chapter8\Wood.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
@@ -592,6 +593,7 @@
     <ClCompile Include="Source\Scene\Chapter7\JitterShadowSampling.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\Shadowmapping.cpp" />
     <ClCompile Include="Source\Scene\Chapter7\ShadowVolume.cpp" />
+    <ClCompile Include="Source\Scene\Chapter8\Decay.cpp" />
     <ClCompile Include="Source\Scene\Chapter8\Sky.cpp" />
     <ClCompile Include="Source\Scene\Chapter8\Wood.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -836,6 +838,8 @@
     <None Include="Shaders\Cubemap\CubemapReflect\CubemapReflect.vert" />
     <None Include="Shaders\Cubemap\CubemapRefract\CubemapRefract.frag" />
     <None Include="Shaders\Cubemap\CubemapRefract\CubemapRefract.vert" />
+    <None Include="Shaders\Decay\Decay.frag" />
+    <None Include="Shaders\Decay\Decay.vert" />
     <None Include="Shaders\Deferred\Deferred.frag" />
     <None Include="Shaders\Deferred\Deferred.vert" />
     <None Include="Shaders\Diffuse\Diffuse.frag" />
