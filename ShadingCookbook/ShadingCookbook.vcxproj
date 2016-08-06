@@ -872,6 +872,8 @@
     <None Include="Shaders\NormalMapping\NormalMapping.vert" />
     <None Include="Shaders\OIT\OIT.frag" />
     <None Include="Shaders\OIT\OIT.vert" />
+    <None Include="Shaders\Paint\Paint.frag" />
+    <None Include="Shaders\Paint\Paint.vert" />
     <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Particles\Particles.frag" />
     <None Include="Shaders\Particles\Particles.vert" />
