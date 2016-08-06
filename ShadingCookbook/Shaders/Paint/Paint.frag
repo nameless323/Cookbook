@@ -47,7 +47,7 @@ vec3 phongModel(vec3 kd)
 void main()
 {
 	vec4 noise = texture(NoiseTex, TexCoord);
-	vec3 color = Material.kd;
+	vec3 color = Material.Kd;
 	if (noise.a > Threshold)
 		color = PaintColor;
 
