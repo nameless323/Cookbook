@@ -1116,6 +1116,9 @@
     <ClInclude Include="Source\Scene\Chapter8\Paint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter8\NightVision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1338,6 +1341,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter8\Paint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter8\NightVision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2118,5 +2124,7 @@
     <None Include="Shaders\Decay\Decay.frag" />
     <None Include="Shaders\Paint\Paint.vert" />
     <None Include="Shaders\Paint\Paint.frag" />
+    <None Include="Shaders\NightVision\NightVision.vert" />
+    <None Include="Shaders\NightVision\NightVision.frag" />
   </ItemGroup>
 </Project>
