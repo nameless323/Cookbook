@@ -51,6 +51,7 @@
 #include "Source/Scene/Chapter8/Wood.h"
 #include "Source/Scene/Chapter8/Decay.h"
 #include "Source/Scene/Chapter8/Paint.h"
+#include "Source/Scene/Chapter8/NightVision.h"
 
 Scene* scene;
 GLFWwindow* window;

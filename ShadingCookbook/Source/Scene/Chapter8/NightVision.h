@@ -26,6 +26,7 @@ private:
 	ShaderProgram _shader;
 	int _width, _height;
 	GLuint _renderFBO;
+	GLuint _fsQuad;
 	GLuint _renderTex;
 	GLuint _noiseTex;
 	Teapot* _teapot;
@@ -41,11 +42,11 @@ private:
 	bool _autorotate;
 	bool _rotateLeft;
 	bool _rotateRight;
-
+	GLuint _pass1Index;
+	GLuint _pass2Index;
 	void SetMatrices();
 	void CompileAndLinkShader();
 	void SetupFBO();
 	void Pass1();
 	void Pass2();
-	void RenderScene();
 };

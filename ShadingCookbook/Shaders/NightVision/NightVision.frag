@@ -47,7 +47,7 @@ vec3 phongModel( vec3 pos, vec3 norm )
     return ambient + diffuse + spec;
 }
 
-float luninance(vec3 color)
+float luminance(vec3 color)
 {
 	return dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
 }
@@ -55,7 +55,7 @@ float luninance(vec3 color)
 subroutine (RenderPassType)
 vec4 pass1()
 {
-	return vec4 (phongModel(Position, Normal, 1.0));
+	return vec4 (phongModel(Position, Normal), 1.0);
 }
 
 subroutine (RenderPassType)
@@ -70,7 +70,6 @@ vec4 pass2()
 
 	if (dist1 > Radius && dist2 > Radius) 
 		green = 0.0;
-
 	return vec4(0.0, green * clamp(noise.a, 0.0, 1.0), 0.0, 1.0);
 }
 
