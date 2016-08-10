@@ -92,7 +92,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Paint;
+	scene = new NightVision;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

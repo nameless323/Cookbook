@@ -85,7 +85,7 @@ void NightVision::InitScene()
 
 	_shader.SetUniform("Width", _width);
 	_shader.SetUniform("Height", _height);
-	_shader.SetUniform("Radius", 285.0f);
+	_shader.SetUniform("Radius", 385.0f);
 	_shader.SetUniform("Light.Intensity", vec3(1.0f, 1.0f, 1.0f));
 
 	_noiseTex = NoiseTex::GeneratePeriodic2DTex(200.0f, 0.5f, 512, 512);
@@ -116,14 +116,13 @@ void NightVision::SetupFBO()
 	glGenFramebuffers(1, &_renderFBO);
 	glBindFramebuffer(GL_FRAMEBUFFER, _renderFBO);
 
-	GLuint renderTex;
-	glGenTextures(1, &renderTex);
-	glBindTexture(GL_TEXTURE_2D, renderTex);
+	glGenTextures(1, &_renderTex);
+	glBindTexture(GL_TEXTURE_2D, _renderTex);
 	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, _width, _height);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _renderTex, 0);
 
 	GLuint depthBuf;
 	glGenRenderbuffers(1, &depthBuf);
