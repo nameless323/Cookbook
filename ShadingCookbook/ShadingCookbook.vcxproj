@@ -943,6 +943,8 @@
     <None Include="Shaders\Tonemapping\Tonemapping.vert" />
     <None Include="Shaders\Uniforms\Blob.frag" />
     <None Include="Shaders\Uniforms\Blob.vert" />
+    <None Include="Shaders\Waves\Waves.frag" />
+    <None Include="Shaders\Waves\Waves.vert" />
     <None Include="Shaders\Wood\Wood.frag" />
     <None Include="Shaders\Wood\Wood.vert" />
   </ItemGroup>

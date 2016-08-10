@@ -2126,5 +2126,7 @@
     <None Include="Shaders\Paint\Paint.frag" />
     <None Include="Shaders\NightVision\NightVision.vert" />
     <None Include="Shaders\NightVision\NightVision.frag" />
+    <None Include="Shaders\Waves\Waves.vert" />
+    <None Include="Shaders\Waves\Waves.frag" />
   </ItemGroup>
 </Project>
