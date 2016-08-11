@@ -1119,6 +1119,9 @@
     <ClInclude Include="Source\Scene\Chapter8\NightVision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter9\Waves.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1344,6 +1347,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter8\NightVision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter9\Waves.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -52,6 +52,7 @@
 #include "Source/Scene/Chapter8/Decay.h"
 #include "Source/Scene/Chapter8/Paint.h"
 #include "Source/Scene/Chapter8/NightVision.h"
+#include "Source/Scene/Chapter9/Waves.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -92,7 +93,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new NightVision;
+	scene = new Waves;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
