@@ -2134,5 +2134,7 @@
     <None Include="Shaders\NightVision\NightVision.frag" />
     <None Include="Shaders\Waves\Waves.vert" />
     <None Include="Shaders\Waves\Waves.frag" />
+    <None Include="Shaders\SimpleParticles\SimpleParticles.vert" />
+    <None Include="Shaders\SimpleParticles\SimpleParticles.frag" />
   </ItemGroup>
 </Project>
