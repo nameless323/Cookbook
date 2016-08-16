@@ -520,6 +520,7 @@
     <ClInclude Include="Source\Scene\Chapter8\Paint.h" />
     <ClInclude Include="Source\Scene\Chapter8\Sky.h" />
     <ClInclude Include="Source\Scene\Chapter8\Wood.h" />
+    <ClInclude Include="Source\Scene\Chapter9\SimpleParticles.h" />
     <ClInclude Include="Source\Scene\Chapter9\Waves.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="stdafx.h" />
@@ -601,6 +602,7 @@
     <ClCompile Include="Source\Scene\Chapter8\Paint.cpp" />
     <ClCompile Include="Source\Scene\Chapter8\Sky.cpp" />
     <ClCompile Include="Source\Scene\Chapter8\Wood.cpp" />
+    <ClCompile Include="Source\Scene\Chapter9\SimpleParticles.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\Waves.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
