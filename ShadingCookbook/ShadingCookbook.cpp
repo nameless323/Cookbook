@@ -53,6 +53,7 @@
 #include "Source/Scene/Chapter8/Paint.h"
 #include "Source/Scene/Chapter8/NightVision.h"
 #include "Source/Scene/Chapter9/Waves.h"
+#include "Source/Scene/Chapter9/SimpleParticles.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -93,7 +94,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new Waves;
+	scene = new SimpleParticles;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

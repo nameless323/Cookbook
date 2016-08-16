@@ -153,6 +153,7 @@ void SimpleParticles::InitBuffers()
 
 	glGenVertexArrays(1, &_particles);
 	glBindVertexArray(_particles);
+	glBindBuffer(GL_ARRAY_BUFFER, _initVel);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glEnableVertexAttribArray(0);
 
