@@ -1125,6 +1125,9 @@
     <ClInclude Include="Source\Scene\Chapter9\SimpleParticles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter9\ParticlesFeedback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1356,6 +1359,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter9\SimpleParticles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter9\ParticlesFeedback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
