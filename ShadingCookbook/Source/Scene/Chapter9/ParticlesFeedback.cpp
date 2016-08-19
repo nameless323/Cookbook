@@ -96,8 +96,127 @@ void ParticlesFeedback::Resize(int x, int y)
 
 void ParticlesFeedback::InitBuffers()
 {
+	_nParticles = 4000;
 
+	glGenBuffers(2, _posBuf);
+	glGenBuffers(2, _velBuf);
+	glGenBuffers(2, _startTime);
+	glGenBuffers(1, &_initVel);
 
+	int size = _nParticles * 3 * sizeof(GLfloat);
+	glBindBuffer(GL_ARRAY_BUFFER, _posBuf[0]);
+	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_COPY);
+	glBindBuffer(GL_ARRAY_BUFFER, _posBuf[1]);
+	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_COPY);
+	glBindBuffer(GL_ARRAY_BUFFER, _velBuf[0]);
+	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_COPY);
+	glBindBuffer(GL_ARRAY_BUFFER, _velBuf[1]);
+	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_COPY);
+	glBindBuffer(GL_ARRAY_BUFFER, _initVel);
+	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, _startTime[0]);
+	glBufferData(GL_ARRAY_BUFFER, _nParticles * sizeof(float), nullptr, GL_DYNAMIC_COPY);
+	glBindBuffer(GL_ARRAY_BUFFER, _startTime[1]);
+	glBufferData(GL_ARRAY_BUFFER, _nParticles * sizeof(float), nullptr, GL_DYNAMIC_COPY);
+
+	GLfloat* data = new GLfloat[_nParticles * 3];
+	for (int i = 0; i < _nParticles * 3; i++)
+		data[i] = 0.0f;
+	glBindBuffer(GL_ARRAY_BUFFER, _posBuf[0]);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+
+	vec3 v(0.0f);
+	float velocity, theta, phi;
+	for(int i = 0; i < _nParticles; i++)
+	{
+		theta = glm::mix(0.0f, glm::pi<float>() / 6.0f, RandFloat());
+		phi = glm::mix(0.0f, glm::two_pi<float>(), RandFloat());
+
+		v.x = sinf(theta) * cosf(phi);
+		v.y = cosf(theta);
+		v.z = sinf(theta) * sinf(phi);
+
+		velocity = glm::mix(1.25f, 1.5f, RandFloat());
+		v = glm::normalize(v) * velocity;
+
+		data[3 * i] = v.x;
+		data[3 * i + 1] = v.y;
+		data[3 * i + 2] = v.z;
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, _velBuf[0]);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+	glBindBuffer(GL_ARRAY_BUFFER, _initVel);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+
+	delete[] data;
+	data = new GLfloat[_nParticles];
+	float time = 0.0f;
+	float rate = 0.001f;
+	for (int i = 0; i < _nParticles; i++)
+	{
+		data[i] = time;
+		time += rate;
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, _startTime[0]);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, _nParticles * sizeof(float), data);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	delete[] data;
+
+	glGenVertexArrays(2, _particleArray);
+
+	glBindVertexArray(_particleArray[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, _posBuf[0]);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, _velBuf[0]);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, _startTime[0]);
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(2);
+
+	glBindBuffer(GL_ARRAY_BUFFER, _initVel);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(3);
+
+	glBindVertexArray(_particleArray[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, _posBuf[1]);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, _velBuf[1]);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, _startTime[1]);
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(2);
+
+	glBindBuffer(GL_ARRAY_BUFFER, _initVel);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(3);
+
+	glBindVertexArray(0);
+
+	glGenTransformFeedbacks(2, _feedback);
+	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, _feedback[0]);
+	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, _posBuf[0]);
+	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 1, _velBuf[0]);
+	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 2, _startTime[0]);
+
+	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, _feedback[1]);
+	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, _posBuf[1]);
+	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 1, _velBuf[1]);
+	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 2, _startTime[1]);
+
+	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, 0);
+
+	GLint value;
+	glGetIntegerv(GL_MAX_TRANSFORM_FEEDBACK_BUFFERS, &value);
+	printf("MAX_TRANSFORM_FEEDBACK = %d\n", value);
 }
 
 float ParticlesFeedback::RandFloat()
