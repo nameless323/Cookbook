@@ -39,7 +39,7 @@ void ParticlesFeedback::InitScene()
 
 	InitBuffers();
 
-	const char* texName = "./media/texture/bluewater.bmp";
+	const char* texName = "./media/texture/brick1.bmp";
 	glActiveTexture(GL_TEXTURE0);
 	BMPReader::loadTex(texName);
 

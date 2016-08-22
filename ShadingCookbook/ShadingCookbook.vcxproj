@@ -886,6 +886,8 @@
     <None Include="Shaders\OIT\OIT.vert" />
     <None Include="Shaders\Paint\Paint.frag" />
     <None Include="Shaders\Paint\Paint.vert" />
+    <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.frag" />
+    <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.vert" />
     <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Particles\Particles.frag" />
     <None Include="Shaders\Particles\Particles.vert" />

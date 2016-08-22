@@ -9,7 +9,7 @@
 
 using glm::mat4;
 
-class ParticlesFeedback : Scene
+class ParticlesFeedback : public Scene
 {
 public:
 	ParticlesFeedback();

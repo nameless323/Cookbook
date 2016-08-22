@@ -2148,5 +2148,7 @@
     <None Include="Shaders\Waves\Waves.frag" />
     <None Include="Shaders\SimpleParticles\SimpleParticles.vert" />
     <None Include="Shaders\SimpleParticles\SimpleParticles.frag" />
+    <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.vert" />
+    <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.frag" />
   </ItemGroup>
 </Project>
