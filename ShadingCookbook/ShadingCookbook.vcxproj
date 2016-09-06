@@ -521,6 +521,7 @@
     <ClInclude Include="Source\Scene\Chapter8\Sky.h" />
     <ClInclude Include="Source\Scene\Chapter8\Wood.h" />
     <ClInclude Include="Source\Scene\Chapter9\ParticlesFeedback.h" />
+    <ClInclude Include="Source\Scene\Chapter9\ParticlesInstancing.h" />
     <ClInclude Include="Source\Scene\Chapter9\SimpleParticles.h" />
     <ClInclude Include="Source\Scene\Chapter9\Waves.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
@@ -604,6 +605,7 @@
     <ClCompile Include="Source\Scene\Chapter8\Sky.cpp" />
     <ClCompile Include="Source\Scene\Chapter8\Wood.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\ParticlesFeedback.cpp" />
+    <ClCompile Include="Source\Scene\Chapter9\ParticlesInstancing.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\SimpleParticles.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\Waves.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -888,6 +890,8 @@
     <None Include="Shaders\Paint\Paint.vert" />
     <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.frag" />
     <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.vert" />
+    <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.frag" />
+    <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.vert" />
     <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Particles\Particles.frag" />
     <None Include="Shaders\Particles\Particles.vert" />
