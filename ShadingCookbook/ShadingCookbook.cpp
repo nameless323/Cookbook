@@ -55,6 +55,7 @@
 #include "Source/Scene/Chapter9/Waves.h"
 #include "Source/Scene/Chapter9/SimpleParticles.h"
 #include "Source/Scene/Chapter9/ParticlesFeedback.h"
+#include "Source/Scene/Chapter9/ParticlesInstancing.h"
 
 Scene* scene;
 GLFWwindow* window;
@@ -95,7 +96,7 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-	scene = new ParticlesFeedback;
+	scene = new ParticlesInstancing;
 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

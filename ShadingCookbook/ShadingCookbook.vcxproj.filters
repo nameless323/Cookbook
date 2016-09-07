@@ -2158,5 +2158,8 @@
     <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.frag" />
     <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.vert" />
     <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.frag" />
+    <None Include="Shaders\ParticlesFire\ParticlesFire.vert" />
+    <None Include="Shaders\ParticlesFire\ParticlesFire.frag" />
+    <None Include="Shaders\ParticlesSmoke\ParticlesSmoke.vert" />
   </ItemGroup>
 </Project>

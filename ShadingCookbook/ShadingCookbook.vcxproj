@@ -890,8 +890,11 @@
     <None Include="Shaders\Paint\Paint.vert" />
     <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.frag" />
     <None Include="Shaders\ParticlesFeedback\ParticlesFeedback.vert" />
+    <None Include="Shaders\ParticlesFire\ParticlesFire.frag" />
+    <None Include="Shaders\ParticlesFire\ParticlesFire.vert" />
     <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.frag" />
     <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.vert" />
+    <None Include="Shaders\ParticlesSmoke\ParticlesSmoke.vert" />
     <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Particles\Particles.frag" />
     <None Include="Shaders\Particles\Particles.vert" />
