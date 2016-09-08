@@ -2161,5 +2161,6 @@
     <None Include="Shaders\ParticlesFire\ParticlesFire.vert" />
     <None Include="Shaders\ParticlesFire\ParticlesFire.frag" />
     <None Include="Shaders\ParticlesSmoke\ParticlesSmoke.vert" />
+    <None Include="Shaders\ParticlesSmoke\ParticlesSmoke.frag" />
   </ItemGroup>
 </Project>

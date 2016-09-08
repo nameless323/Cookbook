@@ -894,6 +894,7 @@
     <None Include="Shaders\ParticlesFire\ParticlesFire.vert" />
     <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.frag" />
     <None Include="Shaders\ParticlesInstancing\ParticlesInstancing.vert" />
+    <None Include="Shaders\ParticlesSmoke\ParticlesSmoke.frag" />
     <None Include="Shaders\ParticlesSmoke\ParticlesSmoke.vert" />
     <None Include="Shaders\Particles\Particles.comp" />
     <None Include="Shaders\Particles\Particles.frag" />
