@@ -4,7 +4,7 @@ subroutine void RenderPassType();
 subroutine uniform RenderPassType RenderPass;
 
 layout (location = 0) in vec3 VertexPosition;
-layout (locaiton = 1) in vec3 VertexVelocity;
+layout (location = 1) in vec3 VertexVelocity;
 layout (location = 2) in float VertexStartTime;
 layout (location = 3) in vec3 VertexInitialVelocity;
 
@@ -33,7 +33,7 @@ void update()
 
 		if (age > ParticleLifetime)
 		{
-			Position = vec3(Position.x, 0.0, 0.0);
+			Position = vec3(Position.x, 0.0, 1.0);
 			Velocity = VertexInitialVelocity;
 			StartTime = Time;
 		}

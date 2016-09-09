@@ -1131,6 +1131,9 @@
     <ClInclude Include="Source\Scene\Chapter9\ParticlesInstancing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Chapter9\ParticlesFire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1368,6 +1371,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\Chapter9\ParticlesInstancing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Chapter9\ParticlesFire.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

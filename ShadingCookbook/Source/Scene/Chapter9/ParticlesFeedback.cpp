@@ -12,7 +12,7 @@ using glm::mat4;
 #include <GLFW/glfw3.h>
 #include <gtx/transform.hpp>
 
-ParticlesFeedback::ParticlesFeedback() : _width(1024), _height(768), _drawBuf(0), _time(0), _dt(0)
+ParticlesFeedback::ParticlesFeedback() : _width(1024), _height(768), _drawBuf(1), _time(0), _dt(0)
 {
 }
 
