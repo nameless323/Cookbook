@@ -523,6 +523,7 @@
     <ClInclude Include="Source\Scene\Chapter9\ParticlesFeedback.h" />
     <ClInclude Include="Source\Scene\Chapter9\ParticlesFire.h" />
     <ClInclude Include="Source\Scene\Chapter9\ParticlesInstancing.h" />
+    <ClInclude Include="Source\Scene\Chapter9\ParticlesSmoke.h" />
     <ClInclude Include="Source\Scene\Chapter9\SimpleParticles.h" />
     <ClInclude Include="Source\Scene\Chapter9\Waves.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
@@ -608,6 +609,7 @@
     <ClCompile Include="Source\Scene\Chapter9\ParticlesFeedback.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\ParticlesFire.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\ParticlesInstancing.cpp" />
+    <ClCompile Include="Source\Scene\Chapter9\ParticlesSmoke.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\SimpleParticles.cpp" />
     <ClCompile Include="Source\Scene\Chapter9\Waves.cpp" />
     <ClCompile Include="stdafx.cpp" />

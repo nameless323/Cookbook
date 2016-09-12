@@ -58,7 +58,7 @@ void render()
 		float agePct = age / ParticleLifetime;
 		Transp = 1.0 - agePct;
 	}
-	gl_Position = MVP * vec4(VertexStartTime, 1.0);
+	gl_Position = MVP * vec4(VertexPosition, 1.0);
 }
 
 void main()
