@@ -35,7 +35,7 @@ void JitterShadowSampling::InitScene()
     _plane = new Plane(20.0f, 20.0f, 2, 2);
     float scale = 2.0f;
     _torus = new Torus(0.7f * scale, 0.3f * scale, 50, 50);
-    _mesh = new Mesh("media/building.obj");
+    _mesh = new Mesh("media/building.obj.txt");
 
     SetupFBO();
     BuildJitterTex();

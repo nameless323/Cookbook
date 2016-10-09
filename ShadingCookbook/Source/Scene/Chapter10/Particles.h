@@ -14,6 +14,9 @@ class Particles : public Scene
 public:
     Particles();
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
     void Update(float t);
     void Render() override;

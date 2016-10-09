@@ -30,7 +30,7 @@ void ShadowVolume::InitScene()
     _angle = 0.0f;
 
     _plane = new Plane(10.0f, 10.0f, 2, 2, 5.0f, 5.0f);
-    _spot = new MeshAdj("./media/spot/spot_triangulated.obj");
+    _spot = new MeshAdj("./media/spot/spot_triangulated.obj.txt");
 
     SetupFBO();
 

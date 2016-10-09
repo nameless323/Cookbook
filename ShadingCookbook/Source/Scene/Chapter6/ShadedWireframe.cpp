@@ -29,7 +29,7 @@ void ShadedWireframe::InitScene()
     float c = 1.5f;
     //	_projection = glm::ortho(-0.4f * c, 0.4f * c, -0.3f *c, 0.3f*c, 0.1f, 100.0f);
 
-    _ogre = new Mesh("./media/bs_ears.obj");
+    _ogre = new Mesh("./media/bs_ears.obj.txt");
     _shader.SetUniform("SpriteTex", 0);
     _shader.SetUniform("Size2", 0.15f);
 

@@ -41,7 +41,7 @@ void GammaCorrection::InitScene()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     CompileAndLinkShader();
-    _ogre = new Mesh("./media/bs_ears.obj", false, true, true);
+    _ogre = new Mesh("./media/bs_ears.obj.txt", false, true, true);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     float c = 2.5f;
     _projection = glm::ortho(-0.4f * c, 0.4f * c, -0.3f * c, 0.3f * c, 0.1f, 100.0f);

@@ -32,7 +32,7 @@ void Silhouette::InitScene()
     float c = 1.5f;
     //	_projection = glm::ortho(-0.4f * c, 0.4f * c, -0.3f *c, 0.3f*c, 0.1f, 100.0f);
 
-    _ogre = new MeshAdj("./media/spot/spot_triangulated.obj");
+    _ogre = new MeshAdj("./media/spot/spot_triangulated.obj.txt");
     _angle = glm::half_pi<float>();
 
     _shader.SetUniform("EdgeWidth", 0.015f);

@@ -37,7 +37,7 @@ void Multilight::InitScene()
     CompileAndLinkShader();
 
     _plane = new Plane(10.0f, 10.0f, 100, 100);
-    _piggy = new Mesh("./media/pig_triangulated.obj", true);
+    _piggy = new Mesh("./media/pig_triangulated.obj.txt", true);
     _view = lookAt(vec3(0.5f, 0.75f, 0.75f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
     _projection = mat4(1.0f);

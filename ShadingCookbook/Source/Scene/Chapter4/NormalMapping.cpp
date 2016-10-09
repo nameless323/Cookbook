@@ -36,7 +36,7 @@ void NormalMapping::InitScene()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     CompileAndLinkShader();
-    _ogre = new Mesh("./media/bs_ears.obj", false, true, true);
+    _ogre = new Mesh("./media/bs_ears.obj.txt", false, true, true);
 
     _view = glm::lookAt(vec3(-1.0f, 0.25f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
     _projection = mat4(1.0f);
