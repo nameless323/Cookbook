@@ -1,9 +1,14 @@
 #include "OIT.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "../../Core/TGA.h"
 #include <vector>
+
+#include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 using std::vector;
 
@@ -39,11 +44,11 @@ void OIT::InitScene()
     _pass1Index = glGetSubroutineIndex(programHandle, GL_FRAGMENT_SHADER, "pass1");
     _pass2Index = glGetSubroutineIndex(programHandle, GL_FRAGMENT_SHADER, "pass2");
 
-    GLfloat verts[] = { 
-        -1.0f, -1.0f, 0.0f, 
+    GLfloat verts[] = {
+        -1.0f, -1.0f, 0.0f,
         1.0f, -1.0f, 0.0f,
-        1.0f, 1.0f, 0.0f, 
-        -1.0f, 1.0f, 0.0f };
+        1.0f, 1.0f, 0.0f,
+        -1.0f, 1.0f, 0.0f};
     GLuint bufHandle;
     glGenBuffers(1, &bufHandle);
     glBindBuffer(GL_ARRAY_BUFFER, bufHandle);
@@ -110,9 +115,9 @@ void OIT::DrawScene()
     float size = 0.45f;
     for (int i = 0; i <= 6; i++)
         for (int j = 0; j <= 6; j++)
-            for (int k = 0; k <= 6; k++) 
+            for (int k = 0; k <= 6; k++)
             {
-                if ((i + j + k) % 2 == 0) 
+                if ((i + j + k) % 2 == 0)
                 {
                     _model = translate(mat4(1.0f), vec3(i - 3, j - 3, k - 3));
                     _model = scale(_model, vec3(size));
@@ -177,11 +182,11 @@ void OIT::InitShaderStorage()
 
     _shader.SetUniform("MaxNodes", maxNodes);
 
-    vector<GLuint> headPtrClearBuf(_width*_height, 0xffffffff);
+    vector<GLuint> headPtrClearBuf(_width * _height, 0xffffffff);
     glGenBuffers(1, &_clearBuf);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, _clearBuf);
     glBufferData(GL_PIXEL_UNPACK_BUFFER, headPtrClearBuf.size() * sizeof(GLuint),
-        &headPtrClearBuf[0], GL_STATIC_COPY);
+                                       &headPtrClearBuf[0], GL_STATIC_COPY);
 }
 
 void OIT::ClearBuffers()
@@ -193,7 +198,7 @@ void OIT::ClearBuffers()
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, _clearBuf);
     glBindTexture(GL_TEXTURE_2D, _headPtrTex);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, GL_RED_INTEGER,
-        GL_UNSIGNED_INT, nullptr);
+                                 GL_UNSIGNED_INT, nullptr);
 }
 
 void OIT::Update(float t)
@@ -202,11 +207,10 @@ void OIT::Update(float t)
     if (_tPrev == 0.0f)
         dt = 0.0f;
     _tPrev = t;
-    _angle += _rotSpeed*dt;
+    _angle += _rotSpeed * dt;
     if (_angle > glm::two_pi<float>())
         _angle -= glm::two_pi<float>();
 }
-
 
 void OIT::Shutdown()
 {
@@ -217,7 +221,7 @@ void OIT::SetMatrices()
     mat4 mv = _view * _model;
     _shader.SetUniform("ModelViewMatrix", mv);
     _shader.SetUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-    _shader.SetUniform("MVP", _projection*mv);
+    _shader.SetUniform("MVP", _projection * mv);
 }
 
 void OIT::Resize(int w, int h)
@@ -237,7 +241,6 @@ void OIT::CompileAndLinkShader()
         _shader.Link();
         _shader.Validate();
         _shader.Use();
-
     }
     catch (ShaderProgramException& e)
     {
@@ -245,4 +248,4 @@ void OIT::CompileAndLinkShader()
         //exit(EXIT_FAILURE);
     }
 }
-
+}

@@ -1,14 +1,19 @@
 #include "Deferred.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "../../Core/TGA.h"
 #include <vector>
+
+#include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 using std::vector;
 
 Deferred::Deferred() :
-    _width(600), _height(600), _angle(0.0f), _tPrev(0.0f), _rotSpeed(glm::pi<float>()/8.0f)
+    _width(600), _height(600), _angle(0.0f), _tPrev(0.0f), _rotSpeed(glm::pi<float>() / 8.0f)
 {
 }
 
@@ -32,11 +37,11 @@ void Deferred::InitScene()
 
     GLfloat verts[] =
     {
-        -1.0f, -1.0f, 0.0f, 
-        1.0f,  -1.0f, 0.0f, 
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f,
         1.0f, 1.0f, 0.0f,
-        -1.0f, -1.0f, 0.0f, 
-        1.0f, 1.0f, 0.0f, 
+        -1.0f, -1.0f, 0.0f,
+        1.0f, 1.0f, 0.0f,
         -1.0f, 1.0f, 0.0f
     };
 
@@ -92,7 +97,7 @@ void Deferred::Pass1()
     glEnable(GL_DEPTH_TEST);
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass1Index);
 
-    _view = glm::lookAt(vec3(5.0f , 4.0f, 10.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    _view = glm::lookAt(vec3(5.0f, 4.0f, 10.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
     _projection = glm::perspective(glm::radians(60.0f), (float)_width / _height, 0.3f, 100.0f);
 
     _shader.SetUniform("Light.Position", vec4(0.0f, 0.0f, 0.0f, 1.0f));
@@ -138,11 +143,11 @@ void Deferred::Pass2()
 void Deferred::Update(float t)
 {
     float dt = t - _tPrev;
-    if (_tPrev == 0.0f) 
+    if (_tPrev == 0.0f)
         dt = 0.0f;
     _tPrev = t;
-    _angle += _rotSpeed*dt;
-    if (_angle > glm::two_pi<float>()) 
+    _angle += _rotSpeed * dt;
+    if (_angle > glm::two_pi<float>())
         _angle -= glm::two_pi<float>();
 }
 
@@ -171,7 +176,7 @@ void Deferred::SetupFBO()
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, normTex, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, colorTex, 0);
 
-    GLenum drawBuffers[] = { GL_NONE, GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
+    GLenum drawBuffers[] = {GL_NONE, GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
     glDrawBuffers(4, drawBuffers);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -192,7 +197,7 @@ void Deferred::SetMatrices()
     mat4 mv = _view * _model;
     _shader.SetUniform("ModelViewMatrix", mv);
     _shader.SetUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-    _shader.SetUniform("MVP", _projection*mv);
+    _shader.SetUniform("MVP", _projection * mv);
 }
 
 void Deferred::Resize(int w, int h)
@@ -212,7 +217,6 @@ void Deferred::CompileAndLinkShader()
         _shader.Link();
         _shader.Validate();
         _shader.Use();
-
     }
     catch (ShaderProgramException& e)
     {
@@ -220,4 +224,4 @@ void Deferred::CompileAndLinkShader()
         //exit(EXIT_FAILURE);
     }
 }
-
+}

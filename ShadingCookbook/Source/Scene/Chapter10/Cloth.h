@@ -1,9 +1,12 @@
 #pragma once
 
+#include <glm.hpp>
+
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
 
-#include <glm.hpp>
+namespace ShadingCookbook
+{
 using glm::mat4;
 
 class Cloth : public Scene
@@ -16,6 +19,7 @@ public:
     void Render() override;
     void Shutdown();
     void Resize(int x, int y);
+
 private:
     ShaderProgram _shader;
     ShaderProgram _computeShader;
@@ -31,10 +35,11 @@ private:
     GLuint _readBuf;
     GLuint _posBufs[2], _velBufs[2];
     GLuint _normBuf, _elBuf, _tcBuf;
-    
+
     mat4 _view, _model, _projection;
 
     void SetMatrices();
     void CompileAndLinkShader();
     void InitBuffers();
 };
+}

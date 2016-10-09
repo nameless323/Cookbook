@@ -1,9 +1,12 @@
 #pragma once
 
+#include <glm.hpp>
+
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
 
-#include <glm.hpp>
+namespace ShadingCookbook
+{
 using glm::mat4;
 
 class Particles : public Scene
@@ -16,6 +19,7 @@ public:
     void Render() override;
     void Shutdown();
     void Resize(int x, int y);
+
 private:
     ShaderProgram _shader;
     ShaderProgram _computeShader;
@@ -33,3 +37,4 @@ private:
     void CompileAndLinkShader();
     void InitBuffers();
 };
+}

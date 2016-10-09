@@ -1,11 +1,11 @@
 #pragma once
 
+#include <glm.hpp>
+#include <GL/glew.h>
+
 #include "../../Core/ShaderProgram.h"
 #include "../../Core/Frustum.h"
 #include "../Scene.h"
-
-#include <glm.hpp>
-#include <GL/glew.h>
 #include "../../Items/Cube.h"
 #include "../../Items/Plane.h"
 #include "../../Items/Torus.h"
@@ -13,6 +13,9 @@
 #include "../../Items/Teapot.h"
 #include "../../Items/MeshAdj.h"
 #include "../../../ingredients/vbomeshadj.h"
+
+namespace ShadingCookbook
+{
 using glm::mat4;
 using glm::vec4;
 using glm::vec3;
@@ -27,6 +30,7 @@ public:
     void Render() override;
     void Shutdown();
     void Resize(int x, int y);
+
 private:
     ShaderProgram _volumeShader, _renderShader, _compShader;
     GLuint _colorDepthFBO, _fsQuad;
@@ -50,3 +54,4 @@ private:
     void Pass3();
     void UpdateLight();
 };
+}

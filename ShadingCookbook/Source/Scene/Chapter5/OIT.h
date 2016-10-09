@@ -1,15 +1,18 @@
 #pragma once
 
+#include <glm.hpp>
+
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
-
-#include <glm.hpp>
 #include "../../Items/Cube.h"
 #include "../../Items/Plane.h"
 #include "../../Items/Torus.h"
 #include "../../Items/Mesh.h"
 #include "../../Items/Teapot.h"
 #include "../../Items/Sphere.h"
+
+namespace ShadingCookbook
+{
 using namespace glm;
 
 enum BufferNames
@@ -35,6 +38,7 @@ public:
     void Render() override;
     void Shutdown();
     void Resize(int x, int y);
+
 private:
     ShaderProgram _shader;
     int _width, _height;
@@ -58,3 +62,4 @@ private:
     void InitShaderStorage();
     void ClearBuffers();
 };
+}

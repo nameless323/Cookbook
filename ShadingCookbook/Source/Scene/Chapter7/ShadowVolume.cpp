@@ -1,10 +1,14 @@
 #include "ShadowVolume.h"
+
 #include <iostream>
 #include <cstdio>
 #include <gtc/matrix_transform.hpp>
 #include <gtx/transform.hpp>
+
 #include "../../Core/TGA.h"
 
+namespace ShadingCookbook
+{
 using glm::vec3;
 
 ShadowVolume::ShadowVolume() : _width(1024), _height(768), _rotSpeed(0.1f), _tPrev(0)
@@ -34,12 +38,12 @@ void ShadowVolume::InitScene()
     _renderShader.SetUniform("LightIntensity", vec3(0.85f));
 
     GLfloat verts[] =
-        {
-            -1.0f, -1.0f, 0.0f,
-            1.0f, -1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-            -1.0f, 1.0f, 0.0f
-        };
+    {
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f,
+        1.0f, 1.0f, 0.0f,
+        -1.0f, 1.0f, 0.0f
+    };
     GLuint bufHandle;
     glGenBuffers(1, &bufHandle);
     glBindBuffer(GL_ARRAY_BUFFER, bufHandle);
@@ -116,10 +120,10 @@ void ShadowVolume::CompileAndLinkShader()
         _compShader.CompileShader("Shaders/ShadowVolume/Comp.frag");
         _compShader.Link();
         _compShader.Validate();
-    } catch (ShaderProgramException &e)
+    }
+    catch (ShaderProgramException& e)
     {
         std::cerr << e.what() << std::endl;
-        
     }
 }
 
@@ -148,8 +152,8 @@ void ShadowVolume::SetupFBO()
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuf);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, ambBuffer);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, diffSpecTex, 0);
-    
-    GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+
+    GLenum drawBuffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
     glDrawBuffers(2, drawBuffers);
 
     GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -173,7 +177,7 @@ void ShadowVolume::DrawScene(ShaderProgram& shader, bool onlyShadowCasters)
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, _spotTex);
         color = vec3(1.0f);
-        shader.SetUniform("Ka", color*0.1f);
+        shader.SetUniform("Ka", color * 0.1f);
         shader.SetUniform("Kd", color);
         shader.SetUniform("Ks", vec3(0.9f));
         shader.SetUniform("Shininess", 150.0f);
@@ -199,7 +203,7 @@ void ShadowVolume::DrawScene(ShaderProgram& shader, bool onlyShadowCasters)
     SetMatrices(shader);
     _spot->Render();
 
-    if (!onlyShadowCasters) 
+    if (!onlyShadowCasters)
     {
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, _brickTex);
@@ -292,5 +296,6 @@ void ShadowVolume::Pass3()
 
 void ShadowVolume::UpdateLight()
 {
-    _lightPos = vec4(5.0f * vec3(cosf(_angle) * 7.5f, 1.5f, sinf(_angle)* 7.5f), 1.0);
+    _lightPos = vec4(5.0f * vec3(cosf(_angle) * 7.5f, 1.5f, sinf(_angle) * 7.5f), 1.0);
+}
 }

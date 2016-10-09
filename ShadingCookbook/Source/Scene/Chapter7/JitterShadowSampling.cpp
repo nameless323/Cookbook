@@ -1,10 +1,15 @@
 #include "JitterShadowSampling.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <GL/glew.h>
-#include "../../Core/TGA.h"
 #include <vector>
+
+#include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 using std::vector;
 
@@ -70,14 +75,14 @@ void JitterShadowSampling::Render()
     glEnable(GL_CULL_FACE);
     glCullFace(GL_FRONT);
     glEnable(GL_POLYGON_OFFSET_FILL);
-    glPolygonOffset(2.5f, 10.0f);    
+    glPolygonOffset(2.5f, 10.0f);
     DrawBuildingScene();
     glDisable(GL_POLYGON_OFFSET_FILL);
 
     float c = 1.0f;
     vec3 cameraPos(1.8f * cos(_angle), c * 7.0f, 1.8f * sin(_angle));
     _view = glm::lookAt(cameraPos, vec3(0.0f, -0.175f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
-    _shader.SetUniform("Light.Position", _view*vec4(_lightFrustum->GetOrigin(), 1.0f));
+    _shader.SetUniform("Light.Position", _view * vec4(_lightFrustum->GetOrigin(), 1.0f));
     _projection = glm::perspective(glm::radians(50.0f), (float)_width / _height, 0.1f, 100.0f);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -87,9 +92,7 @@ void JitterShadowSampling::Render()
     glDisable(GL_CULL_FACE);
     DrawBuildingScene();
     glFinish();
-
 }
-
 
 void JitterShadowSampling::Update(float t)
 {
@@ -102,7 +105,6 @@ void JitterShadowSampling::Update(float t)
         _angle -= glm::two_pi<float>();
 }
 
-
 void JitterShadowSampling::Shutdown()
 {
     delete _teapot;
@@ -113,7 +115,7 @@ void JitterShadowSampling::Shutdown()
 
 void JitterShadowSampling::SetupFBO()
 {
-    GLfloat border[] = { 1.0f, 0.0f, 0.0f, 0.0f };
+    GLfloat border[] = {1.0f, 0.0f, 0.0f, 0.0f};
     GLuint depthTex;
     glGenTextures(1, &depthTex);
     glBindTexture(GL_TEXTURE_2D, depthTex);
@@ -133,7 +135,7 @@ void JitterShadowSampling::SetupFBO()
     glBindFramebuffer(GL_FRAMEBUFFER, _shadowFBO);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
 
-    GLenum drawBuffers[] = { GL_NONE };
+    GLenum drawBuffers[] = {GL_NONE};
     glDrawBuffers(1, drawBuffers);
 
     GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -234,7 +236,7 @@ float JitterShadowSampling::Jitter()
 void JitterShadowSampling::BuildJitterTex()
 {
     int size = _jitterMapSize;
-    int samples = _samplesU*_samplesV;
+    int samples = _samplesU * _samplesV;
     int bufSize = size * size * samples * 2;
     float* data = new float[bufSize];
     for (int i = 0; i < size; i++)
@@ -292,4 +294,5 @@ void JitterShadowSampling::DrawBuildingScene()
     _model *= glm::translate(vec3(0.0f, 0.0f, 0.0f));
     SetMatrices();
     _plane->Render();
+}
 }

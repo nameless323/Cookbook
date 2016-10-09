@@ -1,14 +1,17 @@
 #pragma once
 
+#include <glm.hpp>
+
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
-
-#include <glm.hpp>
 #include "../../Items/Cube.h"
 #include "../../Items/Plane.h"
 #include "../../Items/Torus.h"
 #include "../../Items/Mesh.h"
 #include "../../Items/Teapot.h"
+
+namespace ShadingCookbook
+{
 using glm::mat4;
 
 class Deferred : public Scene
@@ -21,6 +24,7 @@ public:
     void Render() override;
     void Shutdown();
     void Resize(int x, int y);
+
 private:
     ShaderProgram _shader;
     int _width, _height;
@@ -37,7 +41,7 @@ private:
     mat4 _view;
     mat4 _projection;
     float _angle, _tPrev, _rotSpeed;
-    
+
     void SetupFBO();
     void CreateGBufTex(GLenum texUnit, GLenum format, GLuint& texID);
     void SetMatrices();
@@ -45,3 +49,4 @@ private:
     void Pass1();
     void Pass2();
 };
+}

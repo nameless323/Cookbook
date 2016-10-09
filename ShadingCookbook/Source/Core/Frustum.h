@@ -5,15 +5,16 @@
 #include <map>
 #include <glm.hpp>
 
-using namespace glm;
-
-namespace Projection
+namespace ShadingCookbook {namespace Projection
 {
-    enum ProjType
-    {
-        PERSPECTIVE, ORTHO
-    };
+enum ProjType
+{
+    PERSPECTIVE,
+    ORTHO
 };
+};
+
+using namespace glm;
 
 class Frustum
 {
@@ -32,6 +33,7 @@ public:
 
     void PrintInfo() const;
     void Render() const;
+
 private:
     Projection::ProjType _type;
 
@@ -48,3 +50,4 @@ private:
     mat4 _proj;
     GLuint _handle[2];
 };
+}

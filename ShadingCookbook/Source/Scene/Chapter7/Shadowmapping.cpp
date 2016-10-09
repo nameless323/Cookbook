@@ -1,9 +1,14 @@
 #include "Shadowmapping.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "../../Core/TGA.h"
 #include <vector>
+
+#include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 using std::vector;
 
@@ -69,19 +74,17 @@ void Shadowmapping::Render()
     float c = 1.0f;
     vec3 cameraPos(c * 11.5f * cos(_angle), c * 7.0f, c * 11.5f * sin(_angle));
     _view = glm::lookAt(cameraPos, vec3(0.0), vec3(0.0f, 1.0f, 0.0f));
-    _shader.SetUniform("Light.Position", _view*vec4(_lightFrustum->GetOrigin(), 1.0f));
+    _shader.SetUniform("Light.Position", _view * vec4(_lightFrustum->GetOrigin(), 1.0f));
     _projection = glm::perspective(glm::radians(50.0f), (float)_width / _height, 0.1f, 100.0f);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, _width, _height);
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &_pass2Index);
-//    glDisable(GL_CULL_FACE);
+    //    glDisable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     DrawScene();
-
 }
-
 
 void Shadowmapping::Update(float t)
 {
@@ -94,7 +97,6 @@ void Shadowmapping::Update(float t)
         _angle -= glm::two_pi<float>();
 }
 
-
 void Shadowmapping::Shutdown()
 {
     delete _teapot;
@@ -105,7 +107,7 @@ void Shadowmapping::Shutdown()
 
 void Shadowmapping::SetupFBO()
 {
-    GLfloat border[] = { 1.0f, 0.0f, 0.0f, 0.0f };
+    GLfloat border[] = {1.0f, 0.0f, 0.0f, 0.0f};
     GLuint depthTex;
     glGenTextures(1, &depthTex);
     glBindTexture(GL_TEXTURE_2D, depthTex);
@@ -125,7 +127,7 @@ void Shadowmapping::SetupFBO()
     glBindFramebuffer(GL_FRAMEBUFFER, _shadowFBO);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
 
-    GLenum drawBuffers[] = { GL_NONE };
+    GLenum drawBuffers[] = {GL_NONE};
     glDrawBuffers(1, drawBuffers);
 
     GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -220,7 +222,7 @@ void Shadowmapping::DrawScene()
 
 void Shadowmapping::SpitOutDepthBuffer()
 {
-    int size = _shadowmapWidth*_shadowmapHeight;
+    int size = _shadowmapWidth * _shadowmapHeight;
     float* buffer = new float[size];
     unsigned char* imgBuffer = new unsigned char[size * 4];
     glGetTexImage(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, GL_FLOAT, buffer);
@@ -243,4 +245,5 @@ void Shadowmapping::SpitOutDepthBuffer()
     delete[] buffer;
     delete[] imgBuffer;
     exit(1);
+}
 }

@@ -1,9 +1,14 @@
 #include "Mandelbrot.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "../../Core/TGA.h"
 #include <vector>
+
+#include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 using std::vector;
 
@@ -28,10 +33,9 @@ void Mandelbrot::SetWindow()
     float cwidth = _cHeight * ar;
 
     glm::vec4 bbox(_center.x - cwidth / 2.0f, _center.y - _cHeight / 2.0f,
-        _center.x + cwidth / 2.0f, _center.y + _cHeight / 2.0f);
+                   _center.x + cwidth / 2.0f, _center.y + _cHeight / 2.0f);
     _computeShader.SetUniform("CompWindow", bbox);
 }
-
 
 void Mandelbrot::InitScene()
 {
@@ -79,7 +83,7 @@ void Mandelbrot::InitBuffers()
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, imgTex);
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 256, 256);
-    glBindImageTexture(0, imgTex, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA8);    
+    glBindImageTexture(0, imgTex, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA8);
 }
 
 void Mandelbrot::Update(float t)
@@ -97,7 +101,6 @@ void Mandelbrot::Update(float t)
     _angle += _speed * _dt;
     if (_angle > 360.0f) _angle -= 360.0f;
 }
-
 
 void Mandelbrot::Shutdown()
 {
@@ -135,4 +138,5 @@ void Mandelbrot::CompileAndLinkShader()
         std::cerr << e.what() << std::endl;
         //exit(EXIT_FAILURE);
     }
+}
 }

@@ -4,15 +4,19 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
+
+namespace ShadingCookbook
+{
 using std::cout;
 using std::cerr;
 using std::endl;
-#include <fstream>
+
 using std::ifstream;
-#include <sstream>
 using std::istringstream;
 
-#include <map>
 using std::map;
 
 MeshAdj::MeshAdj(const char* filename, bool reCenterMesh)
@@ -507,4 +511,5 @@ void MeshAdj::Center(vector<vec3>& points)
         vec3& point = points[i];
         point = point - center;
     }
+}
 }

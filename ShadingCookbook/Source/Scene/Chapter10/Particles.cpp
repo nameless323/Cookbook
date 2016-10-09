@@ -1,11 +1,17 @@
 #include "Particles.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "../../Core/TGA.h"
 #include <vector>
+
+#include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 using std::vector;
+
 #define PRIM_RESTART 0xffffff
 
 Particles::Particles() :
@@ -30,7 +36,6 @@ void Particles::InitScene()
     _projection = glm::perspective(glm::radians(50.0f), (float)_width / _height, 1.0f, 100.0f);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
 }
 
 void Particles::Render()
@@ -46,7 +51,7 @@ void Particles::Render()
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
     _shader.Use();
-    
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     _view = lookAt(vec3(2, 0, 20), vec3(0, 0, 0), vec3(0, 1, 0));
     _model = glm::mat4(1.0f);
@@ -59,7 +64,7 @@ void Particles::Render()
     glBindVertexArray(0);
 
     glPointSize(5.0f);
-    GLfloat data[] = { att1.x, att1.y, att1.z, 1.0f, att2.x, att2.y, att2.z, 1.0f };
+    GLfloat data[] = {att1.x, att1.y, att1.z, 1.0f, att2.x, att2.y, att2.z, 1.0f};
     glBindBuffer(GL_ARRAY_BUFFER, _bhBuf);
     glBufferSubData(GL_ARRAY_BUFFER, 0, 8 * sizeof(GLfloat), data);
     _shader.SetUniform("Color", vec4(1, 1, 0, 1.0));
@@ -88,7 +93,7 @@ void Particles::InitBuffers()
                 p.y = dy * j;
                 p.z = dz * k;
                 p.w = 1.0f;
-                p = transf*p;
+                p = transf * p;
                 initPos.push_back(p.x);
                 initPos.push_back(p.y);
                 initPos.push_back(p.z);
@@ -119,7 +124,7 @@ void Particles::InitBuffers()
 
     glGenBuffers(1, &_bhBuf);
     glBindBuffer(GL_ARRAY_BUFFER, _bhBuf);
-    GLfloat data[] = { _bh1.x, _bh1.y, _bh1.z, _bh1.w, _bh2.x, _bh2.y, _bh2.z, _bh2.w };
+    GLfloat data[] = {_bh1.x, _bh1.y, _bh1.z, _bh1.w, _bh2.x, _bh2.y, _bh2.z, _bh2.w};
     glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(GLfloat), data, GL_DYNAMIC_DRAW);
 
     glGenVertexArrays(1, &_bhVao);
@@ -147,7 +152,6 @@ void Particles::Update(float t)
     if (_angle > 360.0f) _angle -= 360.0f;
 }
 
-
 void Particles::Shutdown()
 {
 }
@@ -166,7 +170,7 @@ void Particles::Resize(int w, int h)
     glViewport(0, 0, w, h);
     _width = w;
     _height = h;
-//    _projection = glm::perspective(glm::radians(60.0f), (float)w / h, 0.3f, 100.0f);
+    //    _projection = glm::perspective(glm::radians(60.0f), (float)w / h, 0.3f, 100.0f);
 }
 
 void Particles::CompileAndLinkShader()
@@ -189,4 +193,5 @@ void Particles::CompileAndLinkShader()
         std::cerr << e.what() << std::endl;
         //exit(EXIT_FAILURE);
     }
+}
 }

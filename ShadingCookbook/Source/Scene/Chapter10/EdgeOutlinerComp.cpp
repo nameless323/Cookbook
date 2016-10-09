@@ -1,8 +1,13 @@
 #include "EdgeOutlinerComp.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
+
 #include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 
 EdgeOutlinerComp::EdgeOutlinerComp() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _rotationSpeed(glm::pi<float>() / 8.0f), _width(1024), _height(768)
@@ -84,7 +89,6 @@ void EdgeOutlinerComp::InitScene()
     _pass2Index = glGetSubroutineIndex(shaderHandle, GL_FRAGMENT_SHADER, "pass2");
 
     _shader.SetUniform("Light.Intensity", vec3(1.0f, 1.0f, 1.0f));
-
 }
 
 void EdgeOutlinerComp::Render()
@@ -111,7 +115,6 @@ void EdgeOutlinerComp::Update(float t)
         _angle -= glm::two_pi<float>();
 }
 
-
 void EdgeOutlinerComp::SetupFBO()
 {
     glGenFramebuffers(1, &_fboHandle);
@@ -129,7 +132,6 @@ void EdgeOutlinerComp::SetupFBO()
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, _width, _height);
     glBindImageTexture(1, edgeTex, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA8);
 
-
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTex, 0);
 
     GLuint depth;
@@ -139,7 +141,7 @@ void EdgeOutlinerComp::SetupFBO()
 
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth);
 
-    GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
+    GLenum drawBuffers[] = {GL_COLOR_ATTACHMENT0};
     glDrawBuffers(1, drawBuffers);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -201,7 +203,6 @@ void EdgeOutlinerComp::Pass2()
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-
 void EdgeOutlinerComp::Shutdown()
 {
     delete _plane;
@@ -215,7 +216,7 @@ void EdgeOutlinerComp::SetMatrices()
     mat4 mv = _view * _model;
     _shader.SetUniform("ModelViewMatrix", mv);
     _shader.SetUniform("NormalMatrix",
-        mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+                       mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
     _shader.SetUniform("MVP", _projection * mv);
 }
 
@@ -247,4 +248,5 @@ void EdgeOutlinerComp::CompileAndLinkShader()
         std::cerr << e.what() << std::endl;
         //exit(EXIT_FAILURE);
     }
+}
 }

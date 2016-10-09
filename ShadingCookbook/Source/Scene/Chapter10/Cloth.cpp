@@ -1,10 +1,16 @@
 #include "Cloth.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <vector>
+
 #include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 using std::vector;
+
 #define PRIM_RESTART 0xffffff
 
 Cloth::Cloth() :
@@ -42,13 +48,12 @@ void Cloth::InitScene()
 
     glActiveTexture(GL_TEXTURE0);
     TGA::LoadTex("./media/texture/me_textile.tga");
-
 }
 
 void Cloth::Render()
 {
     _computeShader.Use();
-    for (int i = 0; i < 1000; i++) 
+    for (int i = 0; i < 1000; i++)
     {
         glDispatchCompute(_numParticles.x / 10, _numParticles.y / 10, 1);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
@@ -169,7 +174,6 @@ void Cloth::InitBuffers()
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _elBuf);
     glBindVertexArray(0);
-
 }
 
 void Cloth::Update(float t)
@@ -234,4 +238,5 @@ void Cloth::CompileAndLinkShader()
         std::cerr << e.what() << std::endl;
         //exit(EXIT_FAILURE);
     }
+}
 }

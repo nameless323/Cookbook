@@ -1,6 +1,9 @@
 #include "Frustum.h"
+
 #include <gtc/matrix_transform.inl>
 
+namespace ShadingCookbook
+{
 Frustum::Frustum(Projection::ProjType type) : _type(type)
 {
     GLuint elem[12 * 2];
@@ -238,4 +241,5 @@ void Frustum::Render() const
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _handle[1]);
     glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, nullptr);
+}
 }

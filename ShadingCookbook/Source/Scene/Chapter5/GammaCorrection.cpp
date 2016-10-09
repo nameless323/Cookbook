@@ -1,8 +1,13 @@
 #include "GammaCorrection.h"
+
 #include <gtx/transform.hpp>
 #include <iostream>
 #include <GLFW/glfw3.h>
+
 #include "../../Core/TGA.h"
+
+namespace ShadingCookbook
+{
 using glm::vec3;
 
 GammaCorrection::GammaCorrection() : _angle(0), _prevTime(0), _autorotate(1), _rotateLeft(0), _rotateRight(0), _gamma(2.2f)
@@ -39,7 +44,7 @@ void GammaCorrection::InitScene()
     _ogre = new Mesh("./media/bs_ears.obj", false, true, true);
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     float c = 2.5f;
-    _projection = glm::ortho(-0.4f * c, 0.4f * c, -0.3f *c, 0.3f*c, 0.1f, 100.0f);
+    _projection = glm::ortho(-0.4f * c, 0.4f * c, -0.3f * c, 0.3f * c, 0.1f, 100.0f);
 
     _plane = new Plane(50.0f, 50.0f, 1, 1);
     c = 1.5f;
@@ -81,7 +86,6 @@ void GammaCorrection::Update(float t)
         _angle -= glm::two_pi<float>();
 }
 
-
 void GammaCorrection::Shutdown()
 {
     delete _ogre;
@@ -118,4 +122,5 @@ void GammaCorrection::CompileAndLinkShader()
         std::cerr << e.what() << std::endl;
         //exit(EXIT_FAILURE);
     }
+}
 }

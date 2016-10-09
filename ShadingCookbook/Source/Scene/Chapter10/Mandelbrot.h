@@ -1,10 +1,14 @@
 #pragma once
 
+#include <glm.hpp>
+
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
 
-#include <glm.hpp>
 #include "../../Items/Cube.h"
+
+namespace ShadingCookbook
+{
 using glm::mat4;
 
 class Mandelbrot : public Scene
@@ -18,6 +22,7 @@ public:
     void Shutdown();
     void Resize(int x, int y);
     void SetWindow();
+
 private:
     ShaderProgram _shader;
     ShaderProgram _computeShader;
@@ -33,3 +38,4 @@ private:
     void CompileAndLinkShader();
     void InitBuffers();
 };
+}

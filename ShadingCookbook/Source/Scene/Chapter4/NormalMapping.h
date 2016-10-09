@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm.hpp>
+
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
 #include "../../Items/Teapot.h"
@@ -8,36 +10,39 @@
 #include "../../Items/Cube.h"
 #include "../../Items/Mesh.h"
 
-#include <glm.hpp>
+namespace ShadingCookbook
+{
 using glm::mat4;
 
 class NormalMapping : public Scene
 {
 public:
-	NormalMapping();
-	void ProcessInput(int key, int action) override;
-	void InitScene() override;
-	void Update(float t);
-	void Render() override;
-	void Shutdown();
-	void Resize(int x, int y);
-private:
-	ShaderProgram _shader;
-	int _width, _height;
-	Teapot* _teapot;
-	Plane* _plane;
-	Cube* _cube;
-	Torus* _torus;
-	Mesh* _ogre;
-	mat4 _model;
-	mat4 _view;
-	mat4 _projection;
-	float _angle;
-	float _prevTime;
-	bool _autorotate;
-	bool _rotateLeft;
-	bool _rotateRight;
+    NormalMapping();
+    void ProcessInput(int key, int action) override;
+    void InitScene() override;
+    void Update(float t);
+    void Render() override;
+    void Shutdown();
+    void Resize(int x, int y);
 
-	void SetMatrices();
-	void CompileAndLinkShader();
+private:
+    ShaderProgram _shader;
+    int _width, _height;
+    Teapot* _teapot;
+    Plane* _plane;
+    Cube* _cube;
+    Torus* _torus;
+    Mesh* _ogre;
+    mat4 _model;
+    mat4 _view;
+    mat4 _projection;
+    float _angle;
+    float _prevTime;
+    bool _autorotate;
+    bool _rotateLeft;
+    bool _rotateRight;
+
+    void SetMatrices();
+    void CompileAndLinkShader();
 };
+}
