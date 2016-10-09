@@ -1,3 +1,7 @@
+//
+// Normal maps usage visualization.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -18,11 +22,31 @@ class NormalMapping : public Scene
 {
 public:
     NormalMapping();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
+    /**
+     * \brief Update scene logic.
+     */
     void Update(float t);
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
     void Shutdown();
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
     void Resize(int x, int y);
 
 private:
@@ -42,7 +66,13 @@ private:
     bool _rotateLeft;
     bool _rotateRight;
 
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
 };
 }
