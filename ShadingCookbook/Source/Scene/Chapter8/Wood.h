@@ -12,12 +12,35 @@ class Wood : public Scene
 {
 public:
     Wood();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
+    /**
+     * \brief Update scene logic.
+     */
     void Update(float t) override;
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
     void Shutdown() override;
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
     void Resize(int x, int y) override;
+    /**
+     * \brief Draw scene.
+     */
     void DrawScene();
 
 private:
@@ -30,8 +53,13 @@ private:
     float _angle;
     int _width;
     int _height;
-
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
 };
 }
