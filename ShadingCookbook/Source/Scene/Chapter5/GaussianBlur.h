@@ -1,3 +1,7 @@
+//
+// Gaussian blur visualization.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -17,12 +21,32 @@ class GaussianBlur : public Scene
 {
 public:
     GaussianBlur();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
-    void Update(float t);
+    /**
+     * \brief Update scene logic.
+     */
+    void Update(float t) override;
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
-    void Shutdown();
-    void Resize(int x, int y);
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
+    void Shutdown() override;
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
+    void Resize(int x, int y) override;
 
 private:
     ShaderProgram _shader;
@@ -52,12 +76,33 @@ private:
     bool _rotateLeft;
     bool _rotateRight;
 
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
+    /**
+     * \brief Setup framebuffers for blur.
+     */
     void SetupFBO();
+    /**
+     * \brief Render scene.
+     */
     void Pass1();
+    /**
+     * \brief Make vertical blur.
+     */
     void Pass2();
+    /**
+     * \brief Make horizontal blur.
+     */
     void Pass3();
+    /**
+     * \brief Get gauss weight.
+     */
     float Gauss(float, float);
 };
 }

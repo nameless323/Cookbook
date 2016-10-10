@@ -1,3 +1,7 @@
+//
+// Scene with bloom effect.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -8,7 +12,6 @@
 #include "../../Items/Plane.h"
 #include "../../Items/Torus.h"
 #include "../../Items/Cube.h"
-#include "../../Items/Skybox.h"
 #include "../../Items/Sphere.h"
 
 namespace ShadingCookbook
@@ -92,14 +95,41 @@ private:
      * \brief Compile and link shader from file.
      */
     void CompileAndLinkShader();
+    /**
+     * \brief Generate HDR and blur frame buffers.
+     */
     void SetupFBO();
+    /**
+     * \brief Render scene to HDR framebuffer.
+     */
     void Pass1();
+    /**
+     * \brief Generate bloom texture.
+     */
     void Pass2();
+    /**
+     * \brief Vertical blur of bloom texture.
+     */
     void Pass3();
+    /**
+     * \brief Horizontal blur of bloom texture.
+     */
     void Pass4();
+    /**
+     * \brief Merge pass.
+     */
     void Pass5();
+    /**
+     * \brief Get gaus for blur.
+     */
     float Gauss(float x, float sigma2);
+    /**
+     * \brief Get image average luminance.
+     */
     void ComputeAveLuminance();
+    /**
+     * \brief Draw scene.
+     */
     void DrawScene();
 };
 }

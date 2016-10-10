@@ -1,3 +1,7 @@
+//
+// Make order independent transparency (works not so good).
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -5,10 +9,6 @@
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
 #include "../../Items/Cube.h"
-#include "../../Items/Plane.h"
-#include "../../Items/Torus.h"
-#include "../../Items/Mesh.h"
-#include "../../Items/Teapot.h"
 #include "../../Items/Sphere.h"
 
 namespace ShadingCookbook
@@ -32,12 +32,32 @@ class OIT : public Scene
 {
 public:
     OIT();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
-    void Update(float t);
+    /**
+     * \brief Update scene logic.
+     */
+    void Update(float t) override;
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
-    void Shutdown();
-    void Resize(int x, int y);
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
+    void Shutdown() override;
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
+    void Resize(int x, int y) override;
 
 private:
     ShaderProgram _shader;
@@ -54,12 +74,33 @@ private:
     mat4 _projection;
     float _angle, _tPrev, _rotSpeed;
 
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
+    /**
+     * \brief Make OIT buffer from objects.
+     */
     void Pass1();
+    /**
+     * \brief Calculate color from buffers.
+     */
     void Pass2();
+    /**
+     * \brief Draw scene.
+     */
     void DrawScene();
+    /**
+     * \brief Init OIT buffers.
+     */
     void InitShaderStorage();
+    /**
+     * \brief Clear OIT buffers.
+     */
     void ClearBuffers();
 };
 }

@@ -1,3 +1,7 @@
+//
+// Applying sobel operator to perform edge outlining.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -8,7 +12,6 @@
 #include "../../Items/Plane.h"
 #include "../../Items/Torus.h"
 #include "../../Items/Cube.h"
-#include "../../Items/Skybox.h"
 
 namespace ShadingCookbook
 {
@@ -18,11 +21,31 @@ class EdgeOutliner : public Scene
 {
 public:
     EdgeOutliner();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
+    /**
+     * \brief Update scene logic.
+     */
     void Update(float t);
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
     void Shutdown();
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
     void Resize(int x, int y);
 
 private:
@@ -49,10 +72,25 @@ private:
     bool _rotateLeft;
     bool _rotateRight;
 
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
+    /**
+     * \brief Setup framebuffers.
+     */
     void SetupFBO();
+    /**
+     * \brief Draw scene to framebuffer.
+     */
     void Pass1();
+    /**
+     * \brief Apply sobel operator.
+     */
     void Pass2();
 };
 }
