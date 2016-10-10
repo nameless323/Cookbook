@@ -184,49 +184,6 @@ void JitterShadowSampling::CompileAndLinkShader()
     }
 }
 
-void JitterShadowSampling::DrawScene()
-{
-    vec3 color = vec3(0.7f, 0.5f, 0.3f);
-    _shader.SetUniform("Material.Ka", color * 0.05f);
-    _shader.SetUniform("Material.Kd", color);
-    _shader.SetUniform("Material.Ks", vec3(0.9f, 0.9f, 0.9f));
-    _shader.SetUniform("Material.Shininess", 150.0f);
-    _model = mat4(1.0f);
-    _model *= glm::translate(vec3(0.0f, 0.0f, 0.0f));
-    _model *= glm::rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
-    SetMatrices();
-    _teapot->Render();
-
-    _shader.SetUniform("Material.Ka", color * 0.05f);
-    _shader.SetUniform("Material.Kd", color);
-    _shader.SetUniform("Material.Ks", vec3(0.9f, 0.9f, 0.9f));
-    _shader.SetUniform("Material.Shininess", 150.0f);
-    _model = mat4(1.0f);
-    _model *= glm::translate(vec3(0.0f, 2.0f, 5.0f));
-    _model *= glm::rotate(glm::radians(-45.0f), vec3(1.0f, 0.0f, 0.0f));
-    SetMatrices();
-    _torus->Render();
-
-    _shader.SetUniform("Material.Kd", 0.25f, 0.25f, 0.25f);
-    _shader.SetUniform("Material.Ks", 0.0f, 0.0f, 0.0f);
-    _shader.SetUniform("Material.Ka", 0.05f, 0.05f, 0.05f);
-    _shader.SetUniform("Material.Shininess", 1.0f);
-    _model = mat4(1.0f);
-    _model *= glm::translate(vec3(0.0f, 0.0f, 0.0f));
-    SetMatrices();
-    _plane->Render();
-    _model = mat4(1.0f);
-    _model *= glm::translate(vec3(-5.0f, 5.0f, 0.0f));
-    _model *= glm::rotate(glm::radians(-90.0f), vec3(0.0f, 0.0f, 1.0f));
-    SetMatrices();
-    _plane->Render();
-    _model = mat4(1.0f);
-    _model *= glm::translate(vec3(0.0f, 5.0f, -5.0f));
-    _model *= glm::rotate(glm::radians(90.0f), vec3(1.0f, 0.0f, 0.0f));
-    SetMatrices();
-    _plane->Render();
-    _model = mat4(1.0f);
-}
 
 float JitterShadowSampling::Jitter()
 {

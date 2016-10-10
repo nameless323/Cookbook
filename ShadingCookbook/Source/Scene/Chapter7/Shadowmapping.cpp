@@ -219,31 +219,4 @@ void Shadowmapping::DrawScene()
     _plane->Render();
     _model = mat4(1.0f);
 }
-
-void Shadowmapping::SpitOutDepthBuffer()
-{
-    int size = _shadowmapWidth * _shadowmapHeight;
-    float* buffer = new float[size];
-    unsigned char* imgBuffer = new unsigned char[size * 4];
-    glGetTexImage(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, GL_FLOAT, buffer);
-
-    for (int i = 0; i < _shadowmapHeight; i++)
-    {
-        for (int j = 0; j < _shadowmapWidth; j++)
-        {
-            int imgIdx = 4 * ((i * _shadowmapWidth) + j);
-            int bufIdx = ((_shadowmapHeight - i - 1) * _shadowmapWidth) + j;
-            float minVal = 0.88f;
-            float scale = (buffer[bufIdx] - minVal) / (1.0f - minVal);
-            unsigned char val = (unsigned char)(scale * 255);
-            imgBuffer[imgIdx] = val;
-            imgBuffer[imgIdx + 1] = val;
-            imgBuffer[imgIdx + 2] = val;
-            imgBuffer[imgIdx + 3] = 0xff;
-        }
-    }
-    delete[] buffer;
-    delete[] imgBuffer;
-    exit(1);
-}
 }
