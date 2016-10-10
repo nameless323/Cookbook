@@ -1,3 +1,7 @@
+//
+// Using tesselation to draw bezier curve.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -5,9 +9,6 @@
 #include "../../Core/ShaderProgram.h"
 #include "../Scene.h"
 #include "../../ingredients/bmpreader.h"
-#include "../../ingredients/vbomeshadj.h"
-#include "../../Items/Mesh.h"
-#include "../../Items/MeshAdj.h"
 
 namespace ShadingCookbook
 {
@@ -15,12 +16,32 @@ class BezierCurve : public Scene
 {
 public:
     BezierCurve();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
-    void Update(float t);
+    /**
+     * \brief Update scene logic.
+     */
+    void Update(float t) override;
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
-    void Shutdown();
-    void Resize(int x, int y);
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
+    void Shutdown() override;
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
+    void Resize(int x, int y) override;
 
 private:
     ShaderProgram _shader;
@@ -34,7 +55,13 @@ private:
     int _numSegments;
     bool _uniformDirty;
 
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
 };
 }

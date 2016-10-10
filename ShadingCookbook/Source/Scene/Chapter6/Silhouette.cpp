@@ -88,10 +88,6 @@ void Silhouette::SetMatrices()
     _shader.SetUniform("MVP", _projection * mv);
 }
 
-void Silhouette::SetupFBO()
-{
-}
-
 void Silhouette::CompileAndLinkShader()
 {
     try

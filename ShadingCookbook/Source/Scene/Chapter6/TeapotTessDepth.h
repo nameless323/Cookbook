@@ -1,3 +1,7 @@
+//
+// Depth based teapot tesselation.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -13,12 +17,32 @@ class TeapotTessDepth : public Scene
 {
 public:
     TeapotTessDepth();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
-    void Update(float t);
+    /**
+     * \brief Update scene logic.
+     */
+    void Update(float t) override;
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
-    void Shutdown();
-    void Resize(int x, int y);
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
+    void Shutdown() override;
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
+    void Resize(int x, int y) override;
 
 private:
     VBOTeapotPatch* _teapot;
@@ -34,7 +58,13 @@ private:
     int _inner;
     int _outer;
 
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
 };
 }
