@@ -1,3 +1,7 @@
+//
+// Using compute shader to apply sobel operator.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -8,7 +12,6 @@
 #include "../../Items/Plane.h"
 #include "../../Items/Torus.h"
 #include "../../Items/Cube.h"
-#include "../../Items/Skybox.h"
 
 namespace ShadingCookbook
 {
@@ -18,12 +21,32 @@ class EdgeOutlinerComp : public Scene
 {
 public:
     EdgeOutlinerComp();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
-    void Update(float t);
+    /**
+     * \brief Update scene logic.
+     */
+    void Update(float t) override;
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
-    void Shutdown();
-    void Resize(int x, int y);
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
+    void Shutdown() override;
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
+    void Resize(int x, int y) override;
 
 private:
     ShaderProgram _shader;
@@ -50,10 +73,25 @@ private:
     bool _rotateLeft;
     bool _rotateRight;
 
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
+    /**
+     * \brief Setup framebuffer to draw scene.
+     */
     void SetupFBO();
+    /**
+     * \brief Draw scene to framebuffer.
+     */
     void Pass1();
+    /**
+     * \brief Apply sobel operator.
+     */
     void Pass2();
 };
 }
