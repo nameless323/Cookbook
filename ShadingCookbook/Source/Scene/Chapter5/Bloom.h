@@ -19,11 +19,31 @@ class Bloom : public Scene
 {
 public:
     Bloom();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
+    /**
+     * \brief Update scene logic.
+     */
     void Update(float t);
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
     void Shutdown();
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
     void Resize(int x, int y);
 
 private:
@@ -64,8 +84,13 @@ private:
     bool _rotateLeft;
     bool _rotateRight;
     bool _doToneMap;
-
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void CompileAndLinkShader();
     void SetupFBO();
     void Pass1();
