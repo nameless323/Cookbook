@@ -1,3 +1,7 @@
+//
+// Sphere generator.
+//
+
 #pragma once
 
 #include "IDrawable.h"
@@ -10,7 +14,13 @@ class Sphere : IDrawable
 {
 public:
     Sphere(float radius, GLuint slices, GLuint stacks);
+    /**
+     * \brief Render sphere.
+     */
     void Render() override;
+    /**
+     * \brief Get objects vertex array object handler.
+     */
     int GetVAOHandle();
 
 private:
@@ -19,6 +29,9 @@ private:
     GLuint _slices, _stacks;
     float _radius;
 
+    /**
+     * \brief Generate sphere vertices.
+     */
     void GenerateVerts(float* verts, float* norms, float* tex, unsigned int* el);
 };
 }

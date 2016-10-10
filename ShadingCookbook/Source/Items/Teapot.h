@@ -1,3 +1,7 @@
+//
+// Teapot generator.
+//
+
 #pragma once
 
 #include "IDrawable.h"
@@ -15,6 +19,9 @@ class Teapot : public IDrawable
 {
 public:
     Teapot(int grid, const mat4& lidTransform);
+    /**
+     * \brief Render teapot.
+     */
     void Render() override;
 
 private:

@@ -1,3 +1,7 @@
+//
+// Interface for drawable objects.
+//
+
 #pragma once
 
 namespace ShadingCookbook
@@ -13,6 +17,9 @@ public:
     {
     }
 
+    /**
+     * \brief Render object.
+     */
     virtual void Render() = 0;
 };
 }

@@ -1,3 +1,7 @@
+//
+// TGA texture loader.
+//
+
 #pragma once
 
 #include <stdexcept>

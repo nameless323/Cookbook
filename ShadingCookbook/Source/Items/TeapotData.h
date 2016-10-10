@@ -1,3 +1,7 @@
+//
+// Data for teapot generator.
+//
+
 #pragma once
 
 namespace ShadingCookbook {namespace TeapotData

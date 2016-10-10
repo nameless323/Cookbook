@@ -1,3 +1,7 @@
+//
+// Cube generator.
+//
+
 #pragma once
 
 #include "IDrawable.h"

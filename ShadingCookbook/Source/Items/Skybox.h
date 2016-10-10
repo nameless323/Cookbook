@@ -1,3 +1,7 @@
+//
+// Skybox helper.
+//
+
 #pragma once
 
 #include "IDrawable.h"

@@ -58,6 +58,7 @@
 #include "Source/Scene/Chapter9/ParticlesFire.h"
 #include "Source/Scene/Chapter9/ParticlesInstancing.h"
 #include "Source/Scene/Chapter9/ParticlesSmoke.h"
+#include "Source/Scene/Chapter2/DirectionalPhong.h"
 
 ShadingCookbook::Scene* scene;
 GLFWwindow* window;
@@ -99,13 +100,8 @@ void ResizeGL(int w, int h)
 
 int main(void)
 {
-    scene = new ShadingCookbook::Shadowmapping;
-
+    scene = new ShadingCookbook::Particles;
     if (!glfwInit()) exit(EXIT_FAILURE);
-    //  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    //  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    //  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    //  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 

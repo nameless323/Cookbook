@@ -35,7 +35,7 @@ public:
     /**
      * \brief Update scene logic.
      */
-    void Update(float t);
+    void Update(float t) override;
     /**
      * \brief Render scene.
      */
@@ -43,11 +43,11 @@ public:
     /**
      * \brief Shutdown scene. Preforms cleanup of the scene.
      */
-    void Shutdown();
+    void Shutdown() override;
     /**
      * \brief Call when window is resized to reconstruct matrices etc.
      */
-    void Resize(int x, int y);
+    void Resize(int x, int y) override;
 
 private:
     ShaderProgram _shader;
