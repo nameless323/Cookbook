@@ -1,3 +1,7 @@
+//
+// Using perlin noise to create decay like effect.
+//
+
 #pragma once
 
 #include <glm.hpp>

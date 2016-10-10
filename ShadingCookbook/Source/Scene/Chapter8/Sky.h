@@ -1,3 +1,7 @@
+//
+// Using perlin noise to create cloud like textures.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -53,6 +57,7 @@ private:
     float _angle;
     int _width;
     int _height;
+
     /**
      * \brief Set matrices to shader.
      */

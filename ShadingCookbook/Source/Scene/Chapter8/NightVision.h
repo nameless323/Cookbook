@@ -1,3 +1,7 @@
+//
+// Create night vision like effect.
+//
+
 #pragma once
 
 #include <glm.hpp>
@@ -9,7 +13,6 @@
 #include "../../Items/Plane.h"
 #include "../../Items/Torus.h"
 #include "../../Items/Cube.h"
-#include "../../Items/Skybox.h"
 
 namespace ShadingCookbook
 {
@@ -72,12 +75,21 @@ private:
      * \brief Set matrices to shader.
      */
     void SetMatrices();
-    void CompileAndLinkShader();
     /**
      * \brief Compile and link shader from file.
      */
+    void CompileAndLinkShader();    
+    /**
+     * \brief Setup framebuffers.
+     */
     void SetupFBO();
+    /**
+     * \brief Render scene to texture.
+     */
     void Pass1();
+    /**
+     * \brief Apply and show night vision.
+     */
     void Pass2();
 };
 }
