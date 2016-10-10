@@ -19,11 +19,31 @@ class NightVision : public Scene
 {
 public:
     NightVision();
+    /**
+     * \brief Handle system input.
+     * \param key Key code.
+     * \param action Key action (pressed etc).
+     */
     void ProcessInput(int key, int action) override;
+    /**
+     * \brief Make scene initialization (object creation, create initial matrix etc).
+     */
     void InitScene() override;
+    /**
+     * \brief Update scene logic.
+     */
     void Update(float t) override;
+    /**
+     * \brief Render scene.
+     */
     void Render() override;
+    /**
+     * \brief Shutdown scene. Preforms cleanup of the scene.
+     */
     void Shutdown() override;
+    /**
+     * \brief Call when window is resized to reconstruct matrices etc.
+     */
     void Resize(int x, int y) override;
 
 private:
@@ -48,8 +68,14 @@ private:
     bool _rotateRight;
     GLuint _pass1Index;
     GLuint _pass2Index;
+    /**
+     * \brief Set matrices to shader.
+     */
     void SetMatrices();
     void CompileAndLinkShader();
+    /**
+     * \brief Compile and link shader from file.
+     */
     void SetupFBO();
     void Pass1();
     void Pass2();
